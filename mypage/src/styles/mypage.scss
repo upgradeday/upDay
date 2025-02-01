@@ -1,0 +1,56 @@
+@use "./common" as *;
+
+.my-profile-container {
+  box-sizing: border-box;
+  width: 660px;
+  height: 428px;
+  border-radius: 16px;
+  background-color: $nuetral-100;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .upper-part {
+    // width: 564px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+
+    .user-photo {
+      box-sizing: border-box;
+      width: 200px;
+      height: 200px;
+      border: 2px solid $neutral-300;
+      border-radius: 100px;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 36px;
+      .name,
+      .days {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        :nth-child(2) {
+          color: $neutral-500;
+        }
+      }
+    }
+  }
+  .user-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    :first-child {
+      color: $neutral-500;
+    }
+    :last-child {
+      height: 96px;
+    }
+  }
+}

@@ -1,0 +1,93 @@
+// @font-face
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+// main colors
+$blue-100: #eef7ff;
+$blue-300: #92d8fe;
+$blue-400: #4fbaf4;
+$blue-500: #119eea;
+$blue-900: #0b4e7a;
+
+// neutral colors
+$nuetral-100: #ffffff;
+$neutral-200: #f7f7f7;
+$neutral-300: #d3d3d3;
+$neutral-500: #7a7a7a;
+$neutral-700: #555555;
+$neutral-800: #363636;
+$neutral-900: #121212;
+
+$clg-meal: #c5ebe6;
+$clg-learn: #fef2c8;
+$clg-workout: #d5d5ed;
+$clg-habit: #ffdee7;
+
+$icon-on: #fa8d74;
+$icon-on-light: #fce8e4;
+$icon-done: #9dd78e;
+$icon-done-light: #e4f7df;
+$icon-trophy: #ffcf75;
+
+.page-setting {
+  background-color: $blue-900;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: "Pretendard-Regular";
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: $neutral-900;
+}
+
+// font-size
+@mixin font-size($size) {
+  font-size: $size;
+  line-height: 1.5em;
+  padding: 0;
+  margin: 0;
+}
+
+.font-36px {
+  @include font-size(36px);
+}
+.font-28px {
+  @include font-size(28px);
+}
+.font-24px {
+  @include font-size(24px);
+}
+.font-20px {
+  @include font-size(20px);
+}
+.font-16px {
+  @include font-size(16px);
+}
+.font-12px {
+  @include font-size(12px);
+}
+.font-10px {
+  @include font-size(10px);
+}
+
+// font-weight
+.bold {
+  font-weight: 700;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.medium {
+  font-weight: 500;
+}
