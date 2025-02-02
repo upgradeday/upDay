@@ -7,39 +7,81 @@
   font-style: normal;
 }
 
-// main colors
-$blue-100: #eef7ff;
-$blue-300: #92d8fe;
-$blue-400: #4fbaf4;
-$blue-500: #119eea;
-$blue-900: #0b4e7a;
+// blue colors (main)
+$blue-100: #edf5fb;
+$blue-200: #d5e9f8;
+$blue-300: #afdbfd;
+$blue-400: #6abcf9;
+$blue-900: #23557b;
+
+// mint colors
+$mint-100: #e6f4f2;
+$mint-200: #c5ebe6;
+$mint-300: #9be0d6;
+$mint-400: #59ccbb;
+
+// green colors
+$green-100: #f1fae5;
+$green-200: #e2f2cd;
+$green-300: #bde18e;
+$green-400: #a6de83;
+
+// yellow colors
+$yellow-100: #fff9e6;
+$yellow-200: #fef2c8;
+$yellow-300: #ffeba5;
+$yellow-400: #f9e872;
+
+// orange colors
+$orange-100: #fbecdf;
+$orange-200: #fbdcc3;
+$orange-300: #fec08c;
+$orange-400: #fdaf6e;
+
+// red colors
+$red-100: #fceceb;
+$red-200: #f8c2be;
+$red-300: #f89c95;
+$red-400: #f9786e;
+
+// pink colors
+$pink-100: #fff1f5;
+$pink-200: #ffdee7;
+$pink-300: #ffc2d3;
+$pink-400: #ff99b6;
+
+// purple colors
+$purple-100: #f2f2ff;
+$purple-200: #e3e3f4;
+$purple-300: #d2d2fb;
+$purple-400: #bd96d9;
 
 // neutral colors
-$nuetral-100: #ffffff;
+$neutral-100: #ffffff;
 $neutral-200: #f7f7f7;
 $neutral-300: #d3d3d3;
+$neutral-400: #a6a6a6;
 $neutral-500: #7a7a7a;
+$neutral-600: #686868;
 $neutral-700: #555555;
 $neutral-800: #363636;
 $neutral-900: #121212;
 
-$clg-meal: #c5ebe6;
-$clg-learn: #fef2c8;
-$clg-workout: #d5d5ed;
-$clg-habit: #ffdee7;
-
-$icon-on: #fa8d74;
-$icon-on-light: #fce8e4;
-$icon-done: #9dd78e;
-$icon-done-light: #e4f7df;
-$icon-trophy: #ffcf75;
-
 .page-setting {
-  background-color: $blue-900;
+  box-sizing: border-box;
+  background-color: $blue-100;
   width: 100vw;
   height: 100vh;
   margin: 0;
-  padding: 0;
+  padding: 104px 15vw;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  .part1 {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 
 html,
@@ -47,8 +89,13 @@ body {
   font-family: "Pretendard-Regular";
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   color: $neutral-900;
+}
+
+button,
+select {
+  cursor: pointer;
 }
 
 // font-size
@@ -82,6 +129,9 @@ body {
 }
 
 // font-weight
+.black {
+  font-weight: 900;
+}
 .bold {
   font-weight: 700;
 }
