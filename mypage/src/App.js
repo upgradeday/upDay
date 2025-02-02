@@ -1,17 +1,17 @@
-import MyProfile from "./containers/MyProfile";
-import UpdayReport from "./containers/UpdayReport";
-import ChallengeList from "./containers/ChallengeList";
 import "./styles/_common.scss";
+import MyProfile from "./containers/MyProfile";
+import MyReport from "./containers/MyReport";
+import Manegement from "./containers/Manegement";
 
 function App() {
   return (
     <div className="page-setting">
       <div className="part1">
         <MyProfile />
-        <UpdayReport />
+        <MyReport />
       </div>
       <dic>
-        <ChallengeList></ChallengeList>
+        <Manegement />
       </dic>
     </div>
   );

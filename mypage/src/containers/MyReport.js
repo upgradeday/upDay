@@ -2,14 +2,14 @@ import React from "react";
 import "../styles/mypage.scss";
 
 import { HiFire, HiDocumentCheck, HiMiniTrophy } from "react-icons/hi2";
-import { BsBookmarkCheckFill } from "react-icons/bs";
+// import { BsBookmarkCheckFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa6";
 
-export default function UpdayReport() {
+export default function x() {
   return (
     <div className="section">
       <p className="container-title font-36px">업데이 리포트</p>
-      <div className="upday-report-container">
+      <div className="my-report-container">
         <div>
           <p>진행 중</p>
           <HiFire className="icon-report icon-fire" />
