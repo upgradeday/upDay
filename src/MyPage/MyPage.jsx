@@ -1,12 +1,12 @@
-import React from 'react'
-import MyPageLayout from './components/MyPageLayout'
+import React from 'react';
+import MyPageLayout from './components/MyPageLayout';
 
 const MyPage = () => {
-  return (
-	<>
-		<MyPageLayout />
-	</>
-  )
-}
+    return (
+        <>
+            <MyPageLayout />
+        </>
+    );
+};
 
-export default MyPage
+export default MyPage;
