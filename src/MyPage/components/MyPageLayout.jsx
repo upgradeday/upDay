@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import MyProfile from './MyProfileSection';
 
 const MyPageLayout = () => {
-  return (
-	<div>MyPageLayout</div>
-  )
-}
+    return (
+        <main className='w-[80%] max-w-1344px mx-auto'>
+            <article className='flex flex-col'>
+                <MyProfile />
+            </article>
+        </main>
+    );
+};
 
-export default MyPageLayout
+export default MyPageLayout;
