@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
 import Header from './Layout/Header';
 import Footer from './Layout/Footer';
 
@@ -7,20 +8,54 @@ import MyPage from './MyPage/MyPage';
 import ChallengeList from './ChallengeList/ChallengeList';
 import PostDetailModal from './Modal/PostDetailModal';
 
+import Signup from './Login/components/Signup';
+import ProfileSetup from './Login/components/ProfileSetup';
+import Login from './Login/components/Login';
+import NotFound from './NotFound/NotFound'; // 404page 
+
+
 function App() {
+    const navigate = useNavigate(); // useNavigate 훅을 사용하려면 반드시 BrowserRouter 내에 있어야 함
+
     return (
-        <BrowserRouter>
+        <div>
             <Header />
             <Routes>
                 <Route path='/' element={<Main />} />
+                <Route path='*' component={NotFound} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/challengelist' element={<ChallengeList />}>
                     <Route path='post/:id' element={<PostDetailModal />} />
                 </Route>
+
+                <Route
+                    path='/signup'
+                    element={
+                        <Signup onSignupSuccess={() => navigate('/profile')} />
+                    }
+                />
+                <Route
+                    path='/profile'
+                    element={
+                        <ProfileSetup
+                            onProfileComplete={() => navigate('/login')}
+                        />
+                    }
+                />
+                <Route
+                    path='/login'
+                    element={<Login onLoginSuccess={() => navigate('/')} />}
+                />
             </Routes>
             <Footer />
-        </BrowserRouter>
+        </div>
     );
 }
 
-export default App;
+export default function AppWrapper() {
+    return (
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    );
+}
