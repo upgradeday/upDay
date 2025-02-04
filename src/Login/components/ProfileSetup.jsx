@@ -1,57 +1,45 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ 추가
 
-const ProfileSetup = ({ onProfileComplete }) => {
-  const [nickname, setNickname] = useState('');
-  const [profileImage, setProfileImage] = useState(null);
-  const [error, setError] = useState('');
+const ProfileSetup = () => {
+    const [nickname, setNickname] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
+    const [error, setError] = useState('');
+    const navigate = useNavigate(); // ✅ useNavigate 추가
 
-  // 이메일과 비밀번호를 localStorage에서 불러오기
-  const email = localStorage.getItem('email');
-  const password = localStorage.getItem('password');
+    const email = localStorage.getItem('email');
+    const password = localStorage.getItem('password');
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);  // 이미지를 상태에 저장
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setProfileImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (nickname.length > 6) {
+            setError('닉네임은 6글자 이내여야 합니다.');
+            return;
+        }
 
-    // 닉네임 길이 제한 체크
-    if (nickname.length > 6) {
-        setError('닉네임은 6글자 이내여야 합니다.');
-        return;
-    }
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        if (users.some((user) => user.nickname === nickname)) {
+            setError('이 닉네임은 이미 사용 중입니다.');
+            return;
+        }
 
-    // 사용자 목록 가져오기
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+        users.push({ email, password, nickname, profileImage });
+        localStorage.setItem('users', JSON.stringify(users));
 
-    // 중복된 닉네임이 있는지 확인
-    const existingNickname = users.find((user) => user.nickname === nickname);
-    if (existingNickname) {
-        setError('이 닉네임은 이미 사용 중입니다.');
-        return;
-    }
-
-    // error 초기화
-    setError('');
-
-    // 새로운 사용자 정보 추가
-    const newUser = { email, password, nickname, profileImage };
-    users.push(newUser);
-
-    // 사용자 배열을 localStorage에 다시 저장
-    localStorage.setItem('users', JSON.stringify(users));
-
-    // 프로필 설정 완료 후 콜백 호출
-    onProfileComplete();
-};
+        setError('');
+        navigate('/login'); // ✅ 프로필 설정 완료 후 로그인 페이지로 이동
+    };
 
     return (
         <div>

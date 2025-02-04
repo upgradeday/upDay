@@ -1,17 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ 추가
 
-const Signup = ({ onSignupSuccess }) => {
+const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // ✅ useNavigate 추가
 
-    const validateEmail = (email) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
-
-    const validatePassword = (password) => {
-        return password.length >= 8 && /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    };
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const validatePassword = (password) =>
+        password.length >= 8 && /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,18 +23,17 @@ const Signup = ({ onSignupSuccess }) => {
         }
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const existingEmail = users.find((user) => user.email === email);
-        if (existingEmail) {
-        setError('이미 등록된 아이디입니다.');
-        return;
+        if (users.some((user) => user.email === email)) {
+            setError('이미 등록된 아이디입니다.');
+            return;
         }
 
-        // 이메일과 비밀번호를 각각 localStorage에 저장
+        // 이메일과 비밀번호를 저장
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
 
         setError('');
-        onSignupSuccess(); // 회원가입 성공 후 프로필 설정 페이지로 이동
+        navigate('/profile'); // ✅ 회원가입 성공 시 프로필 설정 페이지로 이동
     };
 
     return (
@@ -63,4 +60,3 @@ const Signup = ({ onSignupSuccess }) => {
 };
 
 export default Signup;
-
