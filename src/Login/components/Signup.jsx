@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ 추가
-
+import { useNavigate } from 'react-router-dom'; 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // ✅ useNavigate 추가
+    const navigate = useNavigate(); 
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const validatePassword = (password) =>
@@ -28,12 +27,12 @@ const Signup = () => {
             return;
         }
 
-        // 이메일과 비밀번호를 저장
+        
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
 
         setError('');
-        navigate('/profile'); // ✅ 회원가입 성공 시 프로필 설정 페이지로 이동
+        navigate('/profile'); 
     };
 
     return (

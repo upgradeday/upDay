@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ 추가
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // ✅ useNavigate 추가
+    const navigate = useNavigate(); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +17,7 @@ const Login = () => {
         if (existingUser) {
             setError('');
             localStorage.setItem('loggedInUser', email);
-            navigate('/'); // ✅ 로그인 성공 후 메인 페이지로 이동
+            navigate('/'); 
         } else {
             setError('이메일 또는 비밀번호가 올바르지 않습니다.');
         }
