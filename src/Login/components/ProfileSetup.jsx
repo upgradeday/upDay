@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ 추가
-
+import { useNavigate } from 'react-router-dom'; 
 const ProfileSetup = () => {
     const [nickname, setNickname] = useState('');
     const [profileImage, setProfileImage] = useState(null);
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // ✅ useNavigate 추가
-
+    const navigate = useNavigate(); 
     const email = localStorage.getItem('email');
     const password = localStorage.getItem('password');
 
@@ -38,7 +36,7 @@ const ProfileSetup = () => {
         localStorage.setItem('users', JSON.stringify(users));
 
         setError('');
-        navigate('/login'); // ✅ 프로필 설정 완료 후 로그인 페이지로 이동
+        navigate('/login'); 
     };
 
     return (
