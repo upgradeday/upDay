@@ -1,25 +1,23 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ 추가
 
-const Login = ({ onLoginSuccess }) => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // ✅ useNavigate 추가
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-        // 이메일과 비밀번호로 사용자 확인
         const existingUser = storedUsers.find(
             (user) => user.email === email && user.password === password
         );
-
         if (existingUser) {
             setError('');
-            // 로그인한 사용자의 이메일을 localStorage에 저장
-            localStorage.setItem('loggedInUser', email); // 이메일을 loggedInUser로 저장
-            onLoginSuccess(); // 로그인 성공 후 메인 페이지로 이동
+            localStorage.setItem('loggedInUser', email);
+            navigate('/'); // ✅ 로그인 성공 후 메인 페이지로 이동
         } else {
             setError('이메일 또는 비밀번호가 올바르지 않습니다.');
         }
