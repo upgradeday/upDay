@@ -11,8 +11,9 @@ import PostDetailModal from './Modal/PostDetailModal';
 import Signup from './Login/components/Signup';
 import ProfileSetup from './Login/components/ProfileSetup';
 import Login from './Login/components/Login';
-import NotFound from './NotFound/NotFound'; // 404page 
-
+import NotFound from './NotFound/NotFound'; // 404page
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
     const navigate = useNavigate(); // useNavigate 훅을 사용하려면 반드시 BrowserRouter 내에 있어야 함
@@ -54,8 +55,10 @@ function App() {
 
 export default function AppWrapper() {
     return (
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
     );
 }
