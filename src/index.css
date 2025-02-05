@@ -23,14 +23,41 @@
     .btn-black {
         @apply bg-neutral-800 text-neutral-100 hover:bg-neutral-700;
     }
-    .card {
-        @apply rounded-xl bg-neutral-100;
+
+    .budge-meal {
+        @apply px-2 py-1 rounded-xl font-medium bg-green-200;
     }
+    .budge-study {
+        @apply px-2 py-1 rounded-xl font-medium bg-yellow-200;
+    }
+    .budge-sport {
+        @apply px-2 py-1 rounded-xl font-medium bg-purple-200;
+    }
+    .budge-habit {
+        @apply px-2 py-1 rounded-xl font-medium bg-pink-200;
+    }
+
+    .card {
+        @apply rounded-3xl bg-neutral-100;
+    }
+
     .tap-onclick {
         @apply w-[100px] h-[32px] mt-[8px] rounded-t-xl bg-blue-400 text-sm font-semibold text-neutral-100 active:bg-blue-500;
     }
     .tap-default {
         @apply w-[100px] h-[32px] mt-[8px] rounded-t-xl bg-blue-300 text-sm font-semibold text-neutral-100 active:bg-blue-500;
+    }
+    .doing-on {
+        @apply w-[20px] h-[20px] flex justify-center items-center rounded-full bg-orange-100 text-base text-orange-400;
+    }
+    .doing-off {
+        @apply w-[20px] h-[20px] flex justify-center items-center rounded-full bg-neutral-200 text-base text-neutral-300;
+    }
+    .done-on {
+        @apply w-[20px] h-[20px] flex justify-center items-center rounded-full bg-green-100 text-base text-green-400;
+    }
+    .done-off {
+        @apply w-[20px] h-[20px] flex justify-center items-center rounded-full bg-neutral-200 text-base text-neutral-300;
     }
 }
 

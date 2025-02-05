@@ -6,7 +6,7 @@ export default function MyReport() {
     return (
         <div className='flex flex-col gap-2  '>
             <h1 className='text-2xl font-semibold'>업데이 리포트</h1>
-            <div className='flex flex-col gap-2 bg-neutral-100 rounded-2xl h-[312px] justify-center '>
+            <div className='card flex flex-col gap-2 h-[312px] justify-center '>
                 <div className='flex flex-row justify-evenly'>
                     <div className='flex flex-col justilfy-center items-center gap-6 w-[30%]'>
                         <p className='text-base font-semibold'>진행 중</p>

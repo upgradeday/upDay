@@ -1,7 +1,8 @@
 import React from 'react';
 import MyProfile from './MyProfileSection';
 import MyReport from './MyReportSection';
-import Management from './ManagementSection';
+import PersonalManage from './PersonalManageSection';
+import ChallengeManage from './ChallengeManageSection';
 
 const MyPageLayout = () => {
     return (
@@ -10,7 +11,8 @@ const MyPageLayout = () => {
                 <MyProfile />
                 <MyReport />
             </section>
-            <Management />
+            {/* <PersonalManage /> */}
+            <ChallengeManage />
         </main>
     );
 };
