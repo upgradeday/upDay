@@ -1,0 +1,110 @@
+*{
+    font-family: Pretendard;
+}
+.body{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10vw;
+    background-color: #EDF5FC;
+}
+.imageWrapper{
+    margin-right: 6rem;
+    margin-top: 7.12rem;
+    width: 506px; 
+    height: auto;
+    flex-shrink: 0;
+}
+.pic1{
+    width: 100%;
+    height: auto;
+}
+.loginForm{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    text-align: center;
+    background-color: white;
+    width: 40.75rem;
+    height: 52rem;
+    border-radius: 24px;
+    
+}
+
+.title {
+    position: relative; 
+    display: inline-block; 
+    margin-top: 3.5rem;
+}
+
+.pic2 {
+    width: 100%; 
+    height: auto; 
+}
+.textOverlay{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-size: 24px;
+    font-weight: 500;
+    color: white; 
+    white-space: nowrap;
+}
+
+.ft18{
+    font-size: 18px;
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.submit{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input{
+    border: 1px solid  #D3D3D3;
+    margin-bottom: 1rem;
+    padding-left: 24px;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 12px;
+}
+
+.button{
+    width: 20rem;
+    border-radius: 12px;
+    padding: 12px 136.5px;
+    margin: 2.5rem 0 2.25rem;
+    color: white;
+    background-color: #363636;
+}
+
+.orText {
+    width: 23rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #555555;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.orText::before,
+.orText::after {
+    content: "";
+    flex: 1;
+    border-bottom: 0.5px solid #7c7c7c; 
+    margin: 0 24px; 
+}
+
+.pic3{
+    margin: 2.25rem 0 2rem ; 
+}
+
+.signup{
+    color: #555555;
+    font-size: 18px;
+}

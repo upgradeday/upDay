@@ -1,14 +1,13 @@
 import React from 'react';
+import ChallengeListSection from './ChallengeListSection';
+import ChallengeListSearchSection from './ChallengeListSearchSection';
 
 const ChallengeListLayout = () => {
     return (
-        <div className=''>
-            <div className='flex min-h-screen items-center justify-center'>
-                <h1 className='text-3xl font-bold text-blue-600'>
-                    Hello Tailwind!
-                </h1>
-            </div>
-        </div>
+	<main className="w-[80%] max-w-[1344px] mx-auto bg-green-300">
+		<ChallengeListSearchSection />
+		<ChallengeListSection />
+	</main>
     );
 };
 
