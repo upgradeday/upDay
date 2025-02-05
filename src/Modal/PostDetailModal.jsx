@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModalHeader from './components/ModalHeader';
 import ModalContent from './components/ModalContent';
+import ModalFooter from './components/ModalFooter';
 
 const PostDetailModal = () => {
 
-	const selectedChallenge = useSelector(state => state.challenge.selectedChallenge)
-	console.log(selectedChallenge);
+	const selectedChallenge = useSelector(state => state.challenge.selectedChallenge);
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem('loggedInUser');
 	
@@ -32,7 +32,7 @@ const PostDetailModal = () => {
 				</div>
 				<ModalHeader category={selectedChallenge.category} duration={selectedChallenge.duration} isMyPost={isMyPost} />
 				<ModalContent title={selectedChallenge.title} content={selectedChallenge.content} />
-
+				<ModalFooter userImg={selectedChallenge.userImg} nickname={selectedChallenge.nickname} isMyPost={isMyPost} />
 			</div>
         </div>
     );

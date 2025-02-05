@@ -5,8 +5,8 @@ import { challengeList } from '../../data/challengeData';
 const challengeSlice = createSlice({
     name: 'challenge',
     initialState: {
-        list: challengeList,
-        selectedChallenge: null,
+        list: challengeList, // 초기 데이터, challengeData 배열
+        selectedChallenge: null, // 
 		myPosts: [],  // 내가 작성한 글 목록
     },
     reducers: {
@@ -20,12 +20,12 @@ const challengeSlice = createSlice({
                     ? updatedChallenge
                     : challenge
             );
-            state.setSelectedChallenge = updatedChallenge;
+            state.selectedChallenge = updatedChallenge;
         },
 
 		// 내가 작성한 글 필터링
 		setMyPosts: (state, action) => {
-			const loggedInUser = localStorage.get('loggedInUser');
+			const loggedInUser = localStorage.getItem('loggedInUser');
 			state.myPosts = state.list.filter(post => post.authorId === loggedInUser);
 
 		}

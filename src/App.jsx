@@ -14,7 +14,6 @@ import ProfileSetup from './Login/components/ProfileSetup';
 import Login from './Login/components/Login';
 import NotFound from './NotFound/NotFound'; // 404 NotFound 페이지 추가
 
-
 function App() {
     return (
         <div>
@@ -23,11 +22,12 @@ function App() {
                 <Route path='/' element={<Intro />} />
                 <Route path='/main' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
-                <Route path='/challengelist' element={<ChallengeList />} />
-                <Route
-                    path='/challengelist/post/:id'
-                    element={<PostDetailModal />}
-                />
+                <Route path='/challengelist' element={<ChallengeList />}>
+                    <Route
+                        path='/challengelist/post/:id'
+                        element={<PostDetailModal />}
+                    />
+                </Route>
 
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/profile' element={<ProfileSetup />} />
