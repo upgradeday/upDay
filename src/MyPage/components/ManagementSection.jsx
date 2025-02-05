@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaChevronDown } from 'react-icons/fa6';
+
 import { BsPersonCircle } from 'react-icons/bs';
 
 export default function Management() {

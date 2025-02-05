@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Logo font */
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+
+.bagel-fat-one-regular {
+    font-family: 'Bagel Fat One', serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
@@ -10,8 +19,37 @@
     font-style: normal;
 }
 
+@layer components {
+    .btn {
+        @apply px-2 py-1 rounded-xl font-semibold transition;
+    }
+    .btn-primary {
+        @apply bg-blue-900 text-neutral-100 hover:bg-blue-800;
+    }
+    .btn-secondary {
+        @apply bg-neutral-300 text-blue-900 hover:bg-red-400 hover:text-neutral-100;
+    }
+    .btn-black {
+        @apply bg-neutral-800 text-neutral-100 hover:bg-neutral-700;
+    }
+    .card {
+        @apply rounded-xl bg-neutral-100;
+    }
+    .tap-onclick {
+        @apply w-[100px] h-[32px] mt-[8px] rounded-t-xl bg-blue-400 text-sm font-semibold text-neutral-100 active:bg-blue-500;
+    }
+    .tap-default {
+        @apply w-[100px] h-[32px] mt-[8px] rounded-t-xl bg-blue-300 text-sm font-semibold text-neutral-100 active:bg-blue-500;
+    }
+}
+
 body {
     background-color: #edf5fb;
     color: #121212;
     font-family: 'Pretendard-Regular';
+}
+
+a,
+button {
+    cursor: pointer;
 }

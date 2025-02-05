@@ -1,24 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
+import Intro from './Intro/Intro';
 import Header from './Layout/Header';
 import Footer from './Layout/Footer';
-
 import Main from './Main/Main';
 import MyPage from './MyPage/MyPage';
 import ChallengeList from './ChallengeList/ChallengeList';
 import PostDetailModal from './Modal/PostDetailModal';
-
 import Signup from './Login/components/Signup';
 import ProfileSetup from './Login/components/ProfileSetup';
 import Login from './Login/components/Login';
 import NotFound from './NotFound/NotFound'; // 404 NotFound 페이지 추가
+
 
 function App() {
     return (
         <div>
             <Header />
             <Routes>
-                <Route path='/' element={<Main />} />
+                <Route path='/' element={<Intro />} />
+                <Route path='/main' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/challengelist' element={<ChallengeList />} />
                 <Route
@@ -30,7 +33,6 @@ function App() {
                 <Route path='/profile' element={<ProfileSetup />} />
                 <Route path='/login' element={<Login />} />
 
-                
                 <Route path='*' element={<NotFound />} />
             </Routes>
             <Footer />
@@ -40,8 +42,10 @@ function App() {
 
 export default function AppWrapper() {
     return (
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
     );
 }
