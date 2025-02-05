@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import style from '../style/Login.module.css';
 import pic1 from '../img/Group 233.svg';
 import pic2 from '../img/Group 72.svg';
-import pic3 from '../img/kakao_login 1.svg'
+import pic3 from '../img/kakao_login 1.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +21,7 @@ const Login = () => {
         if (existingUser) {
             setError('');
             localStorage.setItem('loggedInUser', email);
-            navigate('/'); 
+            navigate('/');
         } else {
             setError('이메일 또는 비밀번호가 올바르지 않습니다.');
         }
