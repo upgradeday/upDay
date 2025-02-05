@@ -1,0 +1,76 @@
+*{
+    font-family: Pretendard;
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    background-color: #EDF5FC; 
+
+}
+
+.ft40{
+    font-size: 40px;
+    font-weight: 600;
+    color: #6ABCF9;
+    margin-top: 4.5rem;
+}
+
+.ft18{
+    color: #121212;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 2.5rem;
+}
+
+.button {
+    padding: 13.5px 35.5px ;
+    border-radius: 12px;
+    background-color: #23557B;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 4.5rem;
+}
+
+@media (max-width: 800px) {
+    .pic1{
+        width: 386px;
+    }
+    .ft40 {
+        font-size: 30px; 
+    }
+    .ft18 {
+        font-size: 16px;  
+    }
+    .button {
+        border-radius: 12px;
+        padding: 12px 28px;
+        font-size: 18px;  
+    }
+}
+
+
+@media (max-width: 400px) {
+    .body {
+        flex-direction: column;
+    }
+    .pic1{
+        width: 324px;
+    }
+    .ft40 {
+        font-size: 24px;  
+    }
+    .ft18 {
+        font-size: 14px;  
+    }
+    .button {
+        font-size: 14px;
+        padding: 11.5px 26px;  
+        border-radius: 8px;
+    }
+}
