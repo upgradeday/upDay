@@ -29,7 +29,7 @@ const Main = () => {
             <div className='flex gap-6 mt-10'>
                 {/* 왼쪽: 사용자 정보 & 챌린지 */}
                 <div className='w-2/3'>
-                    <h1 className='text-2xl font-bold'>
+                    <h1 className='text-lg font-medium'>
                         {userName} 안녕하세요
                     </h1>
                     <p className='text-gray-500'>
