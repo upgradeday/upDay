@@ -19,7 +19,7 @@ const ChallengeCard = ({ cardData }) => {
         dispatch(setSelectedChallenge(cardData));
 
         // 해당 카드의 상세 모달 페이지로 이동
-        navigate(`/challengelist/post/${id}`);
+        navigate(`/challengelist/${id}`);
     };
 
     return (

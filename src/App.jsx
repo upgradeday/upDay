@@ -23,10 +23,14 @@ function App() {
                 <Route path='/main' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/challengelist' element={<ChallengeList />}>
-                    <Route
-                        path='/challengelist/post/:id'
-                        element={<PostDetailModal />}
-                    />
+					{/* 글 생성 */}
+                    <Route path='create' element={<PostDetailModal />} />
+
+					{/* 글 읽기 */}
+                    <Route path=':id' element={<PostDetailModal />} />
+
+					{/* 글 수정 */}
+                    <Route path=':id/edit' element={<PostDetailModal />} />
                 </Route>
 
                 <Route path='/signup' element={<Signup />} />
