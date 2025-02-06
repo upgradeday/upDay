@@ -4,7 +4,7 @@ export default function MyProfile() {
     return (
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl font-semibold'>내 프로필</h1>
-            <div className='flex flex-col gap-2 bg-neutral-100 p-[36px] rounded-2xl'>
+            <div className='card flex flex-col gap-2 p-[36px]'>
                 <div className='flex flex-row items-center'>
                     <img
                         alt=''
@@ -14,7 +14,7 @@ export default function MyProfile() {
                     <div className='flex flex-col h-[200px] justify-evenly '>
                         <div className='flex flex-col gap-2'>
                             <div>
-                                <p className='text-2xl font-semibold text-red-100'>
+                                <p className='text-2xl font-semibold'>
                                     데이메이커
                                 </p>
                             </div>
@@ -24,7 +24,7 @@ export default function MyProfile() {
                         </div>
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-semibold'>
-                                <span className='text-blue-400'>00</span>일 째
+                                <span className='text-blue-500'>00</span>일 째
                                 업데이 중
                             </p>
                             <p className='text-sm font-normal text-neutral-500'>
