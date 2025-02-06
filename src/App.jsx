@@ -9,9 +9,9 @@ import Main from './Main/Main';
 import MyPage from './MyPage/MyPage';
 import ChallengeList from './ChallengeList/ChallengeList';
 import PostDetailModal from './Modal/PostDetailModal';
-import Signup from './Login/components/Signup';
-import ProfileSetup from './Login/components/ProfileSetup';
-import Login from './Login/components/Login';
+import Signup from './Login/Signup';
+import ProfileSetup from './Login/ProfileSetup';
+import Login from './Login/Login';
 import NotFound from './NotFound/NotFound'; // 404 NotFound 페이지 추가
 
 function App() {
