@@ -1,25 +1,32 @@
 import React from 'react';
+import { userData } from '../../data/userData';
 
-export default function MyProfile() {
+const MyProfile = () => {
+    // userData 첫번쩨 요소(테스트 계정)의 데이터 가져오기
+    const { email, nickname, profileImage, signupDate } = userData[0];
+
     return (
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl font-semibold'>내 프로필</h1>
-            <div className='card flex flex-col gap-2 p-[36px]'>
+            <div className='card flex flex-col gap-3 p-[36px]'>
                 <div className='flex flex-row items-center'>
-                    <img
-                        alt=''
-                        src='https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        className='inline-block w-[30%] max-w-[200px] rounded-full ring-2 ring-neutral-300 mr-[10%]'
-                    />
+                    <div className='inline-block w-[35%] max-w-[200px] aspect-square mr-[10%]'>
+                        <img
+                            alt='이미지를 읽어올 수 없습니다.'
+                            src={profileImage}
+                            className='w-full h-full object-cover rounded-full ring-2 ring-neutral-300 overflow-hidden'
+                        />
+                    </div>
+
                     <div className='flex flex-col h-[200px] justify-evenly '>
                         <div className='flex flex-col gap-2'>
                             <div>
                                 <p className='text-2xl font-semibold'>
-                                    데이메이커
+                                    {nickname}
                                 </p>
                             </div>
                             <p className='text-sm font-normal text-neutral-500'>
-                                daymaker@kakao.com
+                                {email}
                             </p>
                         </div>
                         <div className='flex flex-col gap-2'>
@@ -28,7 +35,7 @@ export default function MyProfile() {
                                 업데이 중
                             </p>
                             <p className='text-sm font-normal text-neutral-500'>
-                                가입 2025.01.23
+                                {signupDate}
                             </p>
                         </div>
                     </div>
@@ -37,4 +44,5 @@ export default function MyProfile() {
             </div>
         </div>
     );
-}
+};
+export default MyProfile;

@@ -3,7 +3,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 
 export default function PersonalInfo() {
     return (
-        <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
+        <div className='w-full h-[760px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
             <form className='h-full flex flex-col justify-between'>
                 <div className='space-y-12'>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMyPosts } from '../../store/features/challengeSlice';
+import { setMyPosts } from '../../store/features/userChallengeSlice';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
 export default function MyChallengeList() {
