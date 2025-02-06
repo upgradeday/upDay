@@ -7,4 +7,3 @@ export const userData = [
         signupDate: '2024-02-01'
     },
 ];
-

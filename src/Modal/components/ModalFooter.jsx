@@ -4,18 +4,18 @@ const ModalFooter = ({userImg, nickname, isMyPost}) => {
 
   return (
 	<div className='flex justify-between '>
-		<div>
-			<div>
+		<div className='flex items-center'>
+			<div className='w-8 h-8 overflow-hidden rounded-[50%]'>
 				<img src={userImg} alt="" />
 			</div>
-			<p>{nickname}</p>
+			<p className='ml-2 text-sm font-light'>{nickname}</p>
 		</div>
 		<div>
 			{
 				isMyPost ? (
-					<button className='btn btn-primary'>공유하기</button>
+					<button className='px-16 py-2 rounded-xl font-semibold btn-primary'>공유하기</button>
 				) : (
-					<button className='btn btn-primary'>참여하기</button>
+					<button className='px-16 py-2 rounded-xl font-semibold btn-primary'>참여하기</button>
 				)
 			}
 		</div>
