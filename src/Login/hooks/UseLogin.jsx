@@ -7,8 +7,8 @@ import { userData } from '../../data/userData';
 const useLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('test01@naver.com');
+    const [password, setPassword] = useState('test123^');
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -37,6 +37,7 @@ const useLogin = () => {
             dispatch(setUser({ email: existingUser.email }));
 
             navigate('/main');
+            window.location.reload();
         } else {
             setError('이메일 또는 비밀번호가 올바르지 않습니다.');
         }
