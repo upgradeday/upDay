@@ -3,7 +3,7 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { BsSearch, BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
-import MyChallengeList from './MyChallengeList';
+import MyChallengeList from './myChallengeList';
 
 export default function MyChallengeSection() {
     return (
