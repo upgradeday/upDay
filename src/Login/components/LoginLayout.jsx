@@ -3,7 +3,7 @@ import pic2 from '../img/Group 72.svg';
 
 const LoginLayout = ({ children }) => {
     return (
-        <div className='flex justify-end pr-[10vw]'>
+        <div className=' flex justify-end pr-[10vw]'>
             <div className='w-506 h-auto mt-[7.12rem] mr-[6rem] shrink-0'>
                 <img src={pic1} alt='배경 이미지' className='w-full h-auto' />
             </div>
