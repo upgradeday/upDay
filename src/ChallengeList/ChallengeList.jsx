@@ -7,7 +7,7 @@ const ChallengeList = () => {
 	const navigate = useNavigate();
 
 	const handleCreateClick = () => {
-		navigate('challengelist/create');
+		navigate('create');
 	}
     return (
         <>
