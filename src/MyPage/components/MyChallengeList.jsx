@@ -6,28 +6,46 @@ import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 export default function MyChallengeList() {
     const dispatch = useDispatch();
 
-    // Redux state 확인용 로그 추가
     const myChallenges = useSelector((state) => {
-        console.log('Redux State:', state); // Redux 상태 확인
-        return state.myChallengeList?.myChallenge || []; // 방어 코드 추가
+        return state.myChallengeList?.myChallenge || []; // Redux state 확인용 로그 추가, 에러 방지를 위해 []을 기본값으로 지정
     });
 
     useEffect(() => {
         dispatch(setMyChallenge());
     }, [dispatch]);
+
+    const reversedChallenges = [...myChallenges].reverse(); // 리스트를 역순 정렬
+
+    const changeBudge = (category) => {
+        switch (category) {
+            case '식단':
+                return 'budge-meal';
+            case '학습':
+                return 'budge-study';
+            case '운동':
+                return 'budge-sport';
+            case '습관':
+                return 'budge-habit';
+            default:
+                return '';
+        }
+    };
+
     return (
-        <ul className='w-full text-sm'>
-            {myChallenges.length > 0 ? (
-                myChallenges.map((post) => (
+        <ul className='w-full h-[85%] text-sm overflow-scroll'>
+            {reversedChallenges.length > 0 ? (
+                reversedChallenges.map((post) => (
                     <li
                         key={post.id}
-                        className='flex flex-1 gap-2 py-1.5 border-b border-neutral-300'
+                        className='flex flex-1 gap-2 py-4 border-b border-neutral-300'
                     >
-                        <div className='w-[72px] p-0 text-neutral-500 flex justify-center items-center'>
+                        <div className='w-[8%] p-0 text-neutral-500 flex justify-center items-center'>
                             {post.id}
                         </div>
                         <div className='flex flex-1 gap-1 items-center p-0'>
-                            <div className='budge-meal text-xs'>
+                            <div
+                                className={`text-xs ${changeBudge(post.category)}`}
+                            >
                                 {post.category}
                             </div>
                             {post.title}

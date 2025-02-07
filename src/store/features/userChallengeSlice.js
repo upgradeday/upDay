@@ -10,7 +10,7 @@ const userChallengeSlice = createSlice({
     reducers: {
         setMyChallenge: (state) => {
             state.myChallenge = state.list.filter(
-                (challenge) => challenge.clgJoin
+                (challenge) => challenge.clgJoin // 내가 참여한 챌린지 = clgJoin:true
             );
         },
     },

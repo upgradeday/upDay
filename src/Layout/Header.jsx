@@ -1,7 +1,11 @@
 import React from 'react';
+
 // import MyPage from '../MyPage/components/MyProfileSection';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+
 
 const Header = () => {
 
@@ -30,7 +34,7 @@ const Header = () => {
     };
 
     return (
-        <header className='flex justify-between items-center w-[80%] max-w-[1344px] mx-auto h-20'>
+        <header className='flex justify-between items-center w-[80%] max-w-[1344px] mx-auto h-20 mb-10 mt-3'>
             <Link to='main' className='h-10 bagel-fat-one-regular text-3xl'>
                 UpDay
             </Link>
@@ -69,6 +73,5 @@ const Header = () => {
         </header>
     );
 };
-// 여백
 
 export default Header;
