@@ -6,31 +6,38 @@ export default function PersonalInfo() {
         window.location.reload();
     };
 
+    const loggedInUserEmail = localStorage.getItem('loggedInUser');
+    const users = JSON.parse(localStorage.getItem('users')) || []; // JSON 변환
+    const loggedInUser = users.find((user) => user.email === loggedInUserEmail);
+
     const [userInfo, setUserInfo] = useState({
-        nickname: '',
-        name: '',
+        email: '',
         password: '',
+        nickname: '',
         confirmPassword: '',
         about: '',
         profileImage: null,
-        email: '',
     });
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('loggedInUser');
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setUserInfo({
-                nickname: parsedUser.nickname || '',
-                name: parsedUser.name || '',
-                password: '',
-                confirmPassword: '',
-                about: parsedUser.about || '',
-                profileImage: parsedUser.profileImage || null,
+        if (loggedInUser) {
+            setUserInfo((prev) => {
+                const updatedInfo = {
+                    ...prev,
+                    email: loggedInUser.email || '',
+                    password: loggedInUser.password || '',
+                    nickname: loggedInUser.nickname || '',
+                    profileImage: loggedInUser.profileImage || null,
+                    about: loggedInUser.about || '',
+                };
+                // 변경 사항이 없으면 상태 업데이트 방지
+                if (JSON.stringify(prev) === JSON.stringify(updatedInfo)) {
+                    return prev;
+                }
+                return updatedInfo;
             });
         }
-    }, []);
-
+    }, []); // 빈 배열로 설정하여 최초 마운트 시에만 실행
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserInfo((prev) => ({ ...prev, [name]: value }));
@@ -53,6 +60,7 @@ export default function PersonalInfo() {
     const handleImageDelete = () => {
         setUserInfo((prev) => ({ ...prev, profileImage: null }));
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -62,16 +70,26 @@ export default function PersonalInfo() {
         }
 
         const updatedUser = {
+            ...loggedInUser,
             nickname: userInfo.nickname,
-            name: userInfo.name,
-            password: userInfo.password,
+            email: userInfo.email,
             about: userInfo.about,
             profileImage: userInfo.profileImage,
+            password: userInfo.password || loggedInUser.password, // 기존 비밀번호 유지
         };
 
-        localStorage.setItem('users', JSON.stringify(updatedUser));
+        const updatedUsers = users.map((user) =>
+            user.email === userInfo.email ? updatedUser : user
+        );
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+
         alert('회원정보가 성공적으로 변경되었습니다.');
+        handleRefresh();
     };
+
+    if (!loggedInUser) {
+        return <p>로그인한 유저 정보를 찾을 수 없습니다.</p>;
+    }
 
     return (
         <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
@@ -103,19 +121,19 @@ export default function PersonalInfo() {
                                     type='file'
                                     accept='image/*'
                                     onChange={handleImageUpload}
-                                    className='btn btn-primary text-sm shadow-xs hidden'
+                                    className='hidden'
                                     id='upload-photo'
                                 />
                                 <label
                                     htmlFor='upload-photo'
-                                    className='btn btn-primary text-sm shadow-xs '
+                                    className='btn btn-primary text-sm'
                                 >
                                     사진 올리기
                                 </label>
                                 <button
                                     type='button'
                                     onClick={handleImageDelete}
-                                    className='btn btn-secondary text-sm shadow-xs'
+                                    className='btn btn-secondary text-sm'
                                 >
                                     삭제하기
                                 </button>
@@ -133,8 +151,7 @@ export default function PersonalInfo() {
                                     rows={3}
                                     value={userInfo.about}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 placeholder:text-neutral-300 focus:outline-blue-500 md:text-sm/7'
-                                    // defaultValue={''}
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
                             </div>
                         </div>
@@ -143,7 +160,7 @@ export default function PersonalInfo() {
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='nickname'
-                                className='block text-sm/6 font-medium text-gray-900'
+                                className='block text-sm/6 font-medium'
                             >
                                 닉네임
                             </label>
@@ -154,28 +171,26 @@ export default function PersonalInfo() {
                                     type='text'
                                     value={userInfo.nickname}
                                     onChange={handleChange}
-                                    autoComplete='user-nickname'
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500 md:text-sm/7'
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
                             </div>
                         </div>
 
                         <div className='sm:col-span-3'>
                             <label
-                                htmlFor='name'
-                                className='block text-sm/6 font-medium text-gray-900'
+                                htmlFor='email'
+                                className='block text-sm/6 font-medium'
                             >
                                 email
                             </label>
                             <div className='mt-2'>
                                 <input
-                                    id='name'
-                                    name='name'
+                                    id='email'
+                                    name='email'
                                     type='text'
-                                    value={userInfo.name}
+                                    value={userInfo.email}
                                     onChange={handleChange}
-                                    autoComplete='user-name'
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500 md:text-sm/7'
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
                             </div>
                         </div>
@@ -183,7 +198,7 @@ export default function PersonalInfo() {
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='password'
-                                className='block text-sm/6 font-medium text-gray-900'
+                                className='block text-sm/6 font-medium'
                             >
                                 비밀번호
                             </label>
@@ -194,8 +209,7 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.password}
                                     onChange={handleChange}
-                                    autoComplete='new-password'
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500 md:text-sm/7'
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
                             </div>
                         </div>
@@ -203,7 +217,7 @@ export default function PersonalInfo() {
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='confirmPassword'
-                                className='block text-sm/6 font-medium text-gray-900'
+                                className='block text-sm/6 font-medium'
                             >
                                 비밀번호 확인
                             </label>
@@ -214,8 +228,7 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.confirmPassword}
                                     onChange={handleChange}
-                                    autoComplete='new-password-confirmation'
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500 md:text-sm/7'
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
                             </div>
                         </div>
@@ -223,46 +236,23 @@ export default function PersonalInfo() {
                 </div>
 
                 <div className='flex items-center justify-end gap-x-4'>
-                    <button
-                        type='button'
-                        className='btn btn-secondary text-sm shadow-xs'
-                    >
+                    <button type='button' className='btn btn-secondary text-sm'>
                         취소하기
                     </button>
                     <button
                         type='submit'
-                        className='btn btn-primary px-6 text-sm shadow-xs'
-                        onClick={handleRefresh}
+                        className='btn btn-primary px-6 text-sm'
                     >
                         저장하기
                     </button>
                 </div>
             </form>
-            {/* <div className='w-1/3 h-full p-[20px] bg-white rounded-lg shadow-md'>
-
-                {userInfo.profileImage ? (
-                    <img
-                        src={userInfo.profileImage}
-                        alt='프로필'
-                        className='w-[120px] h-[120px] rounded-full mx-auto object-cover'
-                    />
-                ) : (
-                    <BsPersonCircle
-                        aria-hidden='true'
-                        className='w-[120px] h-[120px] mx-auto text-gray-300'
-                    />
-                )}
-
-
-                <h2 className='text-center mt-[10px] font-bold'>
-                    {userInfo.nickname || '닉네임 없음'}
-                </h2>
-
-
-                <p className='text-center mt-[10px] text-gray-600'>
-                    {userInfo.about || '소개글이 없습니다.'}
-                </p>
-            </div> */}
         </div>
     );
 }
+
+// 유효성검사 (비밀번호, 비밀번호 확인)
+// 아이디 값 변경 안돼게
+// 이름 email로 변경하기 -완-
+// about(소개글) 가장 아래로 위치 변경 f12눌러서 안에서 봤을떄 application
+// ~일 째 도전중 값 계산 (가입날 부터 현제날 signupDate값을 불러와서 적용 오늘 날로부터 해서 )
