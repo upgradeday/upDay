@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../store/features/UserSlice';
 import { userData } from '../../data/userData';
@@ -30,7 +30,7 @@ const useLogin = () => {
 
         if (existingUser) {
             setError('');
-            localStorage.setItem('loggedInUser', JSON.stringify(existingUser));
+            localStorage.setItem('loggedInUser', existingUser.email); 
             dispatch(setUser(existingUser));
             navigate('/main');
         } else {
