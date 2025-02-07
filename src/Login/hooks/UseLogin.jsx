@@ -27,17 +27,22 @@ const useLogin = () => {
             (user) => user.email === email && user.password === password
         );
 
-
         if (existingUser) {
             setError('');
-            localStorage.setItem('loggedInUser', existingUser.email); 
-            dispatch(setUser(existingUser));
+
+     
+            localStorage.setItem('loggedInUser', existingUser.email);
+
+        
+            dispatch(setUser({ email: existingUser.email }));
+
             navigate('/main');
         } else {
             setError('이메일 또는 비밀번호가 올바르지 않습니다.');
         }
     };
 
+    
     return {
         email,
         setEmail,
