@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSelectedChallenge } from '../../store/features/challengeSlice';
+import { CATEGORY_IMAGES } from '../../data/userChallengeData';
 
 const ChallengeCard = ({ cardData }) => {
     // cardData 구조분해할당
-    const { id, category, duration, img, title, content, userImg, nickname } = cardData;
+    const { id, category, duration, title, content, userImg, nickname } = cardData;
 
     // 라우터 이동을 위한 navigate 함수
     const navigate = useNavigate();
@@ -19,8 +20,12 @@ const ChallengeCard = ({ cardData }) => {
         dispatch(setSelectedChallenge(cardData));
 
         // 해당 카드의 상세 모달 페이지로 이동
-        navigate(`/challengelist/post/${id}`);
+        navigate(`/challengelist/${id}`);
     };
+
+	const getCategoryImage = (category) => {
+		return CATEGORY_IMAGES[category] || CATEGORY_IMAGES.default;
+	}
 
     return (
         <div
@@ -37,7 +42,7 @@ const ChallengeCard = ({ cardData }) => {
 
 			{/* 기본 제공 이미지 */}
             <div className='mb-4 rounded-2xl overflow-hidden'>
-                <img src={img} className='w-full' alt='' />
+                <img src={getCategoryImage(cardData.category)} className='w-full' alt={`${cardData.category} 챌린지`} />
             </div>
 
 			{/* 챌린지 제목 & 내용 */}

@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer>
-            <div className='flex justify-between items-center w-[80%] max-w-[1344px] h-25 mx-auto'>
+            <div className='flex justify-between items-center w-[80%] max-w-[1344px] h-20 mx-auto mt-10'>
                 <p className='text-3xl font-bold bagel-fat-one-regular'>
                     UpDay
                 </p>
