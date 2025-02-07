@@ -1,17 +1,12 @@
 import React from 'react';
+import CategoryItem from './CategoryItem';  // 새로 만든 CategoryItem 컴포넌트 import
 
 const CategoryList = ({ categories }) => {
     return (
         <div className='mt-6'>
-            <h2 className='text-xl font-bold'>챌린지 둘러보기</h2>
             <div className='grid grid-cols-2 gap-4 mt-2'>
                 {categories.map((category, index) => (
-                    <div
-                        key={index}
-                        className={`p-4 text-center rounded-lg ${category.color} cursor-pointer`}
-                    >
-                        {category.name}
-                    </div>
+                    <CategoryItem key={index} category={category} />
                 ))}
             </div>
         </div>
