@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import useProfileSetup from '../Login/hooks/UseProfileSetup';
+import useProfileSetup from './hooks/UseProfileSetup';
 
 const ProfileSetup = () => {
     const {
@@ -19,7 +19,7 @@ const ProfileSetup = () => {
             <div>
                 <h2>프로필 설정하기</h2>
                 <form onSubmit={handleSubmit} className='mt-6'>
-                    {/* 프로필 이미지 업로드 */}
+          
                     <label
                         htmlFor='file-upload'
                         className='block w-[20rem] h-[20rem] bg-gray-300 rounded-lg flex items-center justify-center cursor-pointer'
@@ -47,8 +47,8 @@ const ProfileSetup = () => {
                         value={nickname}
                         onChange={(e) => setNicknameState(e.target.value)}
                     />
+                    <button type='submit'>설정 완료</button>
                 </form>
-                <button type='submit'>설정 완료</button>
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
