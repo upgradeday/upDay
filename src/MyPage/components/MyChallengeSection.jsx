@@ -3,11 +3,11 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { BsSearch, BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
-import MyChallengeList from './myChallengeList';
+import MyChallengeList from './MyChallengeList';
 
 export default function MyChallengeSection() {
     return (
-        <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
+        <div className='w-full h-[760px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
             <div className='flex flex-row gap-x-3'>
                 <div className='w-[72px] grid shrink-0 grid-cols-1 focus-within:relative'>
                     <select
