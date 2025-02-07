@@ -40,7 +40,7 @@ export default function MyChallengeSection() {
                     </button>
                 </div>
             </div>
-            <div className='flex gap-2 justify-end mt-2 pb-1 border-b border-neutral-300 '>
+            <div className='flex gap-2 justify-end mt-3 pb-3 border-b border-neutral-300 '>
                 <div className='flex items-center'>
                     <BsDot className='text-blue-500 text-sm' />
                     <p className='text-xs'>내가 만든</p>
