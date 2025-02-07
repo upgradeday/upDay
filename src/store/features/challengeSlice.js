@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { challengeList } from '../../data/challengeData';
+import { userChallengeList } from '../../data/userChallengeData';
 
+const getInitialList = () => {
+	const savedChallenges = localStorage.getItem('challenges');
+	// 기존에 작성한 챌린지 글 + 로컬 스토리지에 저장한 챌린지 글 합치기
+	return savedChallenges ? [...userChallengeList, ...JSON.parse(savedChallenges)] : userChallengeList;
+}
 
 const challengeSlice = createSlice({
     name: 'challenge',
     initialState: {
-        list: challengeList, // 초기 데이터, challengeData 배열
-        selectedChallenge: null, // 
+        list: getInitialList(), // 초기 데이터, 
+        selectedChallenge: null,
 		myPosts: [],  // 내가 작성한 글 목록
     },
     reducers: {
@@ -35,9 +40,8 @@ const challengeSlice = createSlice({
 
 		// 로그인 한 유저의 챌린지만 필터링
 		setMyPosts: (state, action) => {
-			const loggedInUser = localStorage.getItem('loggedInUser');
-			state.myPosts = state.list.filter(post => post.authorId === loggedInUser);
-
+			const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+			state.myPosts = state.list.filter(post => post.authorId === loggedInUser.email);
 		}
     },
 });

@@ -5,10 +5,10 @@ import CategoryList from '../Main/components/CategoryList';
 import ChallengeIcon from './images/challenge-2.svg';
 import OngoingChallenges from '../Main/components/OngoingChallenges';
 import ButtonIcon from './images/button.svg';
-import SpoonIcon from './images/spoon.svg';
-import DustIcon from './images/dust.svg';
-import LampIcon from './images/Lamp.svg';
-import HeartIcon from './images/heart.svg';
+import SpoonIcon from '../assets/images/common/spoon.svg';
+import DustIcon from '../assets/images/common/dust.svg';
+import LampIcon from '../assets/images/common/Lamp.svg';
+import HeartIcon from '../assets/images/common/heart.svg';
 
 const Main = () => {
     const userName = '데이메이커 님';
