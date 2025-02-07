@@ -18,11 +18,12 @@ const PostDetailModal = () => {
     const isEditMode = pathname.endsWith('/edit');
     const isViewMode = !isCreateMode && !isEditMode;
 
+	// 
     const selectedChallenge = useSelector(
         (state) => state.challenge.selectedChallenge
     );
 
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const loggedInUser = localStorage.getItem('loggedInUser');
 
     // 챌린지 생성 & 수정 모드일 때 사용할 상태
     const [formData, setFormData] = useState({
@@ -42,25 +43,29 @@ const PostDetailModal = () => {
         return CATEGORY_IMAGES[category] || CATEGORY_IMAGES.default;
     };
 
-    const isMyPost = isCreateMode || loggedInUser?.email === selectedChallenge?.authorId;
+	// 로그인 한 유저인지 확인하는 로직
+    const isMyPost = isCreateMode || loggedInUser === selectedChallenge?.authorId;
 
+	// 창 닫기
     const handleClose = () => {
         navigate('/challengelist');
     };
 
+	// 글 작성하는 로직
     const handleSubmit = () => {
         if (isCreateMode) {
-            const maxId =
+            // id 값을 글이 새로 추가할때 마다 
+			const maxId =
                 Math.max(...userChallengeList.map((challenge) => challenge.id)) + 1;
-            // 이건 추후에 사용할 예정
-            const userInfo = JSON.parse(localStorage.getItem('users'));
+            
+            const userInfo = JSON.parse(localStorage.getItem('users'))[0];
 			
             const newChallenge = {
                 ...formData,
                 id: maxId,
                 authorId: loggedInUser,
-                nickname: userInfo.nickname,
-                userImg: userInfo.profileImage,
+                nickname: userInfo?.nickname || '기본 닉네임',
+                userImg: userInfo?.profileImage || '',
             };
 
             // 필수 입력 체크
@@ -75,10 +80,6 @@ const PostDetailModal = () => {
             }
 
 			// 로컬 스토리지에 저장
-			// const existingChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
-			// const updatedChallenges = [...existingChallenges, newChallenge];
-			// localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
-
 			const existingChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
 			const updatedChallenges = [...existingChallenges, newChallenge];
 			localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
@@ -143,7 +144,7 @@ const PostDetailModal = () => {
                         isCreateMode ? 'create' : isEditMode ? 'edit' : 'view'
                     }
                     userImg={isViewMode ? selectedChallenge?.userImg : 'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg'}
-                    nickname={isViewMode ? selectedChallenge?.nickname : 'ㄴㅇㅇ'}
+                    nickname={isViewMode ? selectedChallenge?.nickname : ''}
                     isMyPost={isMyPost}
                     onSubmit={handleSubmit}
 					onClose={handleClose}
