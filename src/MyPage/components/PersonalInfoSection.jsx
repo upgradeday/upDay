@@ -1,5 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
+import { differenceInDays, format } from 'date-fns';
+
+// 비밀번호 유효성 검사 함수
+const validatePassword = (password) => {
+    if (password.length < 8) {
+        return '비밀번호는 8자 이상이어야 합니다.';
+    }
+    if (!/[a-z]/.test(password)) {
+        return '비밀번호에는 소문자가 하나 이상 포함되어야 합니다.';
+    }
+    if (!/[0-9]/.test(password)) {
+        return '비밀번호에는 숫자가 하나 이상 포함되어야 합니다.';
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+        return '비밀번호에는 특수 문자가 하나 이상 포함되어야 합니다.';
+    }
+    return null;
+};
 
 export default function PersonalInfo() {
     const handleRefresh = () => {
@@ -17,7 +35,12 @@ export default function PersonalInfo() {
         confirmPassword: '',
         about: '',
         profileImage: null,
+        signupDate: '',
     });
+
+    // 새로운 상태 변수
+    const [passwordError, setPasswordError] = useState('');
+    const [daySinceSignup, setDaysSinceSignup] = useState(0);
 
     useEffect(() => {
         if (loggedInUser) {
@@ -27,6 +50,7 @@ export default function PersonalInfo() {
                     email: loggedInUser.email || '',
                     password: loggedInUser.password || '',
                     nickname: loggedInUser.nickname || '',
+                    signupDate: loggedInUser.signupDate || '',
                     profileImage: loggedInUser.profileImage || null,
                     about: loggedInUser.about || '',
                 };
@@ -36,11 +60,33 @@ export default function PersonalInfo() {
                 }
                 return updatedInfo;
             });
+
+            if (loggedInUser.signupDate) {
+                const signupDate = new Date(loggedInUser.signupDate);
+                const today = new Date();
+                const days = differenceInDays(today, signupDate);
+                setDaysSinceSignup(days);
+            }
         }
     }, []); // 빈 배열로 설정하여 최초 마운트 시에만 실행
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserInfo((prev) => ({ ...prev, [name]: value }));
+
+        // 비밀번호 유효성 검사
+        if (name === 'password') {
+            const error = validatePassword(value);
+            setPasswordError(error || '');
+        }
+
+        if (name === 'confirmPassword') {
+            if (value !== userInfo.password) {
+                setPasswordError('비밀번호가 일치하지 않습니다.');
+            } else {
+                setPasswordError('');
+            }
+        }
     };
 
     const handleImageUpload = (e) => {
@@ -64,20 +110,24 @@ export default function PersonalInfo() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (passwordError) {
+            alert(passwordError);
+            return;
+        }
+
         if (userInfo.password !== userInfo.confirmPassword) {
             alert('비밀번호가 일치하지 않습니다.');
             return;
         }
 
         const updatedUser = {
-            ...loggedInUser,
-            nickname: userInfo.nickname,
             email: userInfo.email,
+            password: userInfo.password || loggedInUser.password, // 기존 비밀번호 유지
+            nickname: userInfo.nickname,
+            signupDate: userInfo.signupDate,
             about: userInfo.about,
             profileImage: userInfo.profileImage,
-            password: userInfo.password || loggedInUser.password, // 기존 비밀번호 유지
         };
-
         const updatedUsers = users.map((user) =>
             user.email === userInfo.email ? updatedUser : user
         );
@@ -190,11 +240,11 @@ export default function PersonalInfo() {
                                     type='text'
                                     value={userInfo.email}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-neutral-500 border border-neutral-300 focus:outline-blue-500'
+                                    readOnly
                                 />
                             </div>
                         </div>
-
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='password'
@@ -211,9 +261,13 @@ export default function PersonalInfo() {
                                     onChange={handleChange}
                                     className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
                                 />
+                                {passwordError && (
+                                    <p className='text-red-500 text-sm'>
+                                        {passwordError}
+                                    </p>
+                                )}
                             </div>
                         </div>
-
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='confirmPassword'
@@ -251,8 +305,8 @@ export default function PersonalInfo() {
     );
 }
 
-// 유효성검사 (비밀번호, 비밀번호 확인)
+// 유효성검사 (비밀번호, 비밀번호 확인) -완-
 // 아이디 값 변경 안돼게
 // 이름 email로 변경하기 -완-
-// about(소개글) 가장 아래로 위치 변경 f12눌러서 안에서 봤을떄 application
+// about(소개글) 가장 아래로 위치 변경 f12눌러서 안에서 봤을떄 application -배열상태는 맞게오는데 열면 바뀜-
 // ~일 째 도전중 값 계산 (가입날 부터 현제날 signupDate값을 불러와서 적용 오늘 날로부터 해서 )
