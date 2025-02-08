@@ -6,9 +6,9 @@ const Login = () => {
     return (
         <>
             <Helmet>
-                <title>로그인 | upDay와 함께 새로운 하루</title>
+                <title>로그인 - upDay</title>
             </Helmet>
-            <LoginLayout>
+            <LoginLayout title="로그인 / 회원가입">
                 <LoginForm />
             </LoginLayout>
         </>
