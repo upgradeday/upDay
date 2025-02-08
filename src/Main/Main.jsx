@@ -9,6 +9,9 @@ import SpoonIcon from '../assets/images/common/spoon.svg';
 import DustIcon from '../assets/images/common/dust.svg';
 import LampIcon from '../assets/images/common/Lamp.svg';
 import HeartIcon from '../assets/images/common/heart.svg';
+import MainDay from './images/mainday.svg';
+import MainFlower from './images/main_logo.svg';
+import UserInfo from './components/UserInfo'; // UserInfo 컴포넌트 import
 
 const Main = () => {
     const userName = '데이메이커 님';
@@ -33,48 +36,50 @@ const Main = () => {
 
     return (
         <MainLayout>
-            <div className='flex gap-6 mt-10'>
-                {/* 왼쪽 사용자 정보 & 도전 중인 챌린지 */}
-                <div
-                    className='w-2/3 relative flex flex-col'
-                    style={{ height: '550px' }}
-                >
-                    {/* 배경 이미지 (절대 위치 설정) */}
-                    <div className='absolute top-0 left-0 w-full h-full -z-10'>
+            <div className='flex gap-[90px] '>
+                {/* 왼쪽: 사용자 정보, 메인 꽃 이미지, 도전 중인 챌린지 */}
+                <div className='w-full md:w-[600px] flex flex-col items-center relative'>
+                    <div className='absolute top-[30px] z-10 w-full text-center'>
+                        {/* 메인 플라워 이미지 */}
                         <img
-                            src='배경이미지경로'
-                            alt='배경'
-                            className='w-full h-full object-cover'
+                            src={MainFlower}
+                            alt='메인 플라워 아이콘'
+                            className='absolute top-[210px] right-[-5px]  w-[600px] h-auto' // MainFlower 이미지의 위치 조정
                         />
-                    </div>
-
-                    {/* 도전 중인 챌린지 */}
-                    <div className='w-full mb-4 mt-12'>
-                        <OngoingChallenges challenges={ongoingChallenges} />
-                    </div>
-
-                    {/* 사용자 정보 */}
-                    <div className='mt-auto'>
-                        <h1 className='text-lg font-medium'>
+                        {/* 사용자 이름 */}
+                        <h1 className='text-lg font-medium mb-0 text-left w-full'>
                             <span className='text-3xl font-bold'>
                                 {userName}
                             </span>{' '}
                             안녕하세요!
                         </h1>
-                        <p className='text-gray-500 text-lg '>
-                            Upday와{' '}
-                            <span className='text-2xl font-semibold text-blue-400'>
-                                {challengeDays}
+
+                        <div className='flex items-center text-gray-500 text-lg'>
+                            <img
+                                src={MainDay}
+                                alt='Main Day'
+                                className='w-[150px] h-[90px] object-contain mr-2'
+                            />
+                            <span>
+                                와{' '}
+                                <span className='text-2xl font-semibold text-blue-400'>
+                                    {challengeDays}
+                                </span>
+                                일째 도전 중 입니다.
                             </span>
-                            일째 도전 중 입니다.
-                        </p>
+                        </div>
+                    </div>
+
+                    {/* 진행 중인 챌린지 */}
+                    <div className='w-full mt-12'>
+                        <OngoingChallenges challenges={ongoingChallenges} />
                     </div>
                 </div>
 
                 {/* 오른쪽: 인기 챌린지 & 카테고리 */}
-                <div className='w-2/3 mt-10'>
+                <div className='w-full md:w-[650px] mt-10'>
                     <PopularChallenges challenges={popularChallenges} />
-                    <div className='mt-20 relative'>
+                    <div className='mt-10 relative'>
                         <img
                             src={ChallengeIcon}
                             alt='챌린지 아이콘'
@@ -94,15 +99,29 @@ const Main = () => {
                                     <span className='text-2xl font-semibold'>
                                         {category.name}
                                     </span>
+
+                                    {/* 버튼 아이콘 */}
                                     <img
                                         src={ButtonIcon}
                                         alt='Button'
                                         className='absolute bottom-4 left-4 w-8 h-8'
                                     />
+
+                                    {/* 카테고리 아이콘 */}
                                     <img
                                         src={category.icon}
                                         alt={`${category.name} icon`}
-                                        className='absolute bottom-4 right-7'
+                                        className='absolute bottom-4 right-8 object-contain'
+                                        style={{
+                                            width:
+                                                category.name === '식단'
+                                                    ? '17%' // SpoonIcon
+                                                    : category.name === '학습'
+                                                      ? '28%' // LampIcon
+                                                      : category.name === '운동'
+                                                        ? '40%' // DustIcon
+                                                        : '30%', // HeartIcon (default case)
+                                        }}
                                     />
                                 </div>
                             ))}

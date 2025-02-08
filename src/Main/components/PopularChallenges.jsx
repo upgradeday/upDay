@@ -1,18 +1,10 @@
 import React from 'react';
 import ChallengeIcons from '../images/challenge-1.svg';
-import MainFlower from '../images/main_logo.svg';
 
 const PopularChallenges = ({ challenges }) => {
     return (
         <>
             <div className='relative'>
-                {' '}
-                {/* 부모 div에 relative 추가 */}
-                <img
-                    src={MainFlower}
-                    alt='메인 플라워 아이콘'
-                    className='absolute top-[140px] right-[720px] w-[600px] h-auto' // MainFlower 이미지의 위치 조정
-                />
                 <div className='relative z-10'>
                     <img
                         src={ChallengeIcons}
