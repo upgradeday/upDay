@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNickname, setProfileImage } from '../../store/features/UserSlice';
 import { useNavigate } from 'react-router-dom';
+import img1 from '../img/1.svg';
+import img2 from '../img/2.svg';
+import img3 from '../img/3.svg';
+import img4 from '../img/4.svg';
 
 const useProfileSetup = () => {
     const [nickname, setNicknameState] = useState('');
-    const [profileImage, setProfileImageState] = useState(null);
+    const [profileImage, setProfileImageState] = useState('');
     const [error, setError] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -39,6 +43,10 @@ const useProfileSetup = () => {
             return;
         }
 
+         const defaultImages = [img1, img2, img3, img4]; // 여러 개의 기본 이미지 배열
+         const randomImage =
+             defaultImages[Math.floor(Math.random() * defaultImages.length)];
+
         // Redux 상태 업데이트
         dispatch(setNickname(nickname));
 
@@ -46,7 +54,7 @@ const useProfileSetup = () => {
             email,
             password,
             nickname,
-            profileImage,
+            profileImage: profileImage || randomImage, // 기본이미지 설정정
             signupDate: new Date().toISOString().split('T')[0], // 날짜만 저장
         };
 
