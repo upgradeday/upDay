@@ -7,6 +7,7 @@ const ModalHeader = ({
     mode,
     onChange,
     formData,
+	onDelete
 }) => {
     if (mode === 'create') {
         return (
@@ -44,7 +45,7 @@ const ModalHeader = ({
             {isMyPost && (
                 <div className='flex'>
                     <button>수정</button>
-                    <button>삭제</button>
+                    <button onClick={onDelete}>삭제</button>
                 </div>
             )}
         </div>

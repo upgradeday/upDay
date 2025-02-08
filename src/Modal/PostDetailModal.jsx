@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ModalHeader from './components/ModalHeader';
 import ModalContent from './components/ModalContent';
 import ModalFooter from './components/ModalFooter';
-import { addChallenge } from '../store/features/challengeSlice';
+import { addChallenge, deleteChallenge } from '../store/features/challengeSlice';
 import { CATEGORY_IMAGES, userChallengeList } from '../data/userChallengeData';
 
 const PostDetailModal = () => {
@@ -18,7 +18,8 @@ const PostDetailModal = () => {
     const isEditMode = pathname.endsWith('/edit');
     const isViewMode = !isCreateMode && !isEditMode;
 
-	// 
+
+	
     const selectedChallenge = useSelector(
         (state) => state.challenge.selectedChallenge
     );
@@ -54,9 +55,14 @@ const PostDetailModal = () => {
 	// 글 작성하는 로직
     const handleSubmit = () => {
         if (isCreateMode) {
-            // id 값을 글이 새로 추가할때 마다 
-			const maxId =
-                Math.max(...userChallengeList.map((challenge) => challenge.id)) + 1;
+			// 1. 로컬 스토리지의 챌린지 가져오기
+			const existingStorageChallenges = JSON.parse(localStorage.getItem('challenges' || '[]'));
+
+			// 2. 더미 데이터 챌린지와 로컬 스토리지에 저장된 챌린지 합치기
+			const allChallenges = [...userChallengeList, ...existingStorageChallenges];
+
+            // 3. 합쳐진 챌린지들 중에서 가장 큰 id 값 찾은 후에 + 1 하기 
+			const maxId = Math.max(...allChallenges.map((challenge) => challenge.id), 0) + 1;
             
             const userInfo = JSON.parse(localStorage.getItem('users'))[0];
 			
@@ -80,14 +86,20 @@ const PostDetailModal = () => {
             }
 
 			// 로컬 스토리지에 저장
-			const existingChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
-			const updatedChallenges = [...existingChallenges, newChallenge];
+			const currentChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
+			const updatedChallenges = [...currentChallenges, newChallenge];
 			localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
 
             dispatch(addChallenge(newChallenge));
             navigate('/challengelist');
         }
     };
+
+	// 글 삭제하는 로직
+	const handleDelete = (id) => {
+		dispatch(deleteChallenge(id));
+		navigate('/challengelist');
+	}
 
     return (
         <div
@@ -129,6 +141,7 @@ const PostDetailModal = () => {
                     isMyPost={isMyPost}
                     onChange={setFormData}
                     formData={formData}
+					onDelete={ () => handleDelete(selectedChallenge.id)}
                 />
                 <ModalContent
                     mode={
