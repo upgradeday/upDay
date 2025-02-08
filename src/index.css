@@ -34,16 +34,16 @@
     }
 
     .budge-meal {
-        @apply px-2 py-1 rounded-xl font-medium bg-green-200;
+        @apply px-2 py-1 rounded-xl font-medium bg-green-200 text-center text-xs;
     }
     .budge-study {
-        @apply px-2 py-1 rounded-xl font-medium bg-yellow-200;
+        @apply px-2 py-1 rounded-xl font-medium bg-yellow-200 text-center text-xs;
     }
     .budge-sport {
-        @apply px-2 py-1 rounded-xl font-medium bg-purple-200;
+        @apply px-2 py-1 rounded-xl font-medium bg-purple-200 text-center text-xs;
     }
     .budge-habit {
-        @apply px-2 py-1 rounded-xl font-medium bg-pink-200;
+        @apply px-2 py-1 rounded-xl font-medium bg-pink-200 text-center text-xs;
     }
 
     .card {

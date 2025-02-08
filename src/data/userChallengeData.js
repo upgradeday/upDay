@@ -1,11 +1,11 @@
 export const CATEGORY_IMAGES = {
-    '식단': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMtt3aOrfYZ1KnQq4GK0vf9gkNBC07f72UWQ&s',
-    '학습': 'https://news.edupang.com/data/photos/20170939/art_1506413638434_4f048d.jpg',
-    '운동': 'https://www.noblesse.com/shop/data/m/editor_new/2021/09/09/89bf18216575225e3.jpg',
-    '습관': 'https://www.kbiznews.co.kr/news/photo/201901/48673_10396_236.jpg',
-    default: 'https://blog.kakaocdn.net/dn/GHYFr/btrsSwcSDQV/UQZxkayGyAXrPACyf0MaV1/img.jpg'
+    식단: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMtt3aOrfYZ1KnQq4GK0vf9gkNBC07f72UWQ&s',
+    학습: 'https://news.edupang.com/data/photos/20170939/art_1506413638434_4f048d.jpg',
+    운동: 'https://www.noblesse.com/shop/data/m/editor_new/2021/09/09/89bf18216575225e3.jpg',
+    습관: 'https://www.kbiznews.co.kr/news/photo/201901/48673_10396_236.jpg',
+    default:
+        'https://blog.kakaocdn.net/dn/GHYFr/btrsSwcSDQV/UQZxkayGyAXrPACyf0MaV1/img.jpg',
 };
-
 
 export const userChallengeList = [
     {
@@ -20,7 +20,8 @@ export const userChallengeList = [
         nickname: '바른말고운말',
         postDate: '2024-12-02',
         clgJoin: false,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 2,
@@ -35,7 +36,8 @@ export const userChallengeList = [
         nickname: '꾸준해꾸',
         postDate: '2024-11-30',
         clgJoin: false,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 3,
@@ -50,7 +52,8 @@ export const userChallengeList = [
         nickname: '데이메이커',
         postDate: '2025-01-01',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 4,
@@ -65,7 +68,8 @@ export const userChallengeList = [
         nickname: '배달의만족',
         postDate: '2025-01-13',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 5,
@@ -80,7 +84,8 @@ export const userChallengeList = [
         nickname: '만보르기니',
         postDate: '2025-01-11',
         clgJoin: true,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 6,
@@ -95,7 +100,8 @@ export const userChallengeList = [
         nickname: '집밥박선생',
         postDate: '2024-12-01',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 7,
@@ -110,22 +116,24 @@ export const userChallengeList = [
         nickname: '슈가프리',
         postDate: '2024-11-22',
         clgJoin: false,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 8,
-        authorId: 'english007@naver.com',
-        category: '학습',
-        duration: '3개월',
-        title: '매일 1시간씩 영어 공부하기',
+        authorId: 'test01@naver.com',
+        category: '운동',
+        duration: '1개월',
+        title: '점심 먹고 30분 이상 산책 하기',
         content:
-            '매년 다짐만 하는 영어공부, 제대로 습관을 들이자!!! 단어 외우기? 문법? 이런 거 신경쓰지 말고 미드/영드 자막 없이 보기, 영어권 팟캐스트 듣기 등 자유롭게 공부해봐요!',
+            '식사 후 산책은 혈당조절에도 도움이 되고, 소화를 돕는다고 합니다. 추워도 굴하지 않고 걸어요!!',
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
-        nickname: '아인파인땡큐앤유',
-        postDate: '2025-01-01',
+        nickname: '데이메이커',
+        postDate: '20225-01-15',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 9,
@@ -139,8 +147,9 @@ export const userChallengeList = [
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '해피해피',
         postDate: '2025-01-05',
-        clgJoin: true,
-        clgState: false,
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 10,
@@ -155,7 +164,8 @@ export const userChallengeList = [
         nickname: '데이메이커',
         postDate: '2025-01-04',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 11,
@@ -170,7 +180,8 @@ export const userChallengeList = [
         nickname: '짐브로',
         postDate: '2024-11-30',
         clgJoin: false,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 12,
@@ -185,7 +196,8 @@ export const userChallengeList = [
         nickname: '부지러니',
         postDate: '2024-12-01',
         clgJoin: true,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 13,
@@ -199,8 +211,9 @@ export const userChallengeList = [
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '책벌레99',
         postDate: '2024-12-01',
-        clgJoin: true,
-        clgState: true,
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 14,
@@ -214,8 +227,9 @@ export const userChallengeList = [
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '암기마스터',
         postDate: '2024-12-01',
-        clgJoin: true,
-        clgState: true,
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 15,
@@ -230,7 +244,8 @@ export const userChallengeList = [
         nickname: '얼리어답터',
         postDate: '2024-12-10',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 16,
@@ -245,25 +260,12 @@ export const userChallengeList = [
         nickname: '비건챌린저',
         postDate: '2025-01-18',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
+
     {
         id: 17,
-        authorId: 'veggie123@kakao.com',
-        category: '식단',
-        duration: '1개월',
-        title: '인스턴트 대신 자연식 먹기',
-        content:
-            '패스트푸드를 피하고 자연 그대로의 식재료로 만든 음식을 먹어보자! 몸이 가벼워지는 걸 느낄 수 있을 것!',
-        userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
-        nickname: '건강집착러',
-        postDate: '2025-01-04',
-        clgJoin: true,
-        clgState: false,
-    },
-    {
-        id: 18,
         authorId: 'noyasik@kakao.com',
         category: '식단',
         duration: '1주',
@@ -274,23 +276,41 @@ export const userChallengeList = [
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '야식끊기1일차',
         postDate: '2024-12-01',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
+    },
+    {
+        id: 18,
+        authorId: 'english007@naver.com',
+        category: '학습',
+        duration: '3개월',
+        title: '매일 1시간씩 영어 공부 챌린지',
+        content:
+            '매년 다짐만 하는 영어공부, 제대로 습관을 들이자!!! 단어 외우기? 문법? 이런 거 신경쓰지 말고 미드/영드 자막 없이 보기, 영어권 팟캐스트 듣기 등 자유롭게 공부해봐요!',
+        userImg:
+            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+        nickname: '아인파인땡큐앤유',
+        postDate: '2025-01-01',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: true,
     },
     {
         id: 19,
-        authorId: 'test01@naver.com',
-        category: '운동',
+        authorId: 'veggie123@kakao.com',
+        category: '식단',
         duration: '1개월',
-        title: '점심 먹고 30분 이상 산책 하기',
+        title: '인스턴트 대신 자연식 먹기',
         content:
-            '식사 후 산책은 혈당조절에도 도움이 되고, 소화를 돕는다고 합니다. 추워도 굴하지 않고 걸어요!!',
+            '패스트푸드를 피하고 자연 그대로의 식재료로 만든 음식을 먹어보자! 몸이 가벼워지는 걸 느낄 수 있을 것!',
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
-        nickname: '데이메이커',
-        postDate: '20225-01-15',
-        clgJoin: true,
-        clgState: false,
+        nickname: '건강집착러',
+        postDate: '2025-01-04',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 20,
@@ -305,7 +325,8 @@ export const userChallengeList = [
         nickname: '머슬코어',
         postDate: '2025-01-15',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: false,
     },
     {
         id: 21,
@@ -320,7 +341,8 @@ export const userChallengeList = [
         nickname: '오천원의행복',
         postDate: '2025-01-15',
         clgJoin: true,
-        clgState: false,
+        clgDoing: false,
+        clgDone: false,
     },
     {
         id: 22,
@@ -335,7 +357,8 @@ export const userChallengeList = [
         nickname: '물안먹는하마',
         postDate: '2025-01-16',
         clgJoin: true,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 23,
@@ -350,7 +373,8 @@ export const userChallengeList = [
         nickname: '데이메이커',
         postDate: '2025-01-17',
         clgJoin: true,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 24,
@@ -365,6 +389,7 @@ export const userChallengeList = [
         nickname: '룰루라이프',
         postDate: '2025-01-07',
         clgJoin: false,
-        clgState: true,
+        clgDoing: true,
+        clgDone: false,
     },
 ];
