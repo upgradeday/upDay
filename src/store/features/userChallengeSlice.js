@@ -13,8 +13,16 @@ const userChallengeSlice = createSlice({
                 (challenge) => challenge.clgJoin // 내가 참여한 챌린지 = clgJoin:true
             );
         },
+        toggleClg: (state, action) => {
+            const clgState = state.list.find(
+                (post) => post.id === action.payload
+            );
+            if (clgState) {
+                clgState.clgDoing = !clgState.clgDoing;
+            }
+        },
     },
 });
 
-export const { setMyChallenge } = userChallengeSlice.actions;
+export const { setMyChallenge, toggleClgDoing } = userChallengeSlice.actions;
 export default userChallengeSlice.reducer;
