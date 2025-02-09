@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-    setMyChallenge,
-    toggleClgState,
-} from '../../store/features/userChallengeSlice';
+import { toggleClgState } from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
@@ -12,14 +9,12 @@ export default function MyChallengeList() {
     const myChallenges = useSelector(
         (state) => state.myChallengeList?.myChallenge || []
     );
-    const [loggedInUser, setLoggedInUser] = useState(null);
 
-    useEffect(() => {
-        setLoggedInUser(localStorage.getItem('loggedInUser'));
-        dispatch(setMyChallenge());
-    }, [dispatch]);
-
+    // 챌린지 역순(최신순)으로 배열 변경
     const reversedChallenges = [...myChallenges].reverse();
+
+    // 역순 번호 매핑
+    const clgNum = (index) => myChallenges.length - index;
 
     // 챌린지 카테고리별 뱃지 클래스
     const badgeClasses = {
@@ -37,11 +32,11 @@ export default function MyChallengeList() {
             : !doing && !done
               ? 'line-through text-neutral-500'
               : '';
-
     const getClgDoingClass = (doing) => (doing ? 'doing-on' : 'doing-off');
     const getClgDoneClass = (done) => (done ? 'done-on' : 'done-off');
 
     // 내 챌린지 여부 아이콘 표시
+    const loggedInUser = localStorage.getItem('loggedInUser');
     const isMyChallenge = (authorId) =>
         loggedInUser === authorId ? 'opacity-100' : 'opacity-0';
 
@@ -49,13 +44,16 @@ export default function MyChallengeList() {
         <ul className='w-full h-[85%] text-sm overflow-scroll list-none'>
             {reversedChallenges.length > 0 ? (
                 reversedChallenges.map(
-                    ({ id, authorId, category, title, clgDoing, clgDone }) => (
+                    (
+                        { id, authorId, category, title, clgDoing, clgDone },
+                        index
+                    ) => (
                         <li
                             key={id}
                             className='flex flex-1 gap-x-1.5 h-15 py-4 border-b border-neutral-300 items-center'
                         >
                             <div className='flex flex-row justify-center w-[8%] text-xs text-neutral-500'>
-                                {id}
+                                {clgNum(index)}
                             </div>
                             <BsDot
                                 className={`${isMyChallenge(authorId)} text-2xl text-blue-500 ml-[-3%]`}
