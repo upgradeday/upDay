@@ -1,11 +1,13 @@
 import React from 'react';
 
 const ModalFooter = ({ userImg, nickname, isMyPost, mode, onSubmit, onClose }) => {
-	if(mode === 'create'){
+	if(mode === 'create' || mode === 'edit'){
 		return (
 			<div className='flex justify-between'>
 				<button onClick={onClose}>취소하기</button>
-				<button onClick={onSubmit}>등록하기</button>
+				<button onClick={onSubmit}>
+					{mode === 'create' ? '등록하기' : '수정하기'}
+				</button>
 			</div>
 		)
 	}
