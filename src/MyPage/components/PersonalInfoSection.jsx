@@ -138,7 +138,13 @@ export default function PersonalInfo() {
     };
 
     if (!loggedInUser) {
-        return <p>로그인한 유저 정보를 찾을 수 없습니다.</p>;
+        return (
+            <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
+                <p className='text-center text-gray-500'>
+                    로그인한 유저 정보를 찾을 수 없습니다.
+                </p>
+            </div>
+        );
     }
 
     return (

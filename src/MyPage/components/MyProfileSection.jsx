@@ -38,14 +38,21 @@ const MyProfile = () => {
             }
         }
     }, [localStorage.getItem('users')]); // 빈 배열 유지 (최초 마운트 시 한 번만 실행) //users 키변경 감지
+
     // 유저 정보가 없을 때 메시지 출력
     if (!loggedInUser) {
         return (
-            <p className='text-center text-gray-500'>
-                로그인한 유저 정보를 찾을 수 없습니다.
-            </p>
+            <div className='flex flex-col gap-2'>
+                <h1 className='text-2xl font-semibold'>내 프로필</h1>
+                <div className='card flex flex-col gap-3 p-[36px] h-[384px] justify-center'>
+                    <p className='text-center text-gray-500'>
+                        로그인한 유저 정보를 찾을 수 없습니다.
+                    </p>
+                </div>
+            </div>
         );
     }
+
     return (
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl font-semibold'>내 프로필</h1>
@@ -80,7 +87,7 @@ const MyProfile = () => {
                                 <span className='text-blue-500'>
                                     {daysSinceSignup}
                                 </span>
-                                일 째 업데이트 중
+                                일 째 업데이 중
                             </p>
                             <p className='text-sm font-normal text-neutral-500'>
                                 {loggedInUser.signupDate || '가입일 정보 없음'}

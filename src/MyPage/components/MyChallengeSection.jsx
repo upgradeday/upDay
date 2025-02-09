@@ -5,8 +5,20 @@ import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
 import MyChallengeList from './MyChallengeList';
 
-
 export default function MyChallengeSection() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    // 유저 정보가 없을 때 메시지 출력
+    if (!loggedInUser) {
+        return (
+            <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
+                <p className='text-center text-gray-500'>
+                    로그인한 유저 정보를 찾을 수 없습니다.
+                </p>
+            </div>
+        );
+    }
+
     return (
         <div className='w-full h-[760px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
             <div className='flex flex-row gap-x-3'>
