@@ -14,13 +14,17 @@ const userChallengeSlice = createSlice({
         // 내가 참여한 챌린지 필터링
         setMyChallenge: (state) => {
             state.myChallenge = state.list.filter(({ clgJoin }) => clgJoin);
+            localStorage.setItem(
+                'loggedInUserClgList',
+                JSON.stringify(state.myChallenge) // 필터링된 데이터를 로컬스토리지에 저장
+            );
         },
 
         // 챌린지 수행 여부 토글
         toggleClgState: (state, action) => {
             const { id, type } = action.payload;
             const storedData =
-                JSON.parse(localStorage.getItem('userChallengList')) ||
+                JSON.parse(localStorage.getItem('loggedInUserClgList')) ||
                 state.list;
 
             const updatedData = storedData.map((challenge) => {
@@ -41,7 +45,7 @@ const userChallengeSlice = createSlice({
             });
 
             localStorage.setItem(
-                'userChallengList',
+                'loggedInUserClgList',
                 JSON.stringify(updatedData) // 변경된 데이터를 로컬스토리지에 저장
             );
 
