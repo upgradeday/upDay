@@ -30,6 +30,7 @@ const challengeSlice = createSlice({
 
         // 변경된 챌린지 정보를 처리하는 액션
         updateChallenge: (state, action) => {
+			// 수정된 새로운 데이터 값
             const updatedChallenge = action.payload;
 
             // 전체 목록에서 해당 챌린지 정보 업데이트
@@ -38,7 +39,14 @@ const challengeSlice = createSlice({
                     ? updatedChallenge
                     : challenge
             );
+
+			// 선택된 챌린지의 상태 업데이트
             state.selectedChallenge = updatedChallenge;
+
+			// 로컬 스토리지 상태 업데이트
+			const existingChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
+			const updatedChallenges = existingChallenges.map((challenge) => challenge.id === updatedChallenge.id ? updatedChallenge : challenge);
+			localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
         },
 
         // 챌린지 삭제하는 액션

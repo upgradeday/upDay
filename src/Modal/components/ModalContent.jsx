@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ModalContent = ({ title, content, mode, onChange, formData }) => {
-    if (mode === 'create') {
+    if (mode === 'create' || mode === 'edit') {
         return (
             <div className='mb-4'>
                 <input

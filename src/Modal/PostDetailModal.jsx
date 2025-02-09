@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ModalHeader from './components/ModalHeader';
 import ModalContent from './components/ModalContent';
 import ModalFooter from './components/ModalFooter';
-import { addChallenge, deleteChallenge } from '../store/features/challengeSlice';
+import { addChallenge, deleteChallenge, updateChallenge } from '../store/features/challengeSlice';
 import { CATEGORY_IMAGES, userChallengeList } from '../data/userChallengeData';
 
 const PostDetailModal = () => {
@@ -28,11 +28,22 @@ const PostDetailModal = () => {
 
     // 챌린지 생성 & 수정 모드일 때 사용할 상태
     const [formData, setFormData] = useState({
-        title: isEditMode ? selectedChallenge?.title : '',
-        content: isEditMode ? selectedChallenge?.content : '',
-        category: isEditMode ? selectedChallenge?.category : '',
-        duration: isEditMode ? selectedChallenge?.duration : '',
+        title: '',
+        content: '',
+        category: '',
+        duration: '',
     });
+
+	useEffect(() => {
+		if(isEditMode && selectedChallenge){
+			setFormData({
+				title: selectedChallenge.title,
+				content: selectedChallenge.content,
+				category: selectedChallenge.category,
+				duration: selectedChallenge.duration,
+			});
+		}
+	}, [isEditMode, selectedChallenge]) // isEditMode 혹은 selectedChallenge가 변경될 때마다 재렌더링
 
     // 존재하지 않는 글을 보려고 할 때 빈 화면을 보여주는 안전장치
     if (isViewMode && !selectedChallenge) {
@@ -51,6 +62,12 @@ const PostDetailModal = () => {
     const handleClose = () => {
         navigate('/challengelist');
     };
+
+	// 수정 버튼 클릭시 수정하는 모달 상태창으로 변경하는 로직
+	const handleUpdate = () => {
+		navigate(`/challengelist/${selectedChallenge.id}/edit`);
+	}
+
 
 	// 글 작성하는 로직
     const handleSubmit = () => {
@@ -92,7 +109,23 @@ const PostDetailModal = () => {
 
             dispatch(addChallenge(newChallenge));
             navigate('/challengelist');
-        }
+        } else if(isEditMode){
+
+			// 필수 입력 체크
+			if(!formData.title || !formData.content || !formData.duration || !formData.category){
+				alert('모든 항목을 입력하시오');
+				return;
+			}
+
+			// 수정된 내용 저장하는 로직
+			const updatedChallenge = {
+				...selectedChallenge,
+				...formData
+			};
+
+			dispatch(updateChallenge(updatedChallenge));
+			navigate('/challengelist');
+		}
     };
 
 	// 글 삭제하는 로직
@@ -100,6 +133,7 @@ const PostDetailModal = () => {
 		dispatch(deleteChallenge(id));
 		navigate('/challengelist');
 	}
+
 
     return (
         <div
@@ -142,6 +176,7 @@ const PostDetailModal = () => {
                     onChange={setFormData}
                     formData={formData}
 					onDelete={ () => handleDelete(selectedChallenge.id)}
+					onUpdate={handleUpdate}
                 />
                 <ModalContent
                     mode={
