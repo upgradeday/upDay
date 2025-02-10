@@ -43,14 +43,12 @@ const MyProfile = () => {
                 console.error('로컬 스토리지 데이터 파싱 오류:', error);
             }
         }
-    }, [navigate]); // 빈 배열 유지 (최초 마운트 시 한 번만 실행) //users 키변경 감지 //localStorage.getItem('users')
+    }, [navigate]); 
     // 유저 정보가 없을 때 메시지 출력
     if (!loggedInUser) {
         return null;
-        // <p className='text-center text-gray-500'>
-        //     로그인한 유저 정보를 찾을 수 없습니다.
-        // </p>
     }
+
     return (
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl font-semibold'>내 프로필</h1>
@@ -85,7 +83,7 @@ const MyProfile = () => {
                                 <span className='text-blue-500'>
                                     {daysSinceSignup}
                                 </span>
-                                일 째 업데이트 중
+                                일 째 업데이 중
                             </p>
                             <p className='text-sm font-normal text-neutral-500'>
                                 {loggedInUser.signupDate || '가입일 정보 없음'}

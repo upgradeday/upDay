@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MainLayout from '../Main/components/MainLayout';
 import PopularChallenges from '../Main/components/PopularChallenges';
 import CategoryList from '../Main/components/CategoryList';
@@ -9,24 +9,65 @@ import SpoonIcon from '../assets/images/common/spoon.svg';
 import DustIcon from '../assets/images/common/dust.svg';
 import LampIcon from '../assets/images/common/Lamp.svg';
 import HeartIcon from '../assets/images/common/heart.svg';
-import MainDay from './images/mainday.svg';
 import MainFlower from './images/main_logo.svg';
-import UserInfo from './components/UserInfo'; // UserInfo 컴포넌트 import
+import UserInfo from './components/UserInfo';
 
 const Main = () => {
-    const userName = '데이메이커 님';
-    const challengeDays = 123;
+    const [userName, setUserName] = useState('데이메이커 님');
+    const [challengeDays, setChallengeDays] = useState(0);
+
+    // 로컬스토리지에서 사용자 정보를 읽어와 상태 설정
+    useEffect(() => {
+        const loggedInUserEmail = localStorage.getItem('loggedInUser');
+        const usersData = localStorage.getItem('users');
+
+        if (usersData && loggedInUserEmail) {
+            try {
+                const users = JSON.parse(usersData);
+                const foundUser = users.find(
+                    (user) => user.email === loggedInUserEmail
+                );
+
+                if (foundUser) {
+                    setUserName(foundUser.nickname || '데이메이커 님');
+                    if (foundUser.signupDate) {
+                        const signUpDate = new Date(foundUser.signupDate);
+                        const today = new Date();
+                        const diffDays = Math.floor(
+                            (today - signUpDate) / (1000 * 60 * 60 * 24)
+                        );
+                        setChallengeDays(diffDays);
+                    }
+                } else {
+                    console.error('로그인된 사용자를 찾을 수 없습니다.');
+                }
+            } catch (error) {
+                console.error('로컬 스토리지 데이터 파싱 오류:', error);
+            }
+        }
+    }, []);
+
     const ongoingChallenges = [
-        '물 2L 마시기',
-        '하루 10,000보 걷기',
-        '블로그 글 쓰기',
-        '책 10페이지 읽기',
+        { name: '물 2L 마시기', timeRemaining: '4일 남음' },
+        { name: '하루 10,000보 걷기', timeRemaining: '18일 남음' },
+        { name: '블로그 글 쓰기', timeRemaining: '64일 남음' },
+        { name: '책 10페이지 읽기', timeRemaining: '254일 남음' },
     ];
+
+    // 인기 챌린지 목록
     const popularChallenges = [
-        '하루 10000보 걷기',
-        '물 1L 마시기',
-        '일상 블로그 올리기',
+        '1. 하루 10,000보 걷기',
+        '2. 물 3L 마시기',
+        '3. 네이버 블로그에 일상 글 올리기',
+        '4. 아침 일찍 일어나서 미라클 모닝하기',
+        '5. 헬스 시작하기 (체지방 -5kg 빼기)',
+        '6. 영어 회화 공부하기',
+        '7. 자기 전에 감사 일기 쓰기',
+        '8. 배달 음식 줄이고 집밥 먹기',
+        '9. 저녁 10시에 핸드폰 놓고 잠자기',
     ];
+
+    // 카테고리 정보
     const categories = [
         { name: '식단', color: 'bg-mint-200', icon: SpoonIcon },
         { name: '학습', color: 'bg-yellow-200', icon: LampIcon },
@@ -36,49 +77,30 @@ const Main = () => {
 
     return (
         <MainLayout>
-            <div className='flex gap-[90px] '>
-                {/* 왼쪽: 사용자 정보, 메인 꽃 이미지, 도전 중인 챌린지 */}
+            <div className='flex gap-[90px]'>
+                {/* 왼쪽 콘텐츠 */}
                 <div className='w-full md:w-[600px] flex flex-col items-center relative'>
-                    <div className='absolute top-[30px] z-10 w-full text-center'>
-                        {/* 메인 플라워 이미지 */}
+                    <div className='absolute top-[-22px] z-10 w-full text-center'>
                         <img
                             src={MainFlower}
                             alt='메인 플라워 아이콘'
-                            className='absolute top-[210px] right-[-5px]  w-[600px] h-auto' // MainFlower 이미지의 위치 조정
+                            className='absolute top-[210px] right-[-5px] w-[600px] h-auto'
                         />
-                        {/* 사용자 이름 */}
-                        <h1 className='text-lg font-medium mb-0 text-left w-full'>
-                            <span className='text-3xl font-bold'>
-                                {userName}
-                            </span>{' '}
-                            안녕하세요!
-                        </h1>
-
-                        <div className='flex items-center text-gray-500 text-lg'>
-                            <img
-                                src={MainDay}
-                                alt='Main Day'
-                                className='w-[150px] h-[90px] object-contain mr-2'
-                            />
-                            <span>
-                                와{' '}
-                                <span className='text-2xl font-semibold text-blue-400'>
-                                    {challengeDays}
-                                </span>
-                                일째 도전 중 입니다.
-                            </span>
-                        </div>
+                        <UserInfo
+                            userName={userName}
+                            challengeDays={challengeDays}
+                        />
                     </div>
 
-                    {/* 진행 중인 챌린지 */}
-                    <div className='w-full mt-12'>
+                    <div className='w-full mt-11'>
                         <OngoingChallenges challenges={ongoingChallenges} />
                     </div>
                 </div>
 
-                {/* 오른쪽: 인기 챌린지 & 카테고리 */}
+                {/* 오른쪽 콘텐츠 */}
                 <div className='w-full md:w-[650px] mt-10'>
                     <PopularChallenges challenges={popularChallenges} />
+
                     <div className='mt-10 relative'>
                         <img
                             src={ChallengeIcon}
@@ -99,15 +121,11 @@ const Main = () => {
                                     <span className='text-2xl font-semibold'>
                                         {category.name}
                                     </span>
-
-                                    {/* 버튼 아이콘 */}
                                     <img
                                         src={ButtonIcon}
                                         alt='Button'
                                         className='absolute bottom-4 left-4 w-8 h-8'
                                     />
-
-                                    {/* 카테고리 아이콘 */}
                                     <img
                                         src={category.icon}
                                         alt={`${category.name} icon`}
@@ -115,12 +133,12 @@ const Main = () => {
                                         style={{
                                             width:
                                                 category.name === '식단'
-                                                    ? '17%' // SpoonIcon
+                                                    ? '17%'
                                                     : category.name === '학습'
-                                                      ? '28%' // LampIcon
+                                                      ? '28%'
                                                       : category.name === '운동'
-                                                        ? '40%' // DustIcon
-                                                        : '30%', // HeartIcon (default case)
+                                                        ? '40%'
+                                                        : '30%',
                                         }}
                                     />
                                 </div>
