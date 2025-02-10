@@ -6,6 +6,8 @@ import {
     setSelectedChallenge,
 } from '../../store/features/challengeSlice';
 import { CATEGORY_IMAGES } from '../../data/userChallengeData';
+import LoginRequiredModal from '../../common/components/LoginRequiredModal';
+import useModal from '../../common/hooks/useModal';
 
 const ChallengeCard = ({ cardData }) => {
     // cardData 구조분해할당
@@ -21,6 +23,8 @@ const ChallengeCard = ({ cardData }) => {
         clgJoin,
     } = cardData;
 
+	const {isModalOpen, openModal, closeModal} = useModal();
+
     // 라우터 이동을 위한 navigate 함수
     const navigate = useNavigate();
 
@@ -33,9 +37,23 @@ const ChallengeCard = ({ cardData }) => {
     // 내가 작성한 글이 아니면서 아직 참여하지 않은 경우에만 버튼 표시
     const canJoin = loggedInUser !== authorId && !clgJoin;
 
-    const handleJoin = () => {
-        dispatch(joinChallenge(id));
+	// 참여하기 버튼 핸들링
+    const handleJoin = (e) => {
+		e.stopPropagation(); // 이벤트 전파 중지
+		e.preventDefault(); // 기본 동작 방지
+
+		if(!loggedInUser){
+			openModal();
+		}else{
+			dispatch(joinChallenge(id));
+		}
     };
+
+	// 모달창 닫고 로그인 페이지로 이동하는 로직
+	const handleNavigateToLogin = () => {
+		closeModal();
+		navigate('/login');
+	}
 
     // 카드 클릭시 모달을 띄우는 이벤트 핸들러
     const handleCardClick = () => {
@@ -101,6 +119,7 @@ const ChallengeCard = ({ cardData }) => {
                         {clgJoin ? '참여완료' : '참여하기'}
                     </button>
                 )}
+				<LoginRequiredModal isOpen={isModalOpen} onClose={closeModal} onNavigate={handleNavigateToLogin} stopPropagation={true}/>
             </div>
         </div>
     );
