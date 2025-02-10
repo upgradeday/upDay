@@ -6,13 +6,18 @@ import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
 export default function MyChallengeList() {
     const dispatch = useDispatch();
-    const myChallenges = useSelector(
-        (state) => state.myChallengeList?.myChallenge || []
-    );
+    const storedList = JSON.parse(localStorage.getItem('loggedInUserClgList'));
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    // 테스트 계정과 loggedInUser가 일치할 때만 테스트 계정 목록 사용
+    const myChallenges = storedList.some(
+        (challenge) => challenge.authorId === loggedInUser
+    )
+        ? storedList
+        : [];
 
     // 챌린지 역순(최신순)으로 배열 변경
     const reversedChallenges = [...myChallenges].reverse();
-
     // 역순 번호 매핑
     const clgNum = (index) => myChallenges.length - index;
 
@@ -36,7 +41,6 @@ export default function MyChallengeList() {
     const getClgDoneClass = (done) => (done ? 'done-on' : 'done-off');
 
     // 내 챌린지 여부 아이콘 표시
-    const loggedInUser = localStorage.getItem('loggedInUser');
     const isMyChallenge = (authorId) =>
         loggedInUser === authorId ? 'opacity-100' : 'opacity-0';
 
@@ -99,7 +103,7 @@ export default function MyChallengeList() {
                     )
                 )
             ) : (
-                <li className='text-center text-gray-500 py-2'>
+                <li className='text-center text-gray-500 py-4'>
                     참여한 챌린지가 없습니다.
                 </li>
             )}

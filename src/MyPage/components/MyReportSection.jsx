@@ -4,20 +4,25 @@ import { FaStar } from 'react-icons/fa6';
 
 export default function MyReport() {
     const storedList = JSON.parse(localStorage.getItem('loggedInUserClgList'));
+    const loggedInUser = localStorage.getItem('loggedInUser');
 
-    const clgDoingArr = storedList.filter((state) => state.clgDoing === true);
-    const clgDoneArr = storedList.filter((state) => state.clgDone === true);
-    const clgOverArr = storedList.filter(
-        (state) => state.clgDoing !== true && state.clgDone !== true
-    );
+    // loggedInUser와 authorId가 하나라도 일치하면 storedList 사용, 아니면 빈 배열
+    const userChallenges = storedList.some(
+        (challenge) => challenge.authorId === loggedInUser
+    )
+        ? storedList
+        : [];
 
-    const numClgDoing = clgDoingArr.length;
-    const numClgDone = clgDoneArr.length;
-    const numClgOver = clgOverArr.length;
+    const numClgDoing = userChallenges.filter((clg) => clg.clgDoing).length;
+    const numClgDone = userChallenges.filter((clg) => clg.clgDone).length;
+    const numClgOver = userChallenges.filter(
+        (clg) => !clg.clgDoing && !clg.clgDone
+    ).length;
 
-    const achievementRate = Math.round(
-        (numClgDone / (numClgDone + numClgOver)) * 100
-    );
+    const achievementRate =
+        numClgDone + numClgOver > 0
+            ? Math.round((numClgDone / (numClgDone + numClgOver)) * 100)
+            : 0;
 
     return (
         <div className='flex flex-col gap-2  '>
