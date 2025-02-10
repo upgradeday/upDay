@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Pic from '../img/up-logo.png';
 import { differenceInDays } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
     // 유저 데이터 상태 관리
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [daysSinceSignup, setDaysSinceSignup] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loggedInUserEmail = localStorage.getItem('loggedInUser');
         const usersData = localStorage.getItem('users');
+        if (!loggedInUserEmail) {
+            navigate('/login');
+            return;
+        }
         if (usersData) {
             try {
                 const users = JSON.parse(usersData);
@@ -37,20 +43,10 @@ const MyProfile = () => {
                 console.error('로컬 스토리지 데이터 파싱 오류:', error);
             }
         }
-    }, [localStorage.getItem('users')]); // 빈 배열 유지 (최초 마운트 시 한 번만 실행) //users 키변경 감지
-
+    }, [navigate]); 
     // 유저 정보가 없을 때 메시지 출력
     if (!loggedInUser) {
-        return (
-            <div className='flex flex-col gap-2'>
-                <h1 className='text-2xl font-semibold'>내 프로필</h1>
-                <div className='card flex flex-col gap-3 p-[36px] h-[384px] justify-center'>
-                    <p className='text-center text-gray-500'>
-                        로그인한 유저 정보를 찾을 수 없습니다.
-                    </p>
-                </div>
-            </div>
-        );
+        return null;
     }
 
     return (

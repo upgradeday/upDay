@@ -5,9 +5,13 @@ import Bg from './img/bg-element.svg';
 
 const Intro = () => {
     useEffect(() => {
-        let currentSection = 0;
         const sections = document.querySelectorAll('.section');
 
+        if (sections.length === 0) {
+            console.error('No section found with the class .section');
+            return;
+        }
+        let currentSection = 0;
         const handleScroll = (event) => {
             event.preventDefault();
 
@@ -19,8 +23,9 @@ const Intro = () => {
             } else {
                 currentSection = Math.max(currentSection - 1, 0);
             }
-
-            sections[currentSection].scrollIntoView({ behavior: 'smooth' });
+            if (sections[currentSection]) {
+                sections[currentSection].scrollIntoView({ behavior: 'smooth' });
+            }
         };
 
         window.addEventListener('wheel', handleScroll);
@@ -32,14 +37,17 @@ const Intro = () => {
 
     return (
         <div>
-            <div className='flex w-[80%] max-w-[1344px] mx-auto h-[800px] justify-between items-center h-fit'>
-                <div className='flex flex-col items-center justify-between relative'>
-                    <div className='relative bottom-[100px]'>
-                        <h1 className='text-5xl font-bold text-gray-800 leading-snug '>
+            <div className='section flex flex-col items-center justify-center min-h-screen'>
+                {/* section flex w-[80%] max-w-[1344px] mx-auto h-[800px] justify-between items-center h-fit mb-20 relative */}
+                <div className='flex w-[80%] max-w-[1344px] mx-auto justify-between items-center'>
+                    {/* flex flex-col items-center justify-between relative */}
+                    <div className='flex flex-col items-start'>
+                        {/* relative bottom-[100px] */}
+                        <h1 className='text-5xl font-bold text-gray-800 leading-snug mb-4'>
                             좋은 습관, <br />
                             매일 매일 실천하고 싶으신가요?
                         </h1>
-                        <p className='text-3xl text-gray-600 mt-10'>
+                        <p className='text-3xl text-gray-600 mt-4 mb-8'>
                             작심삼일은 이제 그만! <br />
                             <span className='text-4xl text-blue-600 font-bold'>
                                 Up Day
@@ -50,23 +58,27 @@ const Intro = () => {
                             성장하기
                         </button>
                     </div>
+
+                    <div className='w-40% flex justify-center'>
+                        {/* relative flex-shrink-0 w-[30%] h-full */}
+                        <img
+                            src={Charac}
+                            alt='Character'
+                            className='w-auto h-[505px]'
+                            // relative top-[300px] h-[505px] w-[400px]
+                        />
+                    </div>
                 </div>
-                <div className='relative flex-shrink-0 w-[30%] h-full'>
-                    <img
-                        src={Charac}
-                        alt='Character'
-                        className=' relative top-[300px] h-[505px] w-[400px]'
-                    />
+
+                <div className='animate-bounce flex items-center justify-center mt-20'>
+                    <div className='row-span-2 flex flex-col items-center'>
+                        <p className='text-gray-600 text-sm'>성장하러 가기</p>
+                        <img src={Arrow} alt='Arrow' className='mt-4' />
+                    </div>
                 </div>
             </div>
 
-            <div className='animate-bounce flex items-center place-content-center'>
-                <div className='row-span-2'>
-                    <p className='texy-gray-600 text-sm'>성장하러 가기</p>
-                    <img src={Arrow} alt='Arrow' className='ml-2 mt-4' />
-                </div>
-            </div>
-            <div className='relative w-[80%] max-w-[1344px] mx-auto h-[900px]'>
+            <div className='relative w-[80%] max-w-[1344px] mx-auto h-[900px] section'>
                 <img
                     src={Bg}
                     alt='Background'
@@ -97,4 +109,5 @@ const Intro = () => {
         </div>
     );
 };
+
 export default Intro;
