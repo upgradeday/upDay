@@ -48,7 +48,7 @@ export default function PersonalInfo() {
                 const updatedInfo = {
                     ...prev,
                     email: loggedInUser.email || '',
-                    password: loggedInUser.password || '',
+                    password: '',
                     nickname: loggedInUser.nickname || '',
                     signupDate: loggedInUser.signupDate || '',
                     profileImage: loggedInUser.profileImage || null,
@@ -250,7 +250,7 @@ export default function PersonalInfo() {
                                 htmlFor='password'
                                 className='block text-sm/6 font-medium'
                             >
-                                비밀번호
+                                변경할 비밀번호
                             </label>
                             <div className='mt-2'>
                                 <input
@@ -273,7 +273,7 @@ export default function PersonalInfo() {
                                 htmlFor='confirmPassword'
                                 className='block text-sm/6 font-medium'
                             >
-                                비밀번호 확인
+                                변경할 비밀번호 확인
                             </label>
                             <div className='mt-2'>
                                 <input
@@ -304,9 +304,3 @@ export default function PersonalInfo() {
         </div>
     );
 }
-
-// 유효성검사 (비밀번호, 비밀번호 확인) -완-
-// 아이디 값 변경 안돼게
-// 이름 email로 변경하기 -완-
-// about(소개글) 가장 아래로 위치 변경 f12눌러서 안에서 봤을떄 application -배열상태는 맞게오는데 열면 바뀜-
-// ~일 째 도전중 값 계산 (가입날 부터 현제날 signupDate값을 불러와서 적용 오늘 날로부터 해서 )
