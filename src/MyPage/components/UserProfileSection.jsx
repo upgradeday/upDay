@@ -3,7 +3,7 @@ import Pic from '../img/up-logo.png';
 import { differenceInDays } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 
-const MyProfile = () => {
+const UserProfile = () => {
     // 유저 데이터 상태 관리
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [daysSinceSignup, setDaysSinceSignup] = useState(0);
@@ -44,6 +44,7 @@ const MyProfile = () => {
             }
         }
     }, [navigate]);
+
     // 유저 정보가 없을 때 메시지 출력
     if (!loggedInUser) {
         return null;
@@ -99,4 +100,4 @@ const MyProfile = () => {
         </div>
     );
 };
-export default MyProfile;
+export default UserProfile;
