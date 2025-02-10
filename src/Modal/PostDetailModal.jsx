@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ModalHeader from './components/ModalHeader';
 import ModalContent from './components/ModalContent';
 import ModalFooter from './components/ModalFooter';
@@ -10,7 +10,6 @@ import { CATEGORY_IMAGES, userChallengeList } from '../data/userChallengeData';
 const PostDetailModal = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { id } = useParams();
     const { pathname } = useLocation();
 
     // 현재 모드 확인
@@ -18,8 +17,6 @@ const PostDetailModal = () => {
     const isEditMode = pathname.endsWith('/edit');
     const isViewMode = !isCreateMode && !isEditMode;
 
-
-	
     const selectedChallenge = useSelector(
         (state) => state.challenge.selectedChallenge
     );
@@ -73,7 +70,7 @@ const PostDetailModal = () => {
     const handleSubmit = () => {
         if (isCreateMode) {
 			// 1. 로컬 스토리지의 챌린지 가져오기
-			const existingStorageChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
+			const existingStorageChallenges = JSON.parse(localStorage.getItem('clglist') || '[]');
 
 			// 2. 더미 데이터 챌린지와 로컬 스토리지에 저장된 챌린지 합치기
 			const allChallenges = [...userChallengeList, ...existingStorageChallenges];
@@ -134,7 +131,7 @@ const PostDetailModal = () => {
 
     return (
         <div
-            className='fixed inset-0 bg-neutral-900/60 flex items-center justify-center z-50'
+            className='fixed inset-0 bg-neutral-900/60 flex items-center justify-center z-20'
             onClick={handleClose}
         >
             {/* 모달 내부 클릭시 닫히지 않도록 하는 메소드 */}

@@ -1,12 +1,19 @@
 import React from 'react';
 
-const LoginRequiredModal = ({ isOpen, onNavigate, onClose }) => {
+const LoginRequiredModal = ({ isOpen, onNavigate, onClose, stopPropagation = false }) => {
     if (!isOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
+	
+	const handleBackgroundClick = (e) => {
+		if(stopPropagation){
+			e.stopPropagation();
+		}
+		onClose(e);
+	}
 
     return (
         <div
             className='fixed inset-0 bg-neutral-900 bg-opacity-50 flex justify-center items-center z-50'
-            onClick={onClose} // 배경 클릭 시 모달 닫기
+            onClick={handleBackgroundClick} // 배경 클릭 시 모달 닫기
         >
             <div
                 className='card flex flex-col justify-between items-center w-96 h-48 p-6'
