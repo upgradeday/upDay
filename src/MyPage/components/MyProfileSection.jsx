@@ -43,7 +43,7 @@ const MyProfile = () => {
                 console.error('로컬 스토리지 데이터 파싱 오류:', error);
             }
         }
-    }, [navigate]); 
+    }, [navigate]);
     // 유저 정보가 없을 때 메시지 출력
     if (!loggedInUser) {
         return null;
