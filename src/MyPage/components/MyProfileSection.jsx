@@ -48,6 +48,7 @@ const MyProfile = () => {
     if (!loggedInUser) {
         return null;
     }
+
     return (
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl font-semibold'>내 프로필</h1>
@@ -82,7 +83,7 @@ const MyProfile = () => {
                                 <span className='text-blue-500'>
                                     {daysSinceSignup}
                                 </span>
-                                일 째 업데이트 중
+                                일 째 업데이 중
                             </p>
                             <p className='text-sm font-normal text-neutral-500'>
                                 {loggedInUser.signupDate || '가입일 정보 없음'}

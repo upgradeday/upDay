@@ -39,13 +39,11 @@ const ArrowButton = ({ direction, onClick }) => {
 
 const MainChallenge = ({ challenges }) => {
     return (
-        <div className='relative bg-neutral-800 rounded-xl w-full md:w-[600px] bottom-[-490px]'>
-            {/* 배경색을 변경하고, 위치 내림 */}
+        <div className='relative bg-neutral-800 rounded-xl w-full md:w-[600px] bottom-[-440px]'>
             <div className='flex justify-between items-center mb-4'>
-                <h2 className='text-xl font-medium text-white relative left-4 top-2 '>
+                <h2 className='text-xl font-medium text-white relative left-4 top-2'>
                     도전 중인 챌린지
                 </h2>
-                {/* 좌우 화살표 버튼 추가 */}
                 <div className='flex gap-2 relative top-2 right-4'>
                     <ArrowButton
                         direction='left'
@@ -62,13 +60,12 @@ const MainChallenge = ({ challenges }) => {
                 {challenges.map((challenge, index) => (
                     <li
                         key={index}
-                        className={`py-6 bg-white border flex justify-between items-center ${index === 3 ? 'rounded-b-xl' : ''} mb-0`}
+                        className={`py-4 bg-white border flex justify-between items-center ${index === 3 ? 'rounded-b-xl' : ''} mb-0`}
                     >
-                        {/* 4번째 항목에만 아래쪽 라운드, 항목 간 간격 제거 */}
-                        <span className='text-lg font-semibold text-gray-700'>
+                        <span className='text-lg font-semibold text-gray-700 truncate w-2/3 ml-4'>
                             {challenge.name}
                         </span>
-                        <span className='text-sm text-gray-500'>
+                        <span className='text-sm text-gray-500 mr-4'>
                             {challenge.timeRemaining}
                         </span>
                     </li>

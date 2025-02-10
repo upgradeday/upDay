@@ -7,9 +7,11 @@ const ModalHeader = ({
     mode,
     onChange,
     formData,
-	onDelete
+	onDelete,
+	onUpdate
 }) => {
-    if (mode === 'create') {
+
+    if (mode === 'create' || mode === 'edit') {
         return (
             <div className='flex justify-between items-center mb-4'>
                 <div className='flex items-center'>
@@ -44,7 +46,7 @@ const ModalHeader = ({
 
             {isMyPost && (
                 <div className='flex'>
-                    <button>수정</button>
+                    <button onClick={onUpdate}>수정</button>
                     <button onClick={onDelete}>삭제</button>
                 </div>
             )}
