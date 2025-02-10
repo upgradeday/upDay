@@ -2,7 +2,7 @@ import React from 'react';
 import { HiFire, HiDocumentCheck, HiMiniTrophy } from 'react-icons/hi2';
 import { FaStar } from 'react-icons/fa6';
 
-export default function MyReport() {
+export default function UserReport() {
     const storedList = JSON.parse(localStorage.getItem('loggedInUserClgList'));
     const loggedInUser = localStorage.getItem('loggedInUser');
 
@@ -23,6 +23,17 @@ export default function MyReport() {
         numClgDone + numClgOver > 0
             ? Math.round((numClgDone / (numClgDone + numClgOver)) * 100)
             : 0;
+
+    // 유저 정보가 없을 때 메시지 출력
+    if (!loggedInUser) {
+        return (
+            <div className='card flex flex-col gap-2 h-[308px] justify-center'>
+                <p className='text-center text-gray-500'>
+                    로그인한 유저 정보를 찾을 수 없습니다.
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div className='flex flex-col gap-2  '>
