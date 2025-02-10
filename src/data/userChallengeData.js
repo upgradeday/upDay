@@ -1,11 +1,25 @@
+import diet from '../assets/images/common/spoon.svg';
+import study from '../assets/images/common/Lamp.svg';
+import exercise from '../assets/images/common/dust.svg';
+import habit from '../assets/images/common/heart.svg';
+
 export const CATEGORY_IMAGES = {
-    식단: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMtt3aOrfYZ1KnQq4GK0vf9gkNBC07f72UWQ&s',
-    학습: 'https://news.edupang.com/data/photos/20170939/art_1506413638434_4f048d.jpg',
-    운동: 'https://www.noblesse.com/shop/data/m/editor_new/2021/09/09/89bf18216575225e3.jpg',
-    습관: 'https://www.kbiznews.co.kr/news/photo/201901/48673_10396_236.jpg',
+    식단: diet,
+    학습: study,
+    운동: exercise,
+    습관: habit,
     default:
         'https://blog.kakaocdn.net/dn/GHYFr/btrsSwcSDQV/UQZxkayGyAXrPACyf0MaV1/img.jpg',
 };
+
+// export const CATEGORY_IMAGES = {
+//     식단: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMtt3aOrfYZ1KnQq4GK0vf9gkNBC07f72UWQ&s',
+//     학습: 'https://news.edupang.com/data/photos/20170939/art_1506413638434_4f048d.jpg',
+//     운동: 'https://www.noblesse.com/shop/data/m/editor_new/2021/09/09/89bf18216575225e3.jpg',
+//     습관: 'https://www.kbiznews.co.kr/news/photo/201901/48673_10396_236.jpg',
+//     default:
+//         'https://blog.kakaocdn.net/dn/GHYFr/btrsSwcSDQV/UQZxkayGyAXrPACyf0MaV1/img.jpg',
+// };
 
 export const userChallengeList = [
     {
@@ -16,10 +30,11 @@ export const userChallengeList = [
         title: '욕 안 하기',
         content: '요즘 욕을 입에 달고 살아요.. 이렇게라도 고쳐보고 싶어요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/census-information-town-composition_23-2148993118.jpg?t=st=1739202716~exp=1739206316~hmac=f796e92f98204fa64a14de7ec608484cc1ae0cf65ff3b080e3017758c7e39f65&w=900',
         nickname: '바른말고운말',
         postDate: '2024-12-02',
         postClicked: 252,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -33,10 +48,11 @@ export const userChallengeList = [
         content:
             '초등학교 때 방학 일기 밀려쓰던 사람? 그 사람이 바로 저예요. 작은 일이라도 블로그에 글로 쓰며 일상을 남겨봐요! 쌓이는 글을 보면 뿌듯해진답니다 :)',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/shiba-inu-dog-taking-walk_23-2149478698.jpg?t=st=1739203725~exp=1739207325~hmac=0683b09f8f576e2cc4b54c6fd33410cba37791de29c96ed94a47414d62e694c4&w=1480',
         nickname: '꾸준해꾸',
         postDate: '2024-11-30',
-        postClicked: 64,
+        postClicked: 164,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -54,13 +70,14 @@ export const userChallengeList = [
         nickname: '데이메이커',
         postDate: '2025-01-01',
         postClicked: 203,
+        joinDate: '2025-01-01',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
     },
     {
         id: 4,
-        authorId: 'nodelivery@naver.com',
+        authorId: 'test01@naver.com',
         category: '식단',
         duration: '3개월',
         title: '배달음식 먹지 않기',
@@ -68,9 +85,10 @@ export const userChallengeList = [
             '자극적인 음식에 중독되어 자꾸 집밥을 피하게 되네요... 돈도 아끼고 건강도 챙기고 일석이조 챌린지',
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
-        nickname: '배달의만족',
-        postDate: '2025-01-13',
+        nickname: '데이메이커',
+        postDate: '2025-01-14',
         postClicked: 358,
+        joinDate: '2025-01-14',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -84,10 +102,11 @@ export const userChallengeList = [
         content:
             '가까운 거리는 걷기! 에스컬레이터 보단 계단! 10,000보를 채우는 재미를 느끼실 거예요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/young-beautiful-woman-walks-street-paris-background-triumphal-arch-concept-happy-travel-photo_1321-3474.jpg?t=st=1739202472~exp=1739206072~hmac=460438cb55078540932c06eaa525fc6faa48f05ee0337e8e3bfc4af543fb1d85&w=900',
         nickname: '만보르기니',
         postDate: '2025-01-11',
         postClicked: 501,
+        joinDate: '2025-01-12',
         clgJoin: true,
         clgDoing: true,
         clgDone: false,
@@ -101,10 +120,11 @@ export const userChallengeList = [
         content:
             '처음엔 귀찮을 수 있지만, 내 손으로 만드는 소중한 한 끼의 가치를 알게 되면 일상의 소소한 행복을 느낄 수 있어요. 1개월이면 자연스럽게 습관이 되어 장을 보러 가는게 일상이 되고, 어쩌면 하루 세 끼를 모두 집밥을 해먹는 날이 올 거랍니다 :)',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/portrait-young-woman-by-sea_23-2148140860.jpg?t=st=1739203282~exp=1739206882~hmac=c0da64cf22c4a7f67bbe30c486f2e48c90beaf1832f92e15a59b5b040786624a&w=1480',
         nickname: '집밥박선생',
         postDate: '2024-12-01',
         postClicked: 194,
+        joinDate: '2025-01-05',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -118,10 +138,11 @@ export const userChallengeList = [
         content:
             '가공된 설탕이 들어간 음식 대신 자연식으로 하루를 보내보세요. 더 건강한 식습관을 만들어 봅시다!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/woman-with-notebook-pen-medium-shot_23-2148960417.jpg?t=st=1739201282~exp=1739204882~hmac=779dd4b986c90cfde72c7f3f8d1911bc6443fcd8f534c40c58f73cb8e8df338a&w=900',
         nickname: '슈가프리',
         postDate: '2024-11-22',
         postClicked: 99,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -137,8 +158,9 @@ export const userChallengeList = [
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '데이메이커',
-        postDate: '20225-01-15',
+        postDate: '2025-01-21',
         postClicked: 372,
+        joinDate: '2025-01-21',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -152,10 +174,11 @@ export const userChallengeList = [
         content:
             '일상에 지쳐 감정을 숨기는 당신! 하하하 웃어봅시다! 하하하하하하! 기분이 좋아질 거예요!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/close-up-man-holding-his-adorable-dog-park_23-2148576983.jpg?t=st=1739203882~exp=1739207482~hmac=2d20dce3183aab48dc6deb711bffd5f5cc7b200273f2e252d057deea929de0de&w=1480',
         nickname: '해피해피',
         postDate: '2025-01-05',
         postClicked: 104,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -164,18 +187,19 @@ export const userChallengeList = [
         id: 10,
         authorId: 'test01@naver.com',
         category: '학습',
-        duration: '1개월',
-        title: '일주일에 책 1권씩 읽기',
+        duration: '3개월',
+        title: '2주에 책 1권씩 읽기',
         content:
             '숏폼에 빠져 책을 멀리하게 된 제 자신이 참... 근데 여러분도 그렇죠? 일단 얇은 책 부터 시작해서 책 읽는 재미를 들이고, 다음 책을 읽을 설렘이 생길 수 있도록 도전해봐요!',
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '데이메이커',
-        postDate: '2025-01-04',
+        postDate: '2025-02-12',
         postClicked: 218,
+        joinDate: '2025-02-12',
         clgJoin: true,
-        clgDoing: false,
-        clgDone: true,
+        clgDoing: true,
+        clgDone: false,
     },
     {
         id: 11,
@@ -186,10 +210,11 @@ export const userChallengeList = [
         content:
             '첫날 5개부터 시작해서 점점 개수를 늘려가며 30일 동안 팔 힘과 코어를 단련해보세요!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/muscular-man-pulling-training-apparatus-while-exercising-gym_7502-10715.jpg?t=st=1739202650~exp=1739206250~hmac=31033052238f6bdb7bee1a3ad900c1cd372867a7eed5129d02a4dc7ca250e102&w=900',
         nickname: '짐브로',
         postDate: '2024-11-30',
         postClicked: 75,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -203,10 +228,11 @@ export const userChallengeList = [
         content:
             '오늘의 나를 정비하는 시간, 매일 아침 명상을 통해 이너피스를 찾아봅시다 :)',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/man-posing-indoors-black-white-medium-shot_23-2149652002.jpg?t=st=1739201595~exp=1739205195~hmac=1ca3c994cf289903e8e5f4e17d404dbf649a66c2a6f14a1c194933b0044b9e97&w=900',
         nickname: '부지러니',
         postDate: '2024-12-01',
         postClicked: 140,
+        joinDate: '2025-01-04',
         clgJoin: true,
         clgDoing: true,
         clgDone: false,
@@ -218,12 +244,13 @@ export const userChallengeList = [
         duration: '매일',
         title: '하루 10쪽 독서하기',
         content:
-            '하루에 딱 10쪽만 읽어도 한 달이면 한 권을 완독! 작은 습관이 큰 변화를 만든다!',
+            '하루에 딱 10쪽만 읽어도 한 달이면 한 권을 완독! 작은 습관이 큰 변화를 만든다! 짧은 시간 투자로 지식을 쌓고, 사고의 깊이를 키울 수 있어요. 독서는 집중력을 높이고, 창의적인 사고를 자극하는 최고의 방법입니다. 오늘부터 가볍게 시작해보고, 어느새 독서가 일상이 되는 변화를 경험해보세요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/beautiful-lake-ritsa-caucasus-mountains-green-mountain-hills-blue-sky-with-clouds-spring-landscape_1217-1716.jpg?t=st=1739202882~exp=1739206482~hmac=16f2c746f2f3e5d90aa65ccf92e726a483b7c278c36929f8720a54c6fbf835d0&w=1480',
         nickname: '책벌레99',
         postDate: '2024-12-01',
         postClicked: 199,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -237,10 +264,11 @@ export const userChallengeList = [
         content:
             '매일 역사적 사건이나 인물을 공부하고, 배운 내용을 정리해봐요. 퀴즈로 복습하면 더 좋을 것 같아요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/happy-dog-having-fun-park_23-2147997356.jpg?t=st=1739204011~exp=1739207611~hmac=48fa62508a9e88e7eee585b5649c67509b4ccbd6a12ebe0d1f23ac6270e2aed7&w=1480',
         nickname: '암기마스터',
         postDate: '2024-12-01',
         postClicked: 205,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -252,12 +280,13 @@ export const userChallengeList = [
         duration: '1개월',
         title: '주말마다 디지털 디톡스하기',
         content:
-            '소중한 주말! 유튜브, 릴스, 틱톡에 시간을 허비하고 있지 않으신가요? 디지털 디톡스로 더욱 의미있는 주말을 만들어가요!',
+            '소중한 주말! 유튜브, 릴스, 틱톡에 시간을 허비하고 있지 않으신가요? 디지털에서 벗어나 온전한 휴식을 취하면, 수면의 질 향상과 집중력 회복 효과를 기대할 수 있답니다. 디지털 디톡스로 사랑하는 사람들과 더욱 의미있는 주말을 만들어가요!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/medium-shot-woman-drinking-kombucha_23-2150171564.jpg?t=st=1739201650~exp=1739205250~hmac=19e5a0bb5e8966b1c9f11530fd69090607d4e182c633d62f08197048f8ca4a66&w=900',
         nickname: '얼리어답터',
         postDate: '2024-12-10',
         postClicked: 411,
+        joinDate: '2025-02-08',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -271,10 +300,11 @@ export const userChallengeList = [
         content:
             '고기 없이 채소 위주로 한 끼를 구성해볼까요? 건강과 환경을 동시에 챙기는 좋은 습관, 내 몸의 변화를 느끼면 채식에 빠지게 될 거예요!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/back-view-brunette-girl-light-blue-dress_23-2148238245.jpg?t=st=1739203378~exp=1739206978~hmac=7d1163f4d39a9b68d135caee6fef5bae3941bf46cba16f965cc2937e648364a2&w=900',
         nickname: '비건챌린저',
         postDate: '2025-01-18',
         postClicked: 25,
+        joinDate: '2025-02-11',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -287,12 +317,13 @@ export const userChallengeList = [
         duration: '1주',
         title: '야식 먹지 않기',
         content:
-            '알아요 쉽지 않다는 거... 그래서 딱 1주만 해보고... 다시 생각해볼까요?',
+            '*규칙: 저녁 8시 이후 음식 섭취 금지, 허기지면 물이나 허브티로 대체...! 알아요 쉽지 않다는 거... 그래서 딱 1주만 해보고... 다시 생각해볼까요? 이것만 기억합시다. 건강한 식습관 > 소화기 건강 개선 > 숙면 > 가벼운 아침 맞이',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/front-view-smiley-man-with-sunglasses-city_23-2148682678.jpg?t=st=1739201514~exp=1739205114~hmac=c2197d8edea9268127367aca4c34215ba5dc718ca21124b0f949c798298498fb&w=1480',
         nickname: '야식끊기1일차',
         postDate: '2024-12-01',
         postClicked: 158,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,
@@ -306,10 +337,11 @@ export const userChallengeList = [
         content:
             '매년 다짐만 하는 영어공부, 제대로 습관을 들이자!!! 단어 외우기? 문법? 이런 거 신경쓰지 말고 미드/영드 자막 없이 보기, 영어권 팟캐스트 듣기 등 자유롭게 공부해봐요!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/owner-petting-adorable-cat_23-2148740483.jpg?t=st=1739203665~exp=1739207265~hmac=af0bc96c86dc97f7f4dbc390937ff93ce5d8795fff54d97539c55fa531dd9a14&w=1480',
         nickname: '아인파인땡큐앤유',
         postDate: '2025-01-01',
         postClicked: 119,
+        joinDate: '2025-01-02',
         clgJoin: true,
         clgDoing: false,
         clgDone: true,
@@ -318,20 +350,20 @@ export const userChallengeList = [
         id: 19,
         authorId: 'veggie123@kakao.com',
         category: '식단',
-        duration: '1개월',
-        title: '인스턴트 대신 자연식 먹기',
+        duration: '1주',
+        title: '인스턴트 대신 신선한 음식 먹기',
         content:
             '패스트푸드를 피하고 자연 그대로의 식재료로 만든 음식을 먹어보자! 몸이 가벼워지는 걸 느낄 수 있을 것!',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/middle-age-woman-smiling-having-good-time_23-2149218572.jpg?t=st=1739204125~exp=1739207725~hmac=9a4224bbd83418f763da7cf1740f4ef8fe63518e5bac3c6b43256fa2cb7c9e9b&w=1480',
         nickname: '건강집착러',
         postDate: '2025-01-04',
         postClicked: 208,
-        clgJoin: false,
-        clgDoing: true,
-        clgDone: false,
+        joinDate: '2025-01-28',
+        clgJoin: true,
+        clgDoing: false,
+        clgDone: true,
     },
-
     {
         id: 20,
         authorId: '5000won@naver.com',
@@ -341,10 +373,11 @@ export const userChallengeList = [
         content:
             '과소비는 그만! 5천원으로 살아보며 돈의 소중함을 다시 한 번 느낄 수 있어요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/big-trees-through-window_23-2147770340.jpg?t=st=1739204423~exp=1739208023~hmac=dccc98885f6bf6552dfc32233f07b64fe371e850bf652575848db4489ce5d761&w=1480',
         nickname: '오천원의행복',
-        postDate: '2025-01-15',
+        postDate: '2025-01-16',
         postClicked: 126,
+        joinDate: '2025-01-19',
         clgJoin: true,
         clgDoing: false,
         clgDone: false,
@@ -356,12 +389,13 @@ export const userChallengeList = [
         duration: '1개월',
         title: '하루 30초 플랭크 챌린지',
         content:
-            '처음에는 30초부터 시작해서 점점 시간을 늘려보자! 코어 근육 강화에 딱!',
+            '처음에는 30초부터 시작해서 익숙해지면 점점 시간을 늘려봅시다! 코어 근육 강화 뿐만 아니라 전신 근력 향상과 바른 자세를 유지에도 도움이 됩니다. 자신을 위해 딱 30초만 투자하세요 :)',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/blonde-girl-standing-stretching-hands-lock-breezing_651396-2062.jpg?t=st=1739201906~exp=1739205506~hmac=74739058ebe6752c084c694333cd763c0858bb09ab5b5415d37616f490b52fcd&w=1480',
         nickname: '머슬코어',
-        postDate: '2025-01-15',
+        postDate: '2024-12-13',
         postClicked: 52,
+        joinDate: '2025-01-06',
         clgJoin: true,
         clgDoing: false,
         clgDone: false,
@@ -375,10 +409,11 @@ export const userChallengeList = [
         content:
             '건강을 위한 물 2L 마시기를 함께 해요! 물을 충분히 마시면 혈액 순환이 잘 되고, 피부가 촉촉하고 건강해 보일 수 있어요. 또 집중력과 기억력 향상에도 도움이 된다고 해요! 이번 챌린지를 통해 제대로 된 습관을 만들어봐요 :)',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/koh-nangyuan-surat-thani-thailand-koh-nangyuan-is-one-most-beautiful-beaches-thailand_1258-728.jpg?t=st=1739204350~exp=1739207950~hmac=222207ea95c801a15db5f6b4b1073dccb23a4465833b8d1b64db42a99f677807&w=996',
         nickname: '물안먹는하마',
         postDate: '2025-01-16',
         postClicked: 405,
+        joinDate: '2025-01-16',
         clgJoin: true,
         clgDoing: true,
         clgDone: false,
@@ -394,8 +429,9 @@ export const userChallengeList = [
         userImg:
             'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
         nickname: '데이메이커',
-        postDate: '2025-01-17',
+        postDate: '2025-02-15',
         postClicked: 153,
+        joinDate: '2025-02-15',
         clgJoin: true,
         clgDoing: true,
         clgDone: false,
@@ -407,12 +443,86 @@ export const userChallengeList = [
         duration: '6개월',
         title: '매일 10분 스트레칭',
         content:
-            '하루 10분만 투자해서 전신을 스트레칭해 보세요. 유연성과 혈액순환을 개선할 수 있어요.',
+            '하루 10분만 투자해서 전신을 스트레칭해 보세요. 유연성과 혈액순환을 개선할 수 있어요. 긴장된 근육을 풀어주고, 하루 종일 쌓인 피로를 해소하는 데도 도움이 됩니다. 특히 앉아 있는 시간이 많은 분들에게 필수! 스트레칭으로 몸을 가볍게 만들어 활력 있는 하루를 시작해보세요.',
         userImg:
-            'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+            'https://img.freepik.com/free-photo/young-woman-arranging-her-cake-shop_23-2149210420.jpg?t=st=1739201687~exp=1739205287~hmac=aa0ffed50c792f059dc7287bfc1b9113eb672f4a9c2e4b6cd1fd64d88771b183&w=1480',
         nickname: '룰루라이프',
         postDate: '2025-01-07',
         postClicked: 224,
+        joinDate: '',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
+    },
+    {
+        id: 25,
+        authorId: 'vloger@naver.com',
+        category: '운동',
+        duration: '매일',
+        title: '엘레베이터 대신 계단 챌린지',
+        content:
+            '일상 속에서 운동량을 늘리는 가장 쉬운 방법! 계단 오르기를 하면 하체 근력 강화, 심폐 지구력 증가, 칼로리 소모 효과까지 있어요. 작은 습관이 쌓여 건강한 라이프스타일을 만들어봅시다!',
+        userImg:
+            'https://img.freepik.com/free-photo/shiba-inu-dog-taking-walk_23-2149478698.jpg?t=st=1739203725~exp=1739207325~hmac=0683b09f8f576e2cc4b54c6fd33410cba37791de29c96ed94a47414d62e694c4&w=1480',
+        nickname: '꾸준해꾸',
+        postDate: '2025-02-10',
+        postClicked: 64,
+        joinDate: '',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
+    },
+    {
+        id: 26,
+        authorId: 'peacefulm2nd@gmail.com',
+        category: '운동',
+        duration: '매일',
+        title: '출퇴근길 한 정거장 먼저 내려 걷기',
+        content:
+            '일상 속에서 운동량을 늘리는 가장 쉬운 방법! 계단 오르기를 하면 하체 근력 강화, 심폐 지구력 증가, 칼로리 소모 효과까지 있어요. 작은 습관이 쌓여 건강한 라이프스타일을 만들어봅시다!',
+        userImg:
+            'https://img.freepik.com/free-photo/shiba-inu-dog-taking-walk_23-2149478698.jpg?t=st=1739203725~exp=1739207325~hmac=0683b09f8f576e2cc4b54c6fd33410cba37791de29c96ed94a47414d62e694c4&w=1480',
+        nickname: '부지러니',
+        postDate: '2025-02-06',
+        postClicked: 97,
+        joinDate: '',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
+    },
+    {
+        id: 27,
+        authorId: '5000won@naver.com',
+        category: '습관',
+        duration: '1개월',
+        title: '한 달 동안 불필요한 소비 줄이기 챌린지',
+        content:
+            '덮어놓고 쓰다보면 거지꼴을 못 면한다...! 이번 챌린지를 통해 본인의 소비 패턴을 파악하고, 절약하는 한 달을 보내봐요.',
+        userImg:
+            'https://img.freepik.com/free-photo/big-trees-through-window_23-2147770340.jpg?t=st=1739204423~exp=1739208023~hmac=dccc98885f6bf6552dfc32233f07b64fe371e850bf652575848db4489ce5d761&w=1480',
+        nickname: '오천원의행복',
+        postDate: '2025-02-16',
+        postClicked: 126,
+        postClicked: 42,
+        joinDate: '',
+        clgJoin: false,
+        clgDoing: true,
+        clgDone: false,
+    },
+    {
+        id: 28,
+        authorId: 'healthylife@kakao.com',
+        category: '식단',
+        duration: '3개월',
+        title: '아침 굶지 않기',
+        content:
+            '잠을 더 자겠다는 핑계로 아침을 굶어온 당신! 한 끼 식사가 아니어도 됩니다. 사과 반 쪽, 두유, 계란 등 움직일 에너지를 줄 아침을 챙겨먹어봐요. 일정한 식사 시간을 유지하고, 영양분을 골고루 섭취한다면 하루 동안 더 활기차고 집중력 있는 자신을 발견할 수 있을 거예요! 작은 변화가 몸과 마음에 긍정적인 영향을 줄 거예요. 아침 챙겨 먹기, 오늘부터 시작해볼까요?',
+        userImg:
+            'https://img.freepik.com/free-photo/muscular-man-pulling-training-apparatus-while-exercising-gym_7502-10715.jpg?t=st=1739202650~exp=1739206250~hmac=31033052238f6bdb7bee1a3ad900c1cd372867a7eed5129d02a4dc7ca250e102&w=900',
+        nickname: '짐브로',
+        postDate: '2024-11-03',
+        postClicked: 275,
+        joinDate: '',
         clgJoin: false,
         clgDoing: true,
         clgDone: false,

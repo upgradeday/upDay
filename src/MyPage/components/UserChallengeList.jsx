@@ -1,23 +1,33 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleClgState } from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
 export default function MyChallengeList() {
     const dispatch = useDispatch();
-    const storedList = JSON.parse(localStorage.getItem('loggedInUserClgList'));
+    const storedClgList = JSON.parse(localStorage.getItem('clglist')) || [];
     const loggedInUser = localStorage.getItem('loggedInUser');
 
-    // 테스트 계정과 loggedInUser가 일치할 때만 테스트 계정 목록 사용
-    const myChallenges = storedList.some(
+    // 테스트 계정이 로그인했을 떄 storedList(챌린지 목록) 사용
+    const getClgList = storedClgList.some(
         (challenge) => challenge.authorId === loggedInUser
     )
-        ? storedList
+        ? storedClgList
         : [];
 
+    // 내가 참여한 챌린지 목록
+    const myChallenges = getClgList.filter(({ clgJoin }) => clgJoin);
+
     // 챌린지 역순(최신순)으로 배열 변경
-    const reversedChallenges = [...myChallenges].reverse();
+    // const reversedChallenges = [...myChallenges].reverse();
+
+    // 오래된 순서대로 정렬
+    const sortedChallenges = [...myChallenges].sort(
+        (a, b) => new Date(b.joinDate) - new Date(a.joinDate)
+    );
+
+    console.log(sortedChallenges);
     // 역순 번호 매핑
     const clgNum = (index) => myChallenges.length - index;
 
@@ -46,8 +56,8 @@ export default function MyChallengeList() {
 
     return (
         <ul className='w-full h-[85%] text-sm overflow-scroll list-none'>
-            {reversedChallenges.length > 0 ? (
-                reversedChallenges.map(
+            {sortedChallenges.length > 0 ? (
+                sortedChallenges.map(
                     (
                         { id, authorId, category, title, clgDoing, clgDone },
                         index

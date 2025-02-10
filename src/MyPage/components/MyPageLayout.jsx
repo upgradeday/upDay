@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setMyChallenge } from '../../store/features/userChallengeSlice';
-import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import useModal from '../../common/hooks/useModal';
 
+import { Helmet } from 'react-helmet';
+import MypageNonLogin from './MypageNonLogin';
 import UserProfile from './UserProfileSection';
 import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
-import MypageNonLogin from './MypageNonLogin';
 import ModalForLogin from '../../common/ModalForLogin';
 
 const MyPageLayout = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { isModalOpen, openModal, closeModal } = useModal();
     const [loggedInUser, setLoggedInUser] = useState(null);
+
+    // Redux에서 로그인 사용자 정보와 관련된 데이터를 구독
+    const challenges = useSelector((state) => state.myChallengeList.list);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('loggedInUser');
@@ -23,9 +23,8 @@ const MyPageLayout = () => {
             openModal(); // 로그인되지 않으면 모달을 열기
         } else {
             setLoggedInUser(loggedInUser);
-            dispatch(setMyChallenge()); // 로그인한 사용자 정보 전달
         }
-    }, [dispatch, openModal]);
+    }, [openModal]);
 
     return (
         <main className='w-[80%] max-w-[1344px] mx-auto flex flex-row justify-between'>
