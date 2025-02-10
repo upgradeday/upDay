@@ -207,7 +207,7 @@ export default function PersonalInfo() {
                                     rows={3}
                                     value={userInfo.about}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    className='textarea-field'
                                 />
                             </div>
                         </div>
@@ -227,7 +227,7 @@ export default function PersonalInfo() {
                                     type='text'
                                     value={userInfo.nickname}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    className='input-field'
                                 />
                             </div>
                         </div>
@@ -246,7 +246,7 @@ export default function PersonalInfo() {
                                     type='text'
                                     value={userInfo.email}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-neutral-500 border border-neutral-300 focus:outline-blue-500'
+                                    className='input-field'
                                     readOnly
                                 />
                             </div>
@@ -265,7 +265,7 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.password}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    className='input-field'
                                 />
                                 {passwordError && (
                                     <p className='text-red-500 text-sm'>
@@ -288,7 +288,7 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.confirmPassword}
                                     onChange={handleChange}
-                                    className='block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    className='input-field'
                                 />
                             </div>
                         </div>
