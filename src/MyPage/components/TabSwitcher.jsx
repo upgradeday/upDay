@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PersonalInfo from './PersonalInfoSection'; // PersonalInfo 컴포넌트 임포트
-import MyChallenge from './MyChallengeSection'; // MyChallenge 컴포넌트 임포트
+import UserChallenge from './UserChallengeSection'; // MyChallenge 컴포넌트 임포트
 
 export default function TabSwitcher() {
     const [activeTab, setActiveTab] = useState(1); // 기본값으로 1번 탭을 활성화
@@ -24,7 +24,7 @@ export default function TabSwitcher() {
 
             {/* 활성화된 탭에 맞는 컴포넌트 렌더링 */}
             {activeTab === 1 && <PersonalInfo />}
-            {activeTab === 2 && <MyChallenge />}
+            {activeTab === 2 && <UserChallenge />}
         </section>
     );
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const LoginRequiredModal = ({ isOpen, onNavigate, onClose }) => {
+const LoginRequiredModal = ({ isOpen, onClick, onClose }) => {
     if (!isOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
 
     return (
         <div
-            className='fixed inset-0 bg-neutral-900 bg-opacity-50 flex justify-center items-center z-50'
+            className='fixed inset-0 bg-neutral-900 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50'
             onClick={onClose} // 배경 클릭 시 모달 닫기
         >
             <div
@@ -17,7 +17,7 @@ const LoginRequiredModal = ({ isOpen, onNavigate, onClose }) => {
                 </h2>
 
                 <button
-                    onClick={onNavigate}
+                    onClick={onClick}
                     className='btn btn-key px-4 py-2 text-base'
                 >
                     로그인하러 가기
