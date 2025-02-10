@@ -1,18 +1,41 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setSelectedChallenge } from '../../store/features/challengeSlice';
+import {
+    joinChallenge,
+    setSelectedChallenge,
+} from '../../store/features/challengeSlice';
 import { CATEGORY_IMAGES } from '../../data/userChallengeData';
 
 const ChallengeCard = ({ cardData }) => {
     // cardData 구조분해할당
-    const { id, category, duration, title, content, userImg, nickname } = cardData;
+    const {
+        id,
+        category,
+        duration,
+        title,
+        content,
+        userImg,
+        nickname,
+        authorId,
+        clgJoin,
+    } = cardData;
 
     // 라우터 이동을 위한 navigate 함수
     const navigate = useNavigate();
 
     // Redux 액션 dispatch를 위한 함수
     const dispatch = useDispatch();
+
+    // 로그인 한 유저의 아이디
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    // 내가 작성한 글이 아니면서 아직 참여하지 않은 경우에만 버튼 표시
+    const canJoin = loggedInUser !== authorId && !clgJoin;
+
+    const handleJoin = () => {
+        dispatch(joinChallenge(id));
+    };
 
     // 카드 클릭시 모달을 띄우는 이벤트 핸들러
     const handleCardClick = () => {
@@ -23,16 +46,16 @@ const ChallengeCard = ({ cardData }) => {
         navigate(`/challengelist/${id}`);
     };
 
-	const getCategoryImage = (category) => {
-		return CATEGORY_IMAGES[category] || CATEGORY_IMAGES.default;
-	}
+    const getCategoryImage = (category) => {
+        return CATEGORY_IMAGES[category] || CATEGORY_IMAGES.default;
+    };
 
     return (
         <div
             className='w-[30%] mb-6 p-4 rounded-2xl bg-white'
             onClick={handleCardClick}
         >
-			{/* 카테고리 & 기간 */}
+            {/* 카테고리 & 기간 */}
             <div className='mb-4'>
                 <span className='px-6 py-[6px] rounded-xl bg-[#fbdcc3]'>
                     {category}
@@ -40,36 +63,44 @@ const ChallengeCard = ({ cardData }) => {
                 <span className='ml-4'>{duration}</span>
             </div>
 
-			{/* 기본 제공 이미지 */}
+            {/* 기본 제공 이미지 */}
             <div className='mb-4 rounded-2xl overflow-hidden'>
-                <img src={getCategoryImage(cardData.category)} className='w-full' alt={`${cardData.category} 챌린지`} />
+                <img
+                    src={getCategoryImage(cardData.category)}
+                    className='w-full'
+                    alt={`${cardData.category} 챌린지`}
+                />
             </div>
 
-			{/* 챌린지 제목 & 내용 */}
+            {/* 챌린지 제목 & 내용 */}
             <div className='mb-4'>
                 <p className='mb-1 text-xl font-semibold'>{title}</p>
                 <p className='text-sm font-light'>{content}</p>
             </div>
 
-			{/* 유저 닉네임 & 사진 */}
+            {/* 유저 닉네임 & 사진 */}
             <div className='flex justify-between'>
                 <div className='flex justify-between items-center'>
                     <div className='w-8 h-8 rounded-[50%] overflow-hidden'>
                         <img
-                            src='https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg'
+                            src={userImg}
                             alt=''
                         />
                     </div>
                     <p className='ml-2 text-sm font-light'>{nickname}</p>
                 </div>
 
-				{/* 버튼 */}
-                <button
-                    type='button'
-                    className='px-4 py-[6px] text-[#0B4E7A] border-[1px] border-solid border-[#0B4E7A] rounded-xl'
-                >
-                    참여버튼
-                </button>
+                {/* 버튼 */}
+                {canJoin && (
+                    <button
+                        type='button'
+                        className='px-4 py-[6px] text-[#0B4E7A] border-[1px] border-solid border-[#0B4E7A] rounded-xl'
+						onClick={handleJoin}
+						disabled={clgJoin}
+                    >
+                        {clgJoin ? '참여완료' : '참여하기'}
+                    </button>
+                )}
             </div>
         </div>
     );

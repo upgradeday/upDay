@@ -89,8 +89,10 @@ const PostDetailModal = () => {
                 authorId: loggedInUser,
                 nickname: userInfo?.nickname || '기본 닉네임',
                 userImg: userInfo?.profileImage || '',
+				clgJoin: false,  // 추가: 처음에는 참여하지 않은 상태
+    			clgDoing: false, // 추가: 처음에는 진행하지 않는 상태
+    			clgDone: false   // 추가: 처음에는 완료하지 않은 상태
             };
-
             // 필수 입력 체크
             if (
                 !formData.title ||
@@ -101,11 +103,6 @@ const PostDetailModal = () => {
                 alert('모든 항목을 입력하시오');
                 return;
             }
-
-			// 로컬 스토리지에 저장
-			const currentChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
-			const updatedChallenges = [...currentChallenges, newChallenge];
-			localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
 
             dispatch(addChallenge(newChallenge));
             navigate('/challengelist');
