@@ -7,13 +7,13 @@ const LoginRequiredModal = ({
   stopPropagation = false 
 }) => {
     if (!isOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
-	
-	const handleBackgroundClick = (e) => {
-		if(stopPropagation){
-			e.stopPropagation();
-		}
-		onClose(e);
-	}
+
+    const handleBackgroundClick = (e) => {
+        if(stopPropagation){
+            e.stopPropagation();
+        }
+        onClose(e);
+    }
 
     return (
         <div
