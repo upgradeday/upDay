@@ -73,7 +73,7 @@ const PostDetailModal = () => {
     const handleSubmit = () => {
         if (isCreateMode) {
 			// 1. 로컬 스토리지의 챌린지 가져오기
-			const existingStorageChallenges = JSON.parse(localStorage.getItem('challenges' || '[]'));
+			const existingStorageChallenges = JSON.parse(localStorage.getItem('challenges') || '[]');
 
 			// 2. 더미 데이터 챌린지와 로컬 스토리지에 저장된 챌린지 합치기
 			const allChallenges = [...userChallengeList, ...existingStorageChallenges];
