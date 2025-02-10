@@ -3,12 +3,11 @@ import { useDispatch } from 'react-redux';
 import { setMyChallenge } from '../../store/features/userChallengeSlice';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import useModal from '../hooks/useModal';
-
+import useModal from '../../common/hooks/useModal';
 import MyProfile from './MyProfileSection';
 import MyReport from './MyReportSection';
 import TabSwitcher from './TabSwitcher';
-import NavigateModal from './NavigateModal';
+import ModalForLogin from '../../common/ModalForLogin';
 
 const MyPageLayout = () => {
     const dispatch = useDispatch();
@@ -45,7 +44,7 @@ const MyPageLayout = () => {
                     <TabSwitcher />
                 </>
             )}
-            <NavigateModal
+            <ModalForLogin
                 isOpen={isModalOpen} // 모달 열기 여부
                 onClose={closeModal} // 모달 닫기
                 onNavigate={handleNavigateToLogin} // 로그인 페이지로 이동
