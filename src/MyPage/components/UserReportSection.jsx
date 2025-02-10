@@ -3,19 +3,22 @@ import { HiFire, HiDocumentCheck, HiMiniTrophy } from 'react-icons/hi2';
 import { FaStar } from 'react-icons/fa6';
 
 export default function UserReport() {
-    const storedList = JSON.parse(localStorage.getItem('loggedInUserClgList'));
+    const storedClgList = JSON.parse(localStorage.getItem('clglist'));
     const loggedInUser = localStorage.getItem('loggedInUser');
 
-    // loggedInUser와 authorId가 하나라도 일치하면 storedList 사용, 아니면 빈 배열
-    const userChallenges = storedList.some(
+    // 테스트 계정이 로그인했을 떄 storedList(챌린지 목록) 사용
+    const getClgList = storedClgList.some(
         (challenge) => challenge.authorId === loggedInUser
     )
-        ? storedList
+        ? storedClgList
         : [];
 
-    const numClgDoing = userChallenges.filter((clg) => clg.clgDoing).length;
-    const numClgDone = userChallenges.filter((clg) => clg.clgDone).length;
-    const numClgOver = userChallenges.filter(
+    // 내가 참여한 챌린지 목록
+    const myChallenges = getClgList.filter(({ clgJoin }) => clgJoin);
+
+    const numClgDoing = myChallenges.filter((clg) => clg.clgDoing).length;
+    const numClgDone = myChallenges.filter((clg) => clg.clgDone).length;
+    const numClgOver = myChallenges.filter(
         (clg) => !clg.clgDoing && !clg.clgDone
     ).length;
 
