@@ -13,7 +13,7 @@ const ModalForLogin = ({ isOpen, onClose }) => {
         <LoginRequiredModal
             isOpen={isOpen}
             onClose={onClose}
-            onClick={handleNavigateToLogin} // 로그인 페이지로 가는 클릭 처리
+            onNavigate={handleNavigateToLogin} // 로그인 페이지로 가는 클릭 처리
         />
     );
 };
