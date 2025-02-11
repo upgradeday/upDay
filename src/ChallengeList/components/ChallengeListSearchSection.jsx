@@ -1,31 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const btnList = [
-	{title: '전체', color: '#121212'},
-	{title: '식단', color: '#E3E3F4'},
-	{title: '학습', color: '#FEF2C8'},
-	{title: '운동', color: '#C5EBE6'},
-	{title: '습관', color: '#FFDEE7'},
-
+    { title: '전체', color: '#121212' },
+    { title: '식단', color: '#E3E3F4' },
+    { title: '학습', color: '#FEF2C8' },
+    { title: '운동', color: '#C5EBE6' },
+    { title: '습관', color: '#FFDEE7' },
 ];
 
-const ChallengeListSearchSection = () => {
+const ChallengeListSearchSection = ({ setSelectedCategory }) => {
+	
+    const [activeCategory, setActiveCategory] = useState('전체');
+
+    const handleCategoryClick = (category) => {
+        setActiveCategory(category);
+        setSelectedCategory(category); // 부모 컴포넌트에 선택한 카테고리 전달
+    };
+
     return (
         <section className='flex mb-6'>
             <ul className='flex'>
-                {btnList.map((ele, idx) => {
-                    return (
-                        <li className='pr-4' key={idx}>
-                            <button  style={{ border: `1px solid ${ele.color}`}} className='px-8 py-[10px] rounded-xl  bg-white'>{ele.title}</button>
-                        </li>
-                    );
-                })}
+                {btnList.map((ele, idx) => (
+                    <li className='pr-4' key={idx}>
+                        <button
+                            onClick={() => handleCategoryClick(ele.title)}
+                            style={{
+                                border: `1px solid ${ele.color}`,
+                                backgroundColor:
+                                    activeCategory === ele.title
+                                        ? ele.color
+                                        : 'white',
+                            }}
+                            className='px-8 py-[10px] rounded-xl'
+                        >
+                            {ele.title}
+                        </button>
+                    </li>
+                ))}
             </ul>
-
-			<input type="text" placeholder='검색어를 입력하시오' className='rounded-xl'/>
-			<button className='px-8 py-[10px] rounded-xl  bg-white'>검색버튼</button>
+            <input
+                type='text'
+                placeholder='검색어를 입력하시오'
+                className='rounded-xl'
+            />
+            <button className='px-8 py-[10px] rounded-xl bg-white'>
+                검색버튼
+            </button>
         </section>
     );
 };
-
 export default ChallengeListSearchSection;
