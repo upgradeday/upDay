@@ -11,7 +11,7 @@ export default function MyChallengeSection({
     const loggedInUser = localStorage.getItem('loggedInUser');
     const users = JSON.parse(localStorage.getItem('users'));
 
-    const [isTestAccount, setIsTestAccount] = useState(false);
+    const [isTestAccount, setIsTestAccount] = useState(true);
     const [categoryFilter, setCategoryFilter] = useState('전체');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchQuery, setSearchQuery] = useState(''); // 실제 검색어
@@ -19,7 +19,7 @@ export default function MyChallengeSection({
     // 테스트 계정 체크
     useEffect(() => {
         if (users && users.length > 0 && users[0].email !== loggedInUser) {
-            setIsTestAccount(true);
+            setIsTestAccount(false);
         }
     }, [loggedInUser, users]);
 
@@ -62,7 +62,7 @@ export default function MyChallengeSection({
     };
 
     // 테스트 계정이 아닐 경우
-    if (isTestAccount) {
+    if (!isTestAccount) {
         return (
             <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
                 <UserChallengeSearch
@@ -72,9 +72,8 @@ export default function MyChallengeSection({
                     setSearchTerm={setSearchTerm}
                     onSearch={handleSearch}
                 />
-                <p className='text-center text-gray-500 mt-4'>
-                    테스트 계정이 아닌 경우, <br />
-                    해당 기능은 제한됩니다.
+                <p className='text-xs md:text-sm text-center text-gray-500 mt-4'>
+                    테스트 계정이 아닌 경우, 해당 기능은 제한됩니다.
                 </p>
             </div>
         );
