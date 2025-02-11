@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../Main/components/MainLayout';
 import PopularChallenges from '../Main/components/PopularChallenges';
-import CategoryList from '../Main/components/CategoryList';
 import ChallengeIcon from './images/challenge-2.svg';
 import OngoingChallenges from '../Main/components/OngoingChallenges';
 import ButtonIcon from './images/button.svg';
