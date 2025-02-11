@@ -19,13 +19,26 @@ const validatePassword = (password) => {
     return null;
 };
 
+const validateNickname = (nickname) => {
+    if (nickname.length > 6) {
+        return '닉네임은 6글자 이내여야 합니다.';
+    }
+    return null;
+};
+
 export default function PersonalInfo() {
     const handleRefresh = () => {
         window.location.reload();
     };
 
     const loggedInUserEmail = localStorage.getItem('loggedInUser');
-    const users = JSON.parse(localStorage.getItem('users')) || []; // JSON 변환
+    const [users, setUsers] = useState(() => {
+        try {
+            return JSON.parse(localStorage.getItem('users')) || [];
+        } catch (error) {
+            return [];
+        }
+    });
     const loggedInUser = users.find((user) => user.email === loggedInUserEmail);
 
     const [userInfo, setUserInfo] = useState({
@@ -41,6 +54,8 @@ export default function PersonalInfo() {
     // 새로운 상태 변수
     const [passwordError, setPasswordError] = useState('');
     const [daySinceSignup, setDaysSinceSignup] = useState(0);
+    const [nicknameError, setNicknameError] = useState('');
+    const [editMode, setEditMode] = useState(false); // 수정 모드 상태 추가
 
     useEffect(() => {
         if (loggedInUser) {
@@ -68,11 +83,16 @@ export default function PersonalInfo() {
                 setDaysSinceSignup(days);
             }
         }
-    }, []); // 빈 배열로 설정하여 최초 마운트 시에만 실행
+    }, [loggedInUser]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserInfo((prev) => ({ ...prev, [name]: value }));
+
+        if (name === 'nickname') {
+            const error = validateNickname(value);
+            setNicknameError(error || '');
+        }
 
         // 비밀번호 유효성 검사
         if (name === 'password') {
@@ -87,6 +107,7 @@ export default function PersonalInfo() {
                 setPasswordError('');
             }
         }
+        setUserInfo((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleImageUpload = (e) => {
@@ -110,6 +131,22 @@ export default function PersonalInfo() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        let error = validateNickname(userInfo.nickname);
+        if (error) {
+            setNicknameError(error);
+            return;
+        }
+
+        const isNicknameTaken = users.some(
+            (user) =>
+                user.nickname === userInfo.nickname &&
+                user.email !== loggedInUserEmail
+        );
+        if (isNicknameTaken) {
+            setNicknameError('이 닉네임은 이미 사용 중입니다.');
+            return;
+        }
+
         if (passwordError) {
             alert(passwordError);
             return;
@@ -132,9 +169,10 @@ export default function PersonalInfo() {
             user.email === userInfo.email ? updatedUser : user
         );
         localStorage.setItem('users', JSON.stringify(updatedUsers));
+        setUsers(updatedUsers);
 
-        alert('회원정보가 성공적으로 변경되었습니다.');
         handleRefresh();
+        setEditMode(false); // 수정 완료 후 수정 모드 비활성화
     };
 
     if (!loggedInUser) {
@@ -179,10 +217,17 @@ export default function PersonalInfo() {
                                     onChange={handleImageUpload}
                                     className='hidden'
                                     id='upload-photo'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 />
                                 <label
                                     htmlFor='upload-photo'
-                                    className='btn btn-primary text-sm'
+                                    className='btn text-sm'
+                                    style={{
+                                        backgroundColor: editMode
+                                            ? 'blue'
+                                            : 'gray',
+                                        color: 'white',
+                                    }}
                                 >
                                     사진 올리기
                                 </label>
@@ -190,6 +235,7 @@ export default function PersonalInfo() {
                                     type='button'
                                     onClick={handleImageDelete}
                                     className='btn btn-secondary text-sm'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 >
                                     삭제하기
                                 </button>
@@ -207,7 +253,8 @@ export default function PersonalInfo() {
                                     rows={3}
                                     value={userInfo.about}
                                     onChange={handleChange}
-                                    className='textarea-field'
+                                    className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 />
                             </div>
                         </div>
@@ -227,11 +274,16 @@ export default function PersonalInfo() {
                                     type='text'
                                     value={userInfo.nickname}
                                     onChange={handleChange}
-                                    className='input-field'
+                                    className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 />
+                                {nicknameError && (
+                                    <p className='text-red-500 text-sm'>
+                                        {nicknameError}
+                                    </p>
+                                )}
                             </div>
                         </div>
-
                         <div className='sm:col-span-3'>
                             <label
                                 htmlFor='email'
@@ -248,6 +300,7 @@ export default function PersonalInfo() {
                                     onChange={handleChange}
                                     className='input-field'
                                     readOnly
+                                    disabled // 이메일은 항상 비활성화
                                 />
                             </div>
                         </div>
@@ -265,7 +318,8 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.password}
                                     onChange={handleChange}
-                                    className='input-field'
+                                    className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 />
                                 {passwordError && (
                                     <p className='text-red-500 text-sm'>
@@ -288,7 +342,8 @@ export default function PersonalInfo() {
                                     type='password'
                                     value={userInfo.confirmPassword}
                                     onChange={handleChange}
-                                    className='input-field'
+                                    className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
                                 />
                             </div>
                         </div>
@@ -296,15 +351,35 @@ export default function PersonalInfo() {
                 </div>
 
                 <div className='flex items-center justify-end gap-x-4'>
-                    <button type='button' className='btn btn-secondary text-sm'>
-                        취소하기
-                    </button>
-                    <button
-                        type='submit'
-                        className='btn btn-primary px-6 text-sm'
-                    >
-                        저장하기
-                    </button>
+                    {!editMode && (
+                        <button
+                            type='button'
+                            className='btn btn-primary px-6 text-sm'
+                            onClick={() => setEditMode(true)}
+                        >
+                            수정하기
+                        </button>
+                    )}
+                    {editMode && (
+                        <>
+                            <button
+                                type='button'
+                                className='btn btn-secondary text-sm'
+                                onClick={() => {
+                                    setEditMode(false);
+                                    handleRefresh();
+                                }}
+                            >
+                                취소하기
+                            </button>
+                            <button
+                                type='submit'
+                                className='btn btn-primary px-6 text-sm'
+                            >
+                                저장하기
+                            </button>
+                        </>
+                    )}
                 </div>
             </form>
         </div>

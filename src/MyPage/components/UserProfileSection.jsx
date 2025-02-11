@@ -60,13 +60,13 @@ const UserProfile = () => {
                             <img
                                 alt='프로필 이미지'
                                 src={loggedInUser.profileImage}
-                                className='w-full h-full object-cover rounded-full ring-2 ring-neutral-300 overflow-hidden'
+                                className='w-full max-w-[200px] h-full object-cover rounded-full ring-2 ring-neutral-300 overflow-hidden'
                             />
                         ) : (
                             <img
                                 alt='기본 프로필 이미지'
                                 src={Pic}
-                                className='w-full h-full bg-gray-200 rounded-full flex items-center justify-center text-gray-500'
+                                className='w-full h-full object-cover rounded-full ring-2 ring-neutral-300 overflow-hidden' //w-full h-full bg-gray-200 rounded-full flex items-center justify-center text-gray-500
                             />
                         )}
                     </div>
@@ -100,4 +100,5 @@ const UserProfile = () => {
         </div>
     );
 };
+
 export default UserProfile;
