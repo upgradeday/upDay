@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Charac from './img/character-bulb.svg';
 import Arrow from './img/arrow-text.svg';
 import Bg from './img/bg-element.svg';
+import Chat from './img/spechbubble.svg';
 
 const Intro = () => {
     const h1Ref = useRef(null);
@@ -121,15 +122,20 @@ const Intro = () => {
                     </p>
                 </div>
             </div>
-            <div>
-                <p>👥 같은 목표를 가진 사람들과 응원하며 성장</p>
-                <p>🎯 매일 작은 실천으로 꾸준한 습관 형성</p>
-                <p>🔥 혼자가 아닌 함께, 더 즐겁고 쉽게 목표 완수!</p>
-                <p>
-                    좋은 습관으로 매일 더 나은 나를 만들어보세요! <br />
-                    오늘부터 Up Day와 함께 도전해볼까요? 💪😊
-                </p>
+            <div className='mb-4 flex item-start'>
+                <img src={Chat} alt='Chat' />
+                <div className='relative bg-gray-100 rounded-xl p-4 text-sm text-gray-600 min-h-[50px]'>
+                    👥 같은 목표를 가진 사람들과 응원하며 성장
+                    <div className='absolute left-4 bottom-[-8px] border-[8px]'></div>
+                </div>
             </div>
+
+            <p>🎯 매일 작은 실천으로 꾸준한 습관 형성</p>
+            <p>🔥 혼자가 아닌 함께, 더 즐겁고 쉽게 목표 완수!</p>
+            <p>
+                좋은 습관으로 매일 더 나은 나를 만들어보세요! <br />
+                오늘부터 Up Day와 함께 도전해볼까요? 💪😊
+            </p>
         </div>
     );
 };
