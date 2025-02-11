@@ -78,16 +78,20 @@ const PostDetailModal = () => {
             // 3. 합쳐진 챌린지들 중에서 가장 큰 id 값 찾은 후에 + 1 하기 
 			const maxId = Math.max(...allChallenges.map((challenge) => challenge.id), 0) + 1;
             
-            const userInfo = JSON.parse(localStorage.getItem('users'))[0];
-			
+			// users 정보 다 가져오기
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+			// 현재 로그인한 유저 구별하기
+			const userInfo = users.find((user) => user.email === loggedInUser);
+	
             const newChallenge = {
                 ...formData,
                 id: maxId,
                 authorId: loggedInUser,
                 nickname: userInfo?.nickname || '기본 닉네임',
                 userImg: userInfo?.profileImage || '',
-				clgJoin: false,  // 추가: 처음에는 참여하지 않은 상태
-    			clgDoing: false, // 추가: 처음에는 진행하지 않는 상태
+				clgJoin: true,  // 추가: 처음에는 참여한 상태
+    			clgDoing: true, // 추가: 처음에는 진행한 상태
     			clgDone: false   // 추가: 처음에는 완료하지 않은 상태
             };
             // 필수 입력 체크
