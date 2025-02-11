@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom'; // ✅ useLocation 추가
 import { setUser } from '../../store/features/UserSlice';
 import { userData } from '../../data/userData';
 
 const useLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('test01@naver.com');
-    const [password, setPassword] = useState('test123^');
+    const location = useLocation(); 
+
+    const defaultEmail = 'test01@naver.com';
+    const defaultPassword = 'test123^';
+
+    const [email, setEmail] = useState(location.state?.email || defaultEmail);
+    const [password, setPassword] = useState(
+        location.state?.password || defaultPassword
+    );
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -29,7 +36,6 @@ const useLogin = () => {
             setError('');
 
             localStorage.setItem('loggedInUser', existingUser.email);
-
             dispatch(setUser({ email: existingUser.email }));
 
             navigate('/main');

@@ -43,7 +43,7 @@ const useProfileSetup = () => {
             return;
         }
 
-         const defaultImages = [img1, img2, img3, img4]; // 여러 개의 기본 이미지 배열
+         const defaultImages = [img1, img2, img3, img4]; 
          const randomImage =
              defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
@@ -61,7 +61,8 @@ const useProfileSetup = () => {
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
 
-        navigate('/login');
+        alert ('회원가입이 완료 되었습니다! (●ˇ∀ˇ●)');
+        navigate('/login', {state: {email, password}});
     };
 
     return {

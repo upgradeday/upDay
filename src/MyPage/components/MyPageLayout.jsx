@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { setMyChallenge } from '../../store/features/userChallengeSlice';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import useModal from '../hooks/useModal';
+import useModal from '../../common/hooks/useModal';
 
-import MyProfile from './MyProfileSection';
-import MyReport from './MyReportSection';
+import UserProfile from './UserProfileSection';
+import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
-import NavigateModal from './NavigateModal';
+import MypageNonLogin from './MypageNonLogin';
+import ModalForLogin from '../../common/ModalForLogin';
 
 const MyPageLayout = () => {
     const dispatch = useDispatch();
@@ -26,29 +27,25 @@ const MyPageLayout = () => {
         }
     }, [dispatch, openModal]);
 
-    const handleNavigateToLogin = () => {
-        navigate('/login'); // 로그인 페이지로 리디렉션
-        closeModal(); // 모달 닫기
-    };
-
     return (
         <main className='w-[80%] max-w-[1344px] mx-auto flex flex-row justify-between'>
             <Helmet>
                 <title>마이페이지 | UpDay, 나의 일상을 업그레이드</title>
             </Helmet>
-            {loggedInUser && (
+            {!loggedInUser ? (
+                <MypageNonLogin />
+            ) : (
                 <>
                     <section className='flex flex-col w-[48%] gap-6'>
-                        <MyProfile />
-                        <MyReport />
+                        <UserProfile />
+                        <UserReport />
                     </section>
                     <TabSwitcher />
                 </>
             )}
-            <NavigateModal
+            <ModalForLogin
                 isOpen={isModalOpen} // 모달 열기 여부
                 onClose={closeModal} // 모달 닫기
-                onNavigate={handleNavigateToLogin} // 로그인 페이지로 이동
             />
         </main>
     );

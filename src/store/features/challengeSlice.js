@@ -3,8 +3,17 @@ import { userChallengeList } from '../../data/userChallengeData';
 
 const getInitialList = () => {
     // 로컬 스토리지에서 챌린지 가져오기
-    const savedChallenges = localStorage.getItem('challenges');
-    const parsedChallenges = savedChallenges ? JSON.parse(savedChallenges) : [];
+    const savedChallenges = localStorage.getItem('clglist');
+
+	// 로컬 스토리지에 clglist가 없으면
+	if(!savedChallenges){
+		// 로컬 스토리지에 clglist 이름으로 기존의 더미데이터를 저장
+		localStorage.setItem('clglist', JSON.stringify(userChallengeList));
+		return userChallengeList;
+	}
+
+	// 로컬 스토리지 데이터 파싱
+    const parsedChallenges = JSON.parse(savedChallenges);
 
     // 1. 더미데이터의 상태 업데이트
     const updatedList = userChallengeList.map((challenge) => {
@@ -21,8 +30,14 @@ const getInitialList = () => {
     );
 
     // 3. 업데이트 된 더미데이터 + 사용자가 작성한 챌린지
-    return [...updatedList, ...userWrittenChallenges];
+    const mergedChallenges =  [...updatedList, ...userWrittenChallenges];
+
+	// 병합된 데이터로 로컬 스토리지 업데이트
+	localStorage.setItem('clglist', JSON.stringify(mergedChallenges));
+
+	return mergedChallenges;
 };
+
 
 const challengeSlice = createSlice({
     name: 'challenge',
@@ -43,11 +58,11 @@ const challengeSlice = createSlice({
 
             // 로컬 스토리지에 저장
             const currentChallenges = JSON.parse(
-                localStorage.getItem('challenges') || '[]'
+                localStorage.getItem('clglist') || '[]'
             );
             const updatedChallenges = [...currentChallenges, action.payload];
             localStorage.setItem(
-                'challenges',
+                'clglist',
                 JSON.stringify(updatedChallenges)
             );
         },
@@ -69,7 +84,7 @@ const challengeSlice = createSlice({
 
             // 로컬 스토리지 상태 업데이트
             const existingChallenges = JSON.parse(
-                localStorage.getItem('challenges') || '[]'
+                localStorage.getItem('clglist') || '[]'
             );
             const updatedChallenges = existingChallenges.map((challenge) =>
                 challenge.id === updatedChallenge.id
@@ -77,7 +92,7 @@ const challengeSlice = createSlice({
                     : challenge
             );
             localStorage.setItem(
-                'challenges',
+                'clglist',
                 JSON.stringify(updatedChallenges)
             );
         },
@@ -97,13 +112,13 @@ const challengeSlice = createSlice({
 
             // 로컬 스토리지 업데이트 하기
             const existingChallenges = JSON.parse(
-                localStorage.getItem('challenges') || '[]'
+                localStorage.getItem('clglist') || '[]'
             );
             const updatedChallenges = existingChallenges.filter(
                 (challenge) => challenge.id !== action.payload
             );
             localStorage.setItem(
-                'challenges',
+                'clglist',
                 JSON.stringify(updatedChallenges)
             );
         },
@@ -126,7 +141,7 @@ const challengeSlice = createSlice({
 
             // 로컬 스토리지 업데이트
             const existingChallenges = JSON.parse(
-                localStorage.getItem('challenges') || '[]'
+                localStorage.getItem('clglist') || '[]'
             );
             const updatedChallenge = existingChallenges.map((challenge) => {
                 if (challenge.id === challengeId) {
@@ -139,7 +154,7 @@ const challengeSlice = createSlice({
                 return challenge;
             });
             localStorage.setItem(
-                'challenges',
+                'clglist',
                 JSON.stringify(updatedChallenge)
             );
         },
