@@ -502,7 +502,6 @@ export const userChallengeList = [
             'https://img.freepik.com/free-photo/big-trees-through-window_23-2147770340.jpg?t=st=1739204423~exp=1739208023~hmac=dccc98885f6bf6552dfc32233f07b64fe371e850bf652575848db4489ce5d761&w=1480',
         nickname: '오천원의행복',
         postDate: '2025-02-16',
-        postClicked: 126,
         postClicked: 42,
         joinDate: '',
         clgJoin: false,
