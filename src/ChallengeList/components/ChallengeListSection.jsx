@@ -14,7 +14,23 @@ const ChallengeListSection = ({ selectedCategory }) => {
 		
 		const filtered = selectedCategory === '전체' ? storedChallenges : storedChallenges.filter( ch => ch.category === selectedCategory);
 
-		setFilteredChallenges(filtered);
+		// 필터링 된 결과들을 최신 날짜로 정렬
+		const sortedChallenges = filtered.sort((a, b) => {
+
+			if(!a.postDate) return 1; // 날짜 없는 항목은 뒤로
+			if(!b.postDate) return -1; // 날짜 없는 항목은 뒤로
+
+			const dateA = new Date(a.postDate);
+			const dateB = new Date(b.postDate);
+
+			// 유효한 날짜인지 확인
+			if(isNaN(dateA.getTime())) return 1;
+			if(isNaN(dateB.getTime())) return -1;
+
+			return dateB - dateA;
+		})
+
+		setFilteredChallenges(sortedChallenges);
     }, [selectedCategory, challenges]);
 
     return (

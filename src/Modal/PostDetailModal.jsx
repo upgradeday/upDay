@@ -90,6 +90,7 @@ const PostDetailModal = () => {
                 authorId: loggedInUser,
                 nickname: userInfo?.nickname || '기본 닉네임',
                 userImg: userInfo?.profileImage || '',
+				postDate: new Date().toISOString().slice(0, 19),
 				clgJoin: true,  // 추가: 처음에는 참여한 상태
     			clgDoing: true, // 추가: 처음에는 진행한 상태
     			clgDone: false   // 추가: 처음에는 완료하지 않은 상태
