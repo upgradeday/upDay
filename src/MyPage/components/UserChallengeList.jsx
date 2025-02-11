@@ -1,35 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleClgState } from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
 export default function MyChallengeList() {
     const dispatch = useDispatch();
-    const storedClgList = JSON.parse(localStorage.getItem('clglist')) || [];
+    const challenges = useSelector((state) => state.myChallengeList.list);
     const loggedInUser = localStorage.getItem('loggedInUser');
 
-    // 테스트 계정이 로그인했을 떄 storedList(챌린지 목록) 사용
-    const getClgList = storedClgList.some(
-        (challenge) => challenge.authorId === loggedInUser
-    )
-        ? storedClgList
-        : [];
-
     // 내가 참여한 챌린지 목록
-    const myChallenges = getClgList.filter(({ clgJoin }) => clgJoin);
+    const myChallenges = challenges.filter(({ clgJoin }) => clgJoin);
 
-    // 챌린지 역순(최신순)으로 배열 변경
-    // const reversedChallenges = [...myChallenges].reverse();
-
-    // 오래된 순서대로 정렬
+    // 챌린지 참여날짜 오래된 순으로 정렬
     const sortedChallenges = [...myChallenges].sort(
         (a, b) => new Date(b.joinDate) - new Date(a.joinDate)
     );
 
-    console.log(sortedChallenges);
     // 역순 번호 매핑
-    const clgNum = (index) => myChallenges.length - index;
+    const clgNum = (index) => sortedChallenges.length - index;
+
+    // 챌린지 상태 변경 핸들러
+    const handleToggle = (id, type) => {
+        dispatch(toggleClgState({ id, type }));
+    };
 
     // 챌린지 카테고리별 뱃지 클래스
     const badgeClasses = {
@@ -87,24 +81,13 @@ export default function MyChallengeList() {
                             <div className='w-[48px] flex justify-between items-center'>
                                 <button
                                     className={getClgDoingClass(clgDoing)}
-                                    onClick={() =>
-                                        dispatch(
-                                            toggleClgState({
-                                                id,
-                                                type: 'doing',
-                                            })
-                                        )
-                                    }
+                                    onClick={() => handleToggle(id, 'doing')}
                                 >
                                     <HiFire />
                                 </button>
                                 <button
                                     className={getClgDoneClass(clgDone)}
-                                    onClick={() =>
-                                        dispatch(
-                                            toggleClgState({ id, type: 'done' })
-                                        )
-                                    }
+                                    onClick={() => handleToggle(id, 'done')}
                                 >
                                     <HiDocumentCheck />
                                 </button>

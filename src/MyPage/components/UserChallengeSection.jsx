@@ -1,19 +1,80 @@
-import React from 'react';
-import { FaChevronDown } from 'react-icons/fa6';
-import { BsSearch, BsDot } from 'react-icons/bs';
-import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
-
+import React, { useState, useEffect } from 'react';
+import UserChallengeSearch from './UserChallengeSearch';
 import UserChallengeList from './UserChallengeList';
 
-export default function MyChallengeSection() {
+export default function MyChallengeSection({
+    challenges,
+    setChallenges,
+    filteredChallenges,
+    setFilteredChallenges,
+}) {
     const loggedInUser = localStorage.getItem('loggedInUser');
+    const users = JSON.parse(localStorage.getItem('users'));
 
-    // 유저 정보가 없을 때 메시지 출력
-    if (!loggedInUser) {
+    const [isTestAccount, setIsTestAccount] = useState(false);
+    const [categoryFilter, setCategoryFilter] = useState('전체');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchQuery, setSearchQuery] = useState(''); // 실제 검색어
+
+    // 테스트 계정 체크
+    useEffect(() => {
+        if (users && users.length > 0 && users[0].email !== loggedInUser) {
+            setIsTestAccount(true);
+        }
+    }, [loggedInUser, users]);
+
+    // // 전체 챌린지 목록 가져오기
+    // useEffect(() => {
+    //     const storedClgList = JSON.parse(localStorage.getItem('clglist')) || [];
+    //     setChallenges(storedClgList);
+    //     setFilteredChallenges(storedClgList); // 초기 상태로 전체 목록 표시
+    // }, []);
+
+    // 필터링 업데이트 (검색어 및 카테고리 변경 시)
+    useEffect(() => {
+        let filtered = [...challenges];
+
+        // 카테고리
+        if (categoryFilter !== '전체') {
+            filtered = filtered.filter(
+                (challenge) => challenge.category === categoryFilter
+            );
+        }
+
+        // 검색어
+        if (searchQuery.trim() !== '') {
+            const lowerSearchTerm = searchQuery.toLowerCase();
+            filtered = filtered.filter(
+                (challenge) =>
+                    challenge.title.toLowerCase().includes(lowerSearchTerm) ||
+                    challenge.content.toLowerCase().includes(lowerSearchTerm) ||
+                    challenge.nickname.toLowerCase().includes(lowerSearchTerm)
+            );
+        }
+
+        // 필터링된 챌린지 리스트 업데이트
+        setFilteredChallenges(filtered);
+    }, [challenges, categoryFilter, searchQuery]);
+
+    // 검색 버튼 클릭 시 실행되는 함수
+    const handleSearch = () => {
+        setSearchQuery(searchTerm); // 현재 입력된 검색어를 실제 검색어로 설정
+    };
+
+    // 테스트 계정이 아닐 경우
+    if (isTestAccount) {
         return (
             <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
-                <p className='text-center text-gray-500'>
-                    로그인한 유저 정보를 찾을 수 없습니다.
+                <UserChallengeSearch
+                    categoryFilter={categoryFilter}
+                    setCategoryFilter={setCategoryFilter}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    onSearch={handleSearch}
+                />
+                <p className='text-center text-gray-500 mt-4'>
+                    테스트 계정이 아닌 경우, <br />
+                    해당 기능은 제한됩니다.
                 </p>
             </div>
         );
@@ -21,54 +82,14 @@ export default function MyChallengeSection() {
 
     return (
         <div className='w-full h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 p-[36px]'>
-            <div className='flex flex-row gap-x-3'>
-                <div className='w-[72px] grid shrink-0 grid-cols-1 focus-within:relative'>
-                    <select
-                        id='currency'
-                        name='currency'
-                        aria-label='Currency'
-                        className='btn btn-black w-full col-start-1 row-start-1 appearance-none pl-3 text-base text-neutral-100 placeholder:text-gray-400 md:text-sm/6'
-                    >
-                        <option>전체</option>
-                        <option>식단</option>
-                        <option>학습</option>
-                        <option>운동</option>
-                        <option>습관</option>
-                    </select>
-                    <FaChevronDown
-                        aria-hidden='true'
-                        className='pointer-events-none col-start-1 row-start-1 mr-3 size-2 self-center justify-self-end text-neutral-100 md:size-3'
-                    />
-                </div>
-                <div className='relative flex  flex-1 items-center'>
-                    <input
-                        id='search'
-                        name='search'
-                        type='text'
-                        autoComplete='password-check'
-                        className='btn w-full rounded-xl bg-neutral-100 text-base border border-neutral-300 focus:outline-blue-500 md:text-sm/7'
-                    />
-                    <button className='absolute right-0.5 w-8 h-8 '>
-                        <BsSearch className=' size-5 text-blue-900' />
-                    </button>
-                </div>
-            </div>
-            <div className='flex gap-2 justify-end mt-3 pb-3 border-b border-neutral-300 '>
-                <div className='flex items-center'>
-                    <BsDot className='text-blue-500 text-sm' />
-                    <p className='text-xs'>내가 만든</p>
-                </div>
-                <div className='flex gap-0.5 items-center'>
-                    <HiFire className='text-orange-400 text-sm' />
-                    <p className='text-xs'>진행 중</p>
-                </div>
-                <div className='flex gap-0.5 items-center'>
-                    <HiDocumentCheck className='text-green-400 text-sm' />
-                    <p className='text-xs'>완료</p>
-                </div>
-            </div>
-
-            <UserChallengeList />
+            <UserChallengeSearch
+                categoryFilter={categoryFilter}
+                setCategoryFilter={setCategoryFilter}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                onSearch={handleSearch}
+            />
+            <UserChallengeList challenges={filteredChallenges} />
         </div>
     );
 }
