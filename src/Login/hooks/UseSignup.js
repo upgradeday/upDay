@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setEmail, setPassword } from '../../store/features/UserSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,8 @@ const useSignup = () => {
     const [error, setError] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const clglist = useSelector((state) => state.challenge.list ?? []);
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const validatePassword = (password) =>
@@ -40,6 +42,10 @@ const useSignup = () => {
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
         if (users.some((user) => user.email === email)) {
+            newError = '이미 등록된 아이디입니다.';
+        }
+
+        if (clglist.some((challenge) => challenge.authorId === email)) {
             newError = '이미 등록된 아이디입니다.';
         }
 
