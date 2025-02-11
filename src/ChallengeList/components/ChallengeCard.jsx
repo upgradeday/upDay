@@ -34,8 +34,8 @@ const ChallengeCard = ({ cardData }) => {
     // 로그인 한 유저의 아이디
     const loggedInUser = localStorage.getItem('loggedInUser');
 
-    // 내가 작성한 글이 아니면서 아직 참여하지 않은 경우에만 버튼 표시
-    const canJoin = loggedInUser !== authorId && !clgJoin;
+    // 내가 작성한 글이 아닌 겨우
+    const canJoin = loggedInUser !== authorId;
 
 	// 참여하기 버튼 핸들링
     const handleJoin = (e) => {
@@ -116,7 +116,7 @@ const ChallengeCard = ({ cardData }) => {
 						onClick={handleJoin}
 						disabled={clgJoin}
                     >
-                        {clgJoin ? '참여완료' : '참여하기'}
+                        {clgJoin ? '참여중' : '참여하기'}
                     </button>
                 )}
 				<LoginRequiredModal isOpen={isModalOpen} onClose={closeModal} onNavigate={handleNavigateToLogin} stopPropagation={true}/>
