@@ -11,6 +11,7 @@ const useProfileSetup = () => {
     const [nickname, setNicknameState] = useState('');
     const [profileImage, setProfileImageState] = useState('');
     const [error, setError] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -43,9 +44,9 @@ const useProfileSetup = () => {
             return;
         }
 
-         const defaultImages = [img1, img2, img3, img4]; 
-         const randomImage =
-             defaultImages[Math.floor(Math.random() * defaultImages.length)];
+        const defaultImages = [img1, img2, img3, img4];
+        const randomImage =
+            defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
         // Redux 상태 업데이트
         dispatch(setNickname(nickname));
@@ -61,17 +62,23 @@ const useProfileSetup = () => {
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
 
-        alert ('회원가입이 완료 되었습니다! (●ˇ∀ˇ●)');
-        navigate('/login', {state: {email, password}});
+        setIsModalOpen(true); // 모달창 열기
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        navigate('/login', { state: { email, password } }); // 로그인 페이지로 이동
     };
 
     return {
         nickname,
         profileImage,
         error,
+        isModalOpen,
         setNicknameState,
         handleImageUpload,
         handleSubmit,
+        closeModal,
     };
 };
 

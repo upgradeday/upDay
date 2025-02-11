@@ -1,13 +1,16 @@
 import useProfileSetup from '../hooks/UseProfileSetup';
+import pic1 from '../img/Group 122.svg';
 
 const ProfileForm = () => {
     const {
         nickname,
         profileImage,
         error,
+        isModalOpen,
         setNicknameState,
         handleImageUpload,
         handleSubmit,
+        closeModal,
     } = useProfileSetup();
 
     return (
@@ -52,6 +55,36 @@ const ProfileForm = () => {
                     설정 완료
                 </button>
             </form>
+            {isModalOpen && (
+                <div className='fixed inset-0 flex items-center justify-center bg-neutral-900 bg-opacity-50 backdrop-blur-sm'>
+                    {/* 배경 이미지 */}
+                    <div className='relative w-[615px] h-[640px] flex items-center justify-center'>
+                        <img
+                            src={pic1}
+                            alt='회원가입 완료'
+                            className='absolute inset-0 w-full h-full object-cover'
+                        />
+
+                        {/* 텍스트와 버튼 */}
+                        <div className='absolute top-[12%] left-1/2 transform -translate-x-1/2 text-center text-black'>
+                            <div className='text-3xl font-bold mb-4 whitespace-nowrap '>
+                                회원 가입이 완료되었습니다 !
+                            </div>
+                            <div className='text-lg leading-relaxed mt-[3rem] leading-[2.2]'>
+                                이제 업데이와 함께 챌린지 도전해보세요! <br />
+                                원하던 목표를 이룰 수 있게 도와드려요 ❤ <br />
+                                ヽ(✿ﾟ▽ﾟ)ノ️
+                            </div>
+                            <button
+                                onClick={closeModal}
+                                className='mt-[2rem] bg-blue-300 text-white px-6 py-2 rounded-xl '
+                            >
+                                로그인 하러가기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
