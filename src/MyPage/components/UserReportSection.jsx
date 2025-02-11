@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { HiFire, HiDocumentCheck, HiMiniTrophy } from 'react-icons/hi2';
 import { FaStar } from 'react-icons/fa6';
 
 export default function UserReport() {
-    const storedClgList = JSON.parse(localStorage.getItem('clglist'));
+    const dispatch = useDispatch();
+    const challenges = useSelector((state) => state.myChallengeList.list);
     const loggedInUser = localStorage.getItem('loggedInUser');
 
-    // 테스트 계정이 로그인했을 떄 storedList(챌린지 목록) 사용
-    const getClgList = storedClgList.some(
-        (challenge) => challenge.authorId === loggedInUser
-    )
-        ? storedClgList
-        : [];
+    // 챌린지 데이터가 변경될 때마다 새롭게 로컬스토리지에서 가져오기
+    useEffect(() => {
+        const storedChallenges =
+            JSON.parse(localStorage.getItem('clglist')) || [];
+        if (storedChallenges.length > 0) {
+            dispatch({ type: 'UPDATE_CHALLENGES', payload: storedChallenges });
+        }
+    }, [challenges, dispatch]); // `challenges`가 변경될 때마다 실행
 
     // 내가 참여한 챌린지 목록
-    const myChallenges = getClgList.filter(({ clgJoin }) => clgJoin);
+    const myChallenges = challenges.filter(({ clgJoin }) => clgJoin);
 
     const numClgDoing = myChallenges.filter((clg) => clg.clgDoing).length;
     const numClgDone = myChallenges.filter((clg) => clg.clgDone).length;
