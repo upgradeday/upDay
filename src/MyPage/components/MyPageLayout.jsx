@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import useModal from '../../common/hooks/useModal';
 
 import { Helmet } from 'react-helmet';
@@ -10,12 +9,8 @@ import TabSwitcher from './TabSwitcher';
 import ModalForLogin from '../../common/ModalForLogin';
 
 const MyPageLayout = () => {
-    const dispatch = useDispatch();
     const { isModalOpen, openModal, closeModal } = useModal();
     const [loggedInUser, setLoggedInUser] = useState(null);
-
-    // Redux에서 로그인 사용자 정보와 관련된 데이터를 구독
-    const challenges = useSelector((state) => state.myChallengeList.list);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('loggedInUser');
