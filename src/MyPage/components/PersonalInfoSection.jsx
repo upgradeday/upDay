@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
-import { differenceInDays, format } from 'date-fns';
+import { differenceInDays } from 'date-fns';
 
 // 비밀번호 유효성 검사 함수
 const validatePassword = (password) => {
@@ -51,11 +51,24 @@ export default function PersonalInfo() {
         signupDate: '',
     });
 
+    const ProfileSection = ({ loggedInUser, editMode }) => {
+        const [aboutText, setAboutText] = useState('');
+
+        useEffect(() => {
+            if (loggedInUser?.abobut) {
+                setAboutText(loggedInUser.about);
+            }
+        }, [loggedInUser]);
+
+        const handleChange = (e) => {
+            setAboutText(e.target.value);
+        };
+    };
     // 새로운 상태 변수
     const [passwordError, setPasswordError] = useState('');
-    const [daySinceSignup, setDaysSinceSignup] = useState(0);
+    const [daysSinceSignup, setDaysSinceSignup] = useState(0);
     const [nicknameError, setNicknameError] = useState('');
-    const [editMode, setEditMode] = useState(false); // 수정 모드 상태 추가
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         if (loggedInUser) {
@@ -136,7 +149,6 @@ export default function PersonalInfo() {
             setNicknameError(error);
             return;
         }
-
         const isNicknameTaken = users.some(
             (user) =>
                 user.nickname === userInfo.nickname &&
@@ -202,7 +214,7 @@ export default function PersonalInfo() {
                                     <img
                                         src={userInfo.profileImage}
                                         alt='프로필'
-                                        className='w-16 h-16 rounded-full object-cover'
+                                        className='w-[24%] rounded-full object-cover'
                                     />
                                 ) : (
                                     <BsPersonCircle
@@ -210,7 +222,6 @@ export default function PersonalInfo() {
                                         className='size-[24%] max-size-10 text-gray-300'
                                     />
                                 )}
-
                                 <input
                                     type='file'
                                     accept='image/*'
@@ -221,41 +232,47 @@ export default function PersonalInfo() {
                                 />
                                 <label
                                     htmlFor='upload-photo'
-                                    className='btn text-sm'
-                                    style={{
-                                        backgroundColor: editMode
-                                            ? 'blue'
-                                            : 'gray',
-                                        color: 'white',
-                                    }}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition 
+                                        ${editMode ? 'bg-blue-400 hover:bg-blue-500 cursor-pointer' : 'bg-neutral-600 cursor-not-allowed'} text-white`}
                                 >
                                     사진 올리기
                                 </label>
-                                <button
+                                <input
                                     type='button'
                                     onClick={handleImageDelete}
-                                    className='btn btn-secondary text-sm'
+                                    className='hidden'
+                                    id='delete-photo'
                                     disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
+                                />
+                                <label
+                                    htmlFor='delete-photo'
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition
+                                        ${editMode ? 'bg-neutral-600 hover:bg-red-400 cursor-pointer' : 'bg-neutral-600 cursor-not-allowed'} text-white`}
                                 >
                                     삭제하기
-                                </button>
+                                </label>
                             </div>
                         </div>
-
                         <div className='col-span-full'>
                             <label htmlFor='about' className='block text-sm/6'>
                                 소개글
                             </label>
                             <div className='mt-2'>
-                                <textarea
-                                    id='about'
-                                    name='about'
-                                    rows={3}
-                                    value={userInfo.about}
-                                    onChange={handleChange}
-                                    className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
-                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
-                                />
+                                {editMode ? (
+                                    <textarea
+                                        id='about'
+                                        name='about'
+                                        rows={3}
+                                        value={userInfo.about}
+                                        onChange={handleChange}
+                                        className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
+                                    />
+                                ) : (
+                                    <p className='bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 rounded-xl min-h-[72px]'>
+                                        {userInfo.about ||
+                                            '아직 소개글을 작성하지 않았습니다. 프로필을 업데이트해보세요!'}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -300,7 +317,7 @@ export default function PersonalInfo() {
                                     onChange={handleChange}
                                     className='input-field'
                                     readOnly
-                                    disabled // 이메일은 항상 비활성화
+                                    // disabled // 이메일은 항상 비활성화
                                 />
                             </div>
                         </div>
@@ -365,10 +382,7 @@ export default function PersonalInfo() {
                             <button
                                 type='button'
                                 className='btn btn-secondary text-sm'
-                                onClick={() => {
-                                    setEditMode(false);
-                                    handleRefresh();
-                                }}
+                                onClick={handleRefresh}
                             >
                                 취소하기
                             </button>
