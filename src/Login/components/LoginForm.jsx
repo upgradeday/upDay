@@ -8,7 +8,10 @@ const LoginForm = () => {
 
     return (
         <div className='flex items-center flex-col text-center'>
-            <div className='text-lg mt-[3rem] mb-[2.5rem]'>
+            <div
+                className='text-xs mt-[28px] mb-[20px]
+                md:text-lg md:mt-[3rem] md:mb-[2.5rem]'
+            >
                 로그인 방법을 선택하세요
             </div>
             <form
@@ -18,14 +21,16 @@ const LoginForm = () => {
                 <input
                     type='email'
                     placeholder='이메일'
-                    className='border border-gray-300 mb-4 pl-6 w-80 h-12 rounded-xl'
+                    className='border border-gray-300 
+                    md:mb-4 md:pl-6 md:w-80 md:h-12 md:rounded-xl'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     type='password'
                     placeholder='비밀번호'
-                    className='border border-gray-300 mb-4 pl-6 w-80 h-12 rounded-xl'
+                    className='border border-gray-300 w-[15rem] rounded-lg
+                    md:mb-4 md:pl-6 md:w-80 md:h-12 md:rounded-xl'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

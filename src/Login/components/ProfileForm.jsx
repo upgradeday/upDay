@@ -1,5 +1,5 @@
 import useProfileSetup from '../hooks/UseProfileSetup';
-import pic1 from '../img/Group 122.svg';
+import pic1 from '../img/Group 193.svg';
 
 const ProfileForm = () => {
     const {
@@ -72,11 +72,10 @@ const ProfileForm = () => {
                             <div className='text-lg leading-relaxed mt-[3rem] leading-[2.2]'>
                                 이제 업데이와 함께 챌린지 도전해보세요! <br />
                                 원하던 목표를 이룰 수 있게 도와드려요 ❤ <br />
-                                ヽ(✿ﾟ▽ﾟ)ノ️
                             </div>
                             <button
                                 onClick={closeModal}
-                                className='mt-[2rem] bg-blue-300 text-white px-6 py-2 rounded-xl '
+                                className='mt-[4rem] bg-blue-300 text-white px-6 py-2 rounded-xl '
                             >
                                 로그인 하러가기
                             </button>
