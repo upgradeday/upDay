@@ -4,7 +4,7 @@ import { toggleClgState } from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
-export default function MyChallengeList() {
+export default function UserChallengeList() {
     const dispatch = useDispatch();
     const challenges = useSelector((state) => state.myChallengeList.list);
     const loggedInUser = localStorage.getItem('loggedInUser');

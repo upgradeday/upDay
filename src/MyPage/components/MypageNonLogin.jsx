@@ -3,7 +3,7 @@ import { HiFire, HiDocumentCheck, HiMiniTrophy } from 'react-icons/hi2';
 import { FaStar, FaChevronDown } from 'react-icons/fa6';
 import { BsSearch, BsDot } from 'react-icons/bs';
 
-export default function MypageNonLogin() {
+export default function MyPageNonLogin() {
     return (
         <>
             <section className='flex flex-col w-[48%] gap-6'>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserChallengeSearch from './UserChallengeSearch';
 import UserChallengeList from './UserChallengeList';
 
-export default function MyChallengeSection({
+export default function UserChallengeSection({
     challenges,
     setChallenges,
     filteredChallenges,
