@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import ChallengeListSection from './ChallengeListSection';
 import ChallengeListSearchSection from './ChallengeListSearchSection';
+import { useParams } from 'react-router-dom';
 
 const ChallengeListLayout = () => {
 
-    const [selectedCategory, setSelectedCategory] = useState('전체');
+	// useParams로 url의 카테고리 파라미터 읽기 위해 호출
+	const {category} = useParams();
+
+	// 읽어온 파라미터 상태 관리
+	const [selectedCategory, setSelectedCategory] = useState(category || '전체');
 	
     return (
     <main className="w-[80%] max-w-[1344px] mx-auto bg-green-300">

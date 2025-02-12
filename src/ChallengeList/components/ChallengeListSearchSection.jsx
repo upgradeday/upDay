@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const btnList = [
     { title: '전체', color: '#121212' },
@@ -10,11 +11,13 @@ const btnList = [
 
 const ChallengeListSearchSection = ({ setSelectedCategory }) => {
 	
+	const navigate = useNavigate();
     const [activeCategory, setActiveCategory] = useState('전체');
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category);
         setSelectedCategory(category); // 부모 컴포넌트에 선택한 카테고리 전달
+		navigate(`/challengelist/category/${category}`)
     };
 
     return (
@@ -49,4 +52,5 @@ const ChallengeListSearchSection = ({ setSelectedCategory }) => {
         </section>
     );
 };
+
 export default ChallengeListSearchSection;
