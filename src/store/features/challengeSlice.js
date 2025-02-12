@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userChallengeList } from '../../data/userChallengeData';
+import { getChallenges } from '../../utils/localStorage';
 
 const getInitialList = () => {
     // 로컬 스토리지에서 챌린지 가져오기
@@ -44,7 +45,6 @@ const challengeSlice = createSlice({
     initialState: {
         list: getInitialList(), // 초기 데이터,
         selectedChallenge: null,
-        myPosts: [], // 내가 작성한 글 목록
     },
     reducers: {
         // 선택된 챌린지 정보를 저장하는 액션
@@ -57,9 +57,7 @@ const challengeSlice = createSlice({
             state.list.push(action.payload);
 
             // 로컬 스토리지에 저장
-            const currentChallenges = JSON.parse(
-                localStorage.getItem('clglist') || '[]'
-            );
+            const currentChallenges = getChallenges();
             const updatedChallenges = [...currentChallenges, action.payload];
             localStorage.setItem(
                 'clglist',
@@ -83,10 +81,8 @@ const challengeSlice = createSlice({
             state.selectedChallenge = updatedChallenge;
 
             // 로컬 스토리지 상태 업데이트
-            const existingChallenges = JSON.parse(
-                localStorage.getItem('clglist') || '[]'
-            );
-            const updatedChallenges = existingChallenges.map((challenge) =>
+			const currentChallenges = getChallenges();
+            const updatedChallenges = currentChallenges.map((challenge) =>
                 challenge.id === updatedChallenge.id
                     ? updatedChallenge
                     : challenge
@@ -111,10 +107,8 @@ const challengeSlice = createSlice({
             }
 
             // 로컬 스토리지 업데이트 하기
-            const existingChallenges = JSON.parse(
-                localStorage.getItem('clglist') || '[]'
-            );
-            const updatedChallenges = existingChallenges.filter(
+			const currentChallenges = getChallenges();
+            const updatedChallenges = currentChallenges.filter(
                 (challenge) => challenge.id !== action.payload
             );
             localStorage.setItem(
@@ -126,6 +120,7 @@ const challengeSlice = createSlice({
         // 챌린지 참여 액션
         joinChallenge: (state, action) => {
             const challengeId = action.payload;
+			const joinDate = new Date().toISOString().split('T')[0] // 현재 날짜
 
             // redux 스토어의 list 업데이트
             state.list = state.list.map((challenge) => {
@@ -134,16 +129,15 @@ const challengeSlice = createSlice({
                         ...challenge,
                         clgJoin: true,
                         clgDoing: true,
+						joinDate: joinDate
                     };
                 }
                 return challenge;
             });
 
             // 로컬 스토리지 업데이트
-            const existingChallenges = JSON.parse(
-                localStorage.getItem('clglist') || '[]'
-            );
-            const updatedChallenge = existingChallenges.map((challenge) => {
+			const currentChallenges = getChallenges();
+            const updatedChallenge = currentChallenges.map((challenge) => {
                 if (challenge.id === challengeId) {
                     return {
                         ...challenge,
@@ -156,25 +150,6 @@ const challengeSlice = createSlice({
             localStorage.setItem(
                 'clglist',
                 JSON.stringify(updatedChallenge)
-            );
-        },
-
-        // 로그인 한 유저의 챌린지만 필터링
-        setMyPosts: (state, action) => {
-            const loggedInUser = JSON.parse(
-                localStorage.getItem('loggedInUser')
-            );
-            state.myPosts = state.list.filter(
-                (post) => post.authorId === loggedInUser.email
-            );
-        },
-
-        // 내가 참여한 챌린지 목록 필터링
-        getMyJoinedChallenge: (state, action) => {
-            const userId = action.payload;
-            state.joinedChallenges = state.list.filter(
-                (challenge) =>
-                    challenge.clgJoin && challenge.authorId !== userId
             );
         },
     },
