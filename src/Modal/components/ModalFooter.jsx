@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useModal from '../../common/hooks/useModal';
-import { joinChallenge, setSelectedChallenge } from '../../store/features/challengeSlice';
+import { joinChallenge } from '../../store/features/challengeSlice';
 import LoginRequiredModal from '../../common/components/LoginRequiredModal';
 import { useNavigate } from 'react-router-dom';
 

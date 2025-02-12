@@ -45,8 +45,6 @@ const challengeSlice = createSlice({
     initialState: {
         list: getInitialList(), // 초기 데이터,
         selectedChallenge: null,
-        myPosts: [], // 내가 작성한 글 목록
-		joinedChallenges: [], // 참여한 챌린지 목록
     },
     reducers: {
         // 선택된 챌린지 정보를 저장하는 액션
@@ -153,22 +151,6 @@ const challengeSlice = createSlice({
                 'clglist',
                 JSON.stringify(updatedChallenge)
             );
-        },
-
-        // 로그인 한 유저의 챌린지만 필터링
-        setMyPosts: (state, action) => {
-            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-			const currentChallenges = getChallenges();
-
-            state.myPosts = currentChallenges.filter( (post) => post.authorId === loggedInUser);
-        },
-
-        // 내가 참여한 챌린지 목록 필터링
-        getMyJoinedChallenge: (state, action) => {
-            const userId = action.payload;
-			const currentChallenges = getChallenges();
-
-            state.joinedChallenges = currentChallenges.filter((challenge) => challenge.clgJoin && challenge.authorId !== userId);
         },
     },
 });
