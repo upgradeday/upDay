@@ -1,10 +1,10 @@
 import React from 'react';
 import MainChallenge from './MainChallenge';
 
-const OngoingChallenges = ({ challenges }) => {
+const OngoingChallenges = ({ challenges, isLoggedIn }) => {
     return (
-        <div> {/* className 속성 제거 */}
-            <MainChallenge challenges={challenges} />
+        <div>
+            <MainChallenge challenges={challenges} isLoggedIn={isLoggedIn} />
         </div>
     );
 };
