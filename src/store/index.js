@@ -7,6 +7,6 @@ export const store = configureStore({
     reducer: {
         user: userReducer,
         challenge: challengeReducer,
-        myChallengeList: userChallengeReducer,
+        myClgList: userChallengeReducer,
     },
 });
