@@ -25,6 +25,9 @@ function App() {
                 <Route path='/main' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/challengelist' element={<ChallengeList />}>
+					{/* 카테고리 라우트 */}
+					<Route path='category/:category' element={null} />
+
                     {/* 글 생성 */}
                     <Route path='create' element={<PostDetailModal />} />
 

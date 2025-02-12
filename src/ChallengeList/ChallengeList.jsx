@@ -4,11 +4,14 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 const ChallengeList = () => {
 
+	// 글 생성하는 모달로 가게 하기 위해 호출
 	const navigate = useNavigate();
 
+	// 클릭시 글 생성하는 모달로 이동하는 로직
 	const handleCreateClick = () => {
 		navigate('create');
 	}
+
     return (
         <>
             <ChallengeListLayout />
