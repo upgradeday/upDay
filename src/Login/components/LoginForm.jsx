@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import useLogin from '../hooks/UseLogin';
 import pic3 from '../img/kakao_login_large_wide 1.svg';
+import pic4 from '../img/kakao_login_large_wide 2.svg';
 
 const LoginForm = () => {
     const { email, setEmail, password, setPassword, error, handleSubmit } =
@@ -9,7 +10,7 @@ const LoginForm = () => {
     return (
         <div className='flex items-center flex-col text-center'>
             <div
-                className='text-xs mt-[28px] mb-[20px]
+                className='text-base mt-[28px] mb-[20px]
                 md:text-lg md:mt-[3rem] md:mb-[2.5rem]'
             >
                 로그인 방법을 선택하세요
@@ -21,7 +22,7 @@ const LoginForm = () => {
                 <input
                     type='email'
                     placeholder='이메일'
-                    className='border border-gray-300 
+                    className='input-field w-[18rem] h-[2.8rem] mb-3 pl-3
                     md:mb-4 md:pl-6 md:w-80 md:h-12 md:rounded-xl'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -29,26 +30,36 @@ const LoginForm = () => {
                 <input
                     type='password'
                     placeholder='비밀번호'
-                    className='border border-gray-300 w-[15rem] rounded-lg
+                    className='input-field w-[18rem] h-[2.8rem] mb-3 pl-3
                     md:mb-4 md:pl-6 md:w-80 md:h-12 md:rounded-xl'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                     type='submit'
-                    className='w-[20rem] px-[136.5px] py-3 mt-[2.5rem] mb-[2.1258rem] rounded-xl  bg-neutral-800 text-neutral-100'
+                    className='btn-black w-[18rem] h-[2.8rem] rounded-lg mt-[3rem]
+                    md:w-[20rem] md:h-[3rem] md:px-[136.5px] md:py-3  md:rounded-xl '
                 >
                     로그인
                 </button>
             </form>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            <div className='w-full flex items-center text-center text-gray-700 text-xs font-medium min-w-0'>
-                <span className='w-[7.8125rem] border-b border-neutral-800 '></span>
-                <span className='w-[22px] mx-6'>또는</span>
-                <span className='w-[7.8125rem] border-b border-neutral-800'></span>
+            {error && <div className='text-red-400'>{error}</div>}
+            <div className='w-full max-w-[288px] pt-[1.5rem] pb-[1.5rem] md:max-w-none flex items-center justify-center text-gray-700 text-xs font-medium'>
+                <span className='flex-1 border-b border-neutral-800'></span>
+                <span className='mx-6 leading-none'>또는</span>
+                <span className='flex-1 border-b border-neutral-800'></span>
             </div>
-            <img src={pic3} alt='카카오 로그인' className='my-9' />
-            <Link to='/signup' className='text-neutral-700 text-lg'>
+
+            <img
+                src={pic3}
+                alt='카카오 로그인'
+                className='hidden md:block mb:my-9'
+            />
+            <img src={pic4} alt='카카오 로그인' className='block md:hidden' />
+            <Link
+                to='/signup'
+                className='text-neutral-700 text-base mt-[1.2rem] md:text-lg'
+            >
                 회원가입하기
             </Link>
         </div>
