@@ -2,29 +2,69 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiFire, HiDocumentCheck, HiMiniTrophy } from 'react-icons/hi2';
 import { FaStar } from 'react-icons/fa6';
+import { getChallenges } from '../../utils/localStorage';
 
 export default function UserReport() {
+    // const dispatch = useDispatch();
+    // const challenges = getChallenges();
+    // const loggedInUser = localStorage.getItem('loggedInUser');
+    // const users = JSON.parse(localStorage.getItem('users'));
+    // const [isTestAccount, setIsTestAccount] = useState(true);
+
+    // // 테스트 계정 체크
+    // useEffect(() => {
+    //     if (users && users.length > 0 && users[0].email !== loggedInUser) {
+    //         setIsTestAccount(false);
+    //     }
+    // }, [loggedInUser, users]);
+
+    // // 챌린지 데이터가 변경될 때마다 새롭게 로컬스토리지에서 가져오기
+    // useEffect(() => {
+    //     const storedChallenges = getChallenges();
+    //     if (storedChallenges.length > 0) {
+    //         dispatch({ type: 'UPDATE_CHALLENGES', payload: storedChallenges });
+    //     }
+    // }, [challenges, dispatch]); // `challenges`가 변경될 때마다 실행
+
     const dispatch = useDispatch();
-    const challenges = useSelector((state) => state.myChallengeList.list);
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const users = JSON.parse(localStorage.getItem('users'));
+    const [challenges, setChallenges] = useState([]);
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [users, setUsers] = useState([]);
     const [isTestAccount, setIsTestAccount] = useState(true);
 
-    // 테스트 계정 체크
+    // localStorage 값 가져올 때 JSON 파싱 예외 처리
     useEffect(() => {
-        if (users && users.length > 0 && users[0].email !== loggedInUser) {
+        try {
+            const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            setLoggedInUser(storedUser);
+            setUsers(storedUsers);
+        } catch (error) {
+            console.error('Error parsing localStorage data:', error);
+            setLoggedInUser(null);
+            setUsers([]);
+        }
+    }, []);
+
+    // 테스트 계정 확인
+    useEffect(() => {
+        if (users.length > 0 && users[0].email !== loggedInUser?.email) {
             setIsTestAccount(false);
+        } else {
+            setIsTestAccount(true);
         }
     }, [loggedInUser, users]);
 
-    // 챌린지 데이터가 변경될 때마다 새롭게 로컬스토리지에서 가져오기
+    // 챌린지 데이터 상태 업데이트 최적화
     useEffect(() => {
-        const storedChallenges =
-            JSON.parse(localStorage.getItem('clglist')) || [];
+        const storedChallenges = getChallenges();
+        setChallenges(storedChallenges);
+
         if (storedChallenges.length > 0) {
             dispatch({ type: 'UPDATE_CHALLENGES', payload: storedChallenges });
         }
-    }, [challenges, dispatch]); // `challenges`가 변경될 때마다 실행
+    }, [dispatch]); // ⚠️ `challenges`를 의존성 배열에서 제거해 불필요한 리렌더링 방지
 
     // 내가 참여한 챌린지 목록
     const myChallenges = challenges.filter(({ clgJoin }) => clgJoin);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import useModal from '../../common/hooks/useModal';
 import { Helmet } from 'react-helmet';
 import MyPageNonLogin from './MyPageNonLogin';
@@ -6,6 +6,7 @@ import UserProfile from './UserProfileSection';
 import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
 import ModalForLogin from '../../common/ModalForLogin';
+import { getChallenges } from '../../utils/localStorage';
 
 const MyPageLayout = () => {
     const [loggedInUser, setLoggedInUser] = useState(null);
@@ -13,35 +14,39 @@ const MyPageLayout = () => {
     const [challenges, setChallenges] = useState([]);
     const [filteredChallenges, setFilteredChallenges] = useState([]);
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        if (!loggedInUser) {
-            openModal(); // 로그인되지 않으면 모달을 열기
+    const checkUserLogin = useCallback(() => {
+        const storedUser = localStorage.getItem('loggedInUser');
+        if (!storedUser) {
+            openModal();
         } else {
-            setLoggedInUser(loggedInUser);
+            try {
+                setLoggedInUser(JSON.parse(storedUser)); // ✅ JSON 파싱 추가 (안전성 ↑)
+            } catch (error) {
+                console.error('Error parsing loggedInUser:', error);
+                setLoggedInUser(storedUser);
+            }
         }
     }, [openModal]);
 
     useEffect(() => {
-        // localStorage에서 데이터를 불러와서 상태를 업데이트하는 함수
-        const updateChallenges = () => {
-            const storedClgList =
-                JSON.parse(localStorage.getItem('clglist')) || [];
-            setChallenges(storedClgList);
-            setFilteredChallenges(storedClgList); // 초기 상태로 전체 목록 표시
-        };
+        checkUserLogin();
+    }, [checkUserLogin]);
 
-        updateChallenges();
+    useEffect(() => {
+        // 초기 상태를 한 번에 처리
+        const storedClgList = getChallenges();
+        setChallenges(storedClgList);
+        setFilteredChallenges(storedClgList);
 
-        // localStorage 변경을 감지하여 상태 업데이트
+        // localStorage 변경 감지 이벤트 리스너 등록
         const storageEventListener = () => {
-            updateChallenges();
+            const updatedChallenges = getChallenges();
+            setChallenges(updatedChallenges);
+            setFilteredChallenges(updatedChallenges);
         };
 
-        // localStorage에 변화가 있을 때마다 감지
         window.addEventListener('storage', storageEventListener);
 
-        // Cleanup: 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             window.removeEventListener('storage', storageEventListener);
         };

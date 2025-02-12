@@ -1,47 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import UserChallengeSearch from './UserChallengeSearch';
 import UserChallengeList from './UserChallengeList';
 
 export default function UserChallengeSection({
     challenges,
-    setChallenges,
     filteredChallenges,
     setFilteredChallenges,
 }) {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const users = JSON.parse(localStorage.getItem('users'));
-
-    const [isTestAccount, setIsTestAccount] = useState(true);
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [users, setUsers] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState('전체');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchQuery, setSearchQuery] = useState(''); // 실제 검색어
 
-    // 테스트 계정 체크
+    // localStorage 값 가져올 때 JSON 파싱 예외 처리
     useEffect(() => {
-        if (users && users.length > 0 && users[0].email !== loggedInUser) {
-            setIsTestAccount(false);
+        try {
+            const storedUser = localStorage.getItem('loggedInUser');
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            setLoggedInUser(storedUser);
+            setUsers(storedUsers);
+        } catch (error) {
+            console.error('Error parsing localStorage data:', error);
+            setLoggedInUser(null);
+            setUsers([]);
         }
-    }, [loggedInUser, users]);
+    }, []);
 
-    // // 전체 챌린지 목록 가져오기
-    // useEffect(() => {
-    //     const storedClgList = JSON.parse(localStorage.getItem('clglist')) || [];
-    //     setChallenges(storedClgList);
-    //     setFilteredChallenges(storedClgList); // 초기 상태로 전체 목록 표시
-    // }, []);
+    // 테스트 계정 여부를 상태로 관리하지 않고 즉시 계산
+    const isTestAccount = useMemo(() => {
+        return users.length > 0 && users[0].email !== loggedInUser;
+    }, [users, loggedInUser]);
 
-    // 필터링 업데이트 (검색어 및 카테고리 변경 시)
-    useEffect(() => {
+    // 필터링된 챌린지 리스트를 `useMemo`로 최적화
+    const filteredList = useMemo(() => {
         let filtered = [...challenges];
 
-        // 카테고리
         if (categoryFilter !== '전체') {
             filtered = filtered.filter(
                 (challenge) => challenge.category === categoryFilter
             );
         }
 
-        // 검색어
         if (searchQuery.trim() !== '') {
             const lowerSearchTerm = searchQuery.toLowerCase();
             filtered = filtered.filter(
@@ -52,13 +53,17 @@ export default function UserChallengeSection({
             );
         }
 
-        // 필터링된 챌린지 리스트 업데이트
-        setFilteredChallenges(filtered);
+        return filtered;
     }, [challenges, categoryFilter, searchQuery]);
+
+    // 필터링된 리스트 상태 업데이트
+    useEffect(() => {
+        setFilteredChallenges(filteredList);
+    }, [filteredList, setFilteredChallenges]);
 
     // 검색 버튼 클릭 시 실행되는 함수
     const handleSearch = () => {
-        setSearchQuery(searchTerm); // 현재 입력된 검색어를 실제 검색어로 설정
+        setSearchQuery(searchTerm);
     };
 
     // 테스트 계정이 아닐 경우
