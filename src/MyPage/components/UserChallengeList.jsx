@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleClgState } from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
-export default function UserChallengeList() {
+export default function UserChallengeList({ filteredChallenges }) {
     const dispatch = useDispatch();
-    const challenges = useSelector((state) => state.myChallengeList.list);
-    const loggedInUser = localStorage.getItem('loggedInUser');
+    const myPosts = useSelector((state) => state.myClgList.myPosts);
+    const joinedChallenges =
+        useSelector((state) => state.myClgList.joinedChallenges) || [];
 
-    // 내가 참여한 챌린지 목록
-    const myChallenges = challenges.filter(({ clgJoin }) => clgJoin);
+    // 노출할 목록 선택
+    const challengesToDisplay =
+        (filteredChallenges?.length > 0
+            ? filteredChallenges
+            : joinedChallenges) || [];
 
-    // 챌린지 참여날짜 오래된 순으로 정렬
-    const sortedChallenges = [...myChallenges].sort(
+    // 참여날짜 오래된 순으로 정렬
+    const sortedChallenges = [...challengesToDisplay].sort(
         (a, b) => new Date(b.joinDate) - new Date(a.joinDate)
     );
 
@@ -45,11 +49,15 @@ export default function UserChallengeList() {
     const getClgDoneClass = (done) => (done ? 'done-on' : 'done-off');
 
     // 내 챌린지 여부 아이콘 표시
-    const isMyChallenge = (authorId) =>
-        loggedInUser === authorId ? 'opacity-100' : 'opacity-0';
+    const isMyChallenge = (authorId) => {
+        if (!Array.isArray(myPosts)) return 'opacity-0';
+        return myPosts.some((post) => post.authorId === authorId)
+            ? 'opacity-100'
+            : 'opacity-0';
+    };
 
     return (
-        <ul className='w-full h-[85%] text-sm overflow-scroll list-none'>
+        <ul className='w-full h-[490px] md:h-[570px] text-xs md:text-sm overflow-scroll list-none'>
             {sortedChallenges.length > 0 ? (
                 sortedChallenges.map(
                     (
@@ -58,17 +66,15 @@ export default function UserChallengeList() {
                     ) => (
                         <li
                             key={id}
-                            className='flex flex-1 gap-x-1.5 h-15 py-4 border-b border-neutral-300 items-center'
+                            className='flex flex-1 gap-x-1 md:gap-x-1.5 h-15 py-3 md:py-4 border-b border-neutral-300 items-center'
                         >
-                            <div className='flex flex-row justify-center w-[8%] text-xs text-neutral-500'>
+                            <div className='flex flex-row justify-center w-[8%] text-[10px] md:text-xs text-neutral-500'>
                                 {clgNum(index)}
                             </div>
                             <BsDot
                                 className={`${isMyChallenge(authorId)} text-2xl text-blue-500 ml-[-3%]`}
                             />
-                            <div
-                                className={`${getBadgeClass(category)} w-10 h-6`}
-                            >
+                            <div className={`${getBadgeClass(category)}`}>
                                 {category}
                             </div>
                             <div className='flex flex-1 gap-1 h-6 items-center overflow-hidden'>

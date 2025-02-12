@@ -9,20 +9,16 @@ const userChallengeSlice = createSlice({
     },
     reducers: {
         setMyPosts: (state, action) => {
-            const loggedInUser = JSON.parse(
-                localStorage.getItem('loggedInUser')
-            );
+            const loggedInUser = localStorage.getItem('loggedInUser');
             const currentChallenges = getChallenges();
             state.myPosts = currentChallenges.filter(
                 (post) => post.authorId === loggedInUser
             );
         },
         getMyJoinedChallenge: (state, action) => {
-            const userId = action.payload;
             const currentChallenges = getChallenges();
             state.joinedChallenges = currentChallenges.filter(
-                (challenge) =>
-                    challenge.clgJoin && challenge.authorId !== userId
+                (challenge) => challenge.clgJoin
             );
         },
         toggleClgState: (state, action) => {
@@ -50,16 +46,22 @@ const userChallengeSlice = createSlice({
 
             localStorage.setItem('clglist', JSON.stringify(updatedChallenges));
 
-            state.myPosts = updatedChallenges.filter(
-                (post) =>
-                    post.authorId ===
-                    JSON.parse(localStorage.getItem('loggedInUser'))
-            );
-            state.joinedChallenges = updatedChallenges.filter(
-                (challenge) =>
-                    challenge.clgJoin &&
-                    challenge.authorId !== action.payload.userId
-            );
+            // state.myPosts = updatedChallenges.filter(
+            //     (post) => post.authorId === localStorage.getItem('loggedInUser')
+            // );
+            // state.joinedChallenges = updatedChallenges.filter(
+            //     (challenge) => challenge.clgJoin === true
+            // );
+            return {
+                ...state,
+                myPosts: updatedChallenges.filter(
+                    (post) =>
+                        post.authorId === localStorage.getItem('loggedInUser')
+                ),
+                joinedChallenges: updatedChallenges.filter(
+                    (challenge) => challenge.clgJoin
+                ),
+            };
         },
     },
 });

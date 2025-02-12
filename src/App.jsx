@@ -16,17 +16,15 @@ import NotFound from './NotFound/NotFound'; // 404 NotFound 페이지 추가
 
 function App() {
     return (
-
-        <div className='h-screen max-h-[969px] flex flex-col justify-between'>
-
+        <div className='min-w-[390px] w-screen h-screen max-h-[969px] flex flex-col justify-between'>
             <Header />
             <Routes>
                 <Route path='/' element={<Intro />} />
                 <Route path='/main' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/challengelist' element={<ChallengeList />}>
-					{/* 카테고리 라우트 */}
-					<Route path='category/:category' element={null} />
+                    {/* 카테고리 라우트 */}
+                    <Route path='category/:category' element={null} />
 
                     {/* 글 생성 */}
                     <Route path='create' element={<PostDetailModal />} />

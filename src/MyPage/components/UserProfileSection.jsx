@@ -175,10 +175,10 @@ const UserProfile = () => {
     };
     return (
         <div className='flex flex-col gap-2'>
-            <h1 className='text-2xl font-semibold'>내 프로필</h1>
-            <div className='card flex flex-col gap-3 p-[36px]'>
+            <h1 className='text-xl md:text-2xl font-semibold'>내 프로필</h1>
+            <div className='card flex flex-col gap-3 md:gap-6 p-[24px] md:p-[36px]'>
                 <div className='flex flex-row items-center'>
-                    <div className='inline-block w-[35%] max-w-[200px] aspect-square mr-[10%]'>
+                    <div className='inline-block w-[42%] max-w-[180px] md:w-[50%] md:max-w-[200px] aspect-square mr-[10%]'>
                         {loggedInUser.profileImage ? (
                             <img
                                 alt='프로필 이미지'
@@ -195,27 +195,27 @@ const UserProfile = () => {
                     </div>
                     <div className='flex flex-col h-[200px] justify-evenly'>
                         <div className='flex flex-col gap-2'>
-                            <p className='text-2xl font-semibold'>
+                            <p className='text-xl md:text-2xl font-semibold'>
                                 {loggedInUser.nickname || '닉네임 없음'}
                             </p>
-                            <p className='text-sm font-normal text-neutral-500'>
+                            <p className='text-xs md:text-sm font-normal text-neutral-500'>
                                 {loggedInUser.email || '이메일 없음'}
                             </p>
                         </div>
                         <div className='flex flex-col gap-2'>
-                            <p className='text-sm font-semibold'>
+                            <p className='text-xs md:text-sm font-semibold'>
                                 <span className='text-blue-500'>
                                     {daysSinceSignup}
                                 </span>
                                 일 째 업데이 중
                             </p>
-                            <p className='text-sm font-normal text-neutral-500'>
+                            <p className='text-xs md:text-sm font-normal text-neutral-500'>
                                 {loggedInUser.signupDate || '가입일 정보 없음'}
                             </p>
                         </div>
                     </div>
                 </div>
-                <p className='text-sm h-[100px]'>
+                <p className='text-xs md:text-sm h-[62px] md:h-[100px] overflow-hidden text-ellipsis whitespace-wrap'>
                     {loggedInUser.about ||
                         '아직 소개글을 작성하지 않았습니다. 프로필을 업데이트해보세요!'}
                 </p>
