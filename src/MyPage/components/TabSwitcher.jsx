@@ -3,12 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PersonalInfo from './PersonalInfoSection'; // PersonalInfo 컴포넌트 임포트
 import UserChallenge from './UserChallengeSection'; // MyChallenge 컴포넌트 임포트
 
-export default function TabSwitcher({
-    challenges,
-    setChallenges,
-    filteredChallenges,
-    setFilteredChallenges,
-}) {
+export default function TabSwitcher() {
     const loggedInUser = localStorage.getItem('loggedInUser');
     const users = JSON.parse(localStorage.getItem('users'));
 
@@ -32,7 +27,7 @@ export default function TabSwitcher({
     }, [isTestAccount]);
 
     return (
-        <section className='w-[48%]'>
+        <section className='w-full md:w-[48%]'>
             <div className='flex gap-2'>
                 <button
                     className={`tap-onclick ${activeTab === 1 ? 'tap-onclick' : 'tap-default'}`}
@@ -51,10 +46,8 @@ export default function TabSwitcher({
             {/* 활성화된 탭에 맞는 컴포넌트 렌더링 */}
             {activeTab === 1 && (
                 <UserChallenge
-                    challenges={challenges}
-                    setChallenges={setChallenges}
-                    filteredChallenges={filteredChallenges}
-                    setFilteredChallenges={setFilteredChallenges}
+                // challenges={challenges}
+                // setChallenges={setChallenges}
                 />
             )}
             {activeTab === 2 && <PersonalInfo />}

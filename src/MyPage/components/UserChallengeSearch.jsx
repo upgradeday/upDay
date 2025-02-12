@@ -51,18 +51,18 @@ export default function UserChallengeSearch({
                     </button>
                 </div>
             </div>
-            <div className='flex gap-2 justify-end mt-3 pb-3 border-b border-neutral-300 '>
+            <div className='flex gap-2 justify-end mt-2.5 pb-2.5 border-b border-neutral-300 '>
                 <div className='flex items-center'>
                     <BsDot className='text-blue-500 text-sm' />
-                    <p className='text-xs'>내가 만든</p>
+                    <p className='text-[10px] md:text-xs'>내가 만든</p>
                 </div>
                 <div className='flex gap-0.5 items-center'>
                     <HiFire className='text-orange-400 text-sm' />
-                    <p className='text-xs'>진행 중</p>
+                    <p className='text-[10px] md:text-xs'>진행 중</p>
                 </div>
                 <div className='flex gap-0.5 items-center'>
                     <HiDocumentCheck className='text-green-400 text-sm' />
-                    <p className='text-xs'>완료</p>
+                    <p className='text-[10px] md:text-xs'>완료</p>
                 </div>
             </div>
         </>

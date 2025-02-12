@@ -6,13 +6,11 @@ import UserProfile from './UserProfileSection';
 import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
 import ModalForLogin from '../../common/ModalForLogin';
-import { getChallenges } from '../../utils/localStorage';
 
 const MyPageLayout = () => {
     const [loggedInUser, setLoggedInUser] = useState(null);
     const { isModalOpen, openModal, closeModal } = useModal();
-    const [challenges, setChallenges] = useState([]);
-    const [filteredChallenges, setFilteredChallenges] = useState([]);
+    // const [challenges, setChallenges] = useState([]);
 
     const checkUserLogin = useCallback(() => {
         const storedUser = localStorage.getItem('loggedInUser');
@@ -20,7 +18,7 @@ const MyPageLayout = () => {
             openModal();
         } else {
             try {
-                setLoggedInUser(JSON.parse(storedUser)); // ✅ JSON 파싱 추가 (안전성 ↑)
+                setLoggedInUser(storedUser);
             } catch (error) {
                 console.error('Error parsing loggedInUser:', error);
                 setLoggedInUser(storedUser);
@@ -31,26 +29,6 @@ const MyPageLayout = () => {
     useEffect(() => {
         checkUserLogin();
     }, [checkUserLogin]);
-
-    useEffect(() => {
-        // 초기 상태를 한 번에 처리
-        const storedClgList = getChallenges();
-        setChallenges(storedClgList);
-        setFilteredChallenges(storedClgList);
-
-        // localStorage 변경 감지 이벤트 리스너 등록
-        const storageEventListener = () => {
-            const updatedChallenges = getChallenges();
-            setChallenges(updatedChallenges);
-            setFilteredChallenges(updatedChallenges);
-        };
-
-        window.addEventListener('storage', storageEventListener);
-
-        return () => {
-            window.removeEventListener('storage', storageEventListener);
-        };
-    }, []);
 
     return (
         <main className='w-[90%] md:w-[80%] md:max-w-[1344px] mx-auto flex flex-col md:flex-row gap-4 justify-between'>
@@ -65,12 +43,7 @@ const MyPageLayout = () => {
                         <UserProfile />
                         <UserReport />
                     </section>
-                    <TabSwitcher
-                        challenges={challenges}
-                        setChallenges={setChallenges}
-                        filteredChallenges={filteredChallenges}
-                        setFilteredChallenges={setFilteredChallenges}
-                    />
+                    <TabSwitcher />
                 </>
             )}
             <ModalForLogin
