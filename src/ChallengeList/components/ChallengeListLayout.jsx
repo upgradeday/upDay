@@ -10,13 +10,16 @@ const ChallengeListLayout = () => {
 
 	// 읽어온 파라미터 상태 관리
 	const [selectedCategory, setSelectedCategory] = useState(category || '전체');
+
+	// 검색 결과 상태 추가
+	const [searchResults, setSearchResults] = useState(null)
 	
     return (
     <main className="w-[80%] max-w-[1344px] mx-auto bg-green-300">
 		{/* 상태 변경 함수가 필요하기에 setSelectedCategory 를 props로 전달 */}
-        <ChallengeListSearchSection setSelectedCategory={setSelectedCategory} />
+        <ChallengeListSearchSection setSelectedCategory={setSelectedCategory} setSearchResults={setSearchResults} />
 		{/* 현재 값만 필요하기에 selectedCategory 을 props로 전달 */}
-        <ChallengeListSection selectedCategory={selectedCategory} />
+        <ChallengeListSection selectedCategory={selectedCategory} searchResults={searchResults} />
     </main>
     );
 };
