@@ -1,16 +1,18 @@
-import React from 'react';
-
-// import MyPage from '../MyPage/components/MyProfileSection';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 
 
 const Header = () => {
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    }
+
     const [loggedInUser, setLoggedInUser] = useState(
         localStorage.getItem('loggedInUser')
     );
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,10 +23,6 @@ const Header = () => {
         window.addEventListener('storage', handleStorageChange);
         return () => window.removeEventListener('storage', handleStorageChange);
     }, []);
-
-    useEffect(() => {
-        setLoggedInUser(localStorage.getItem('loggedInUser'));
-    }, [loggedInUser]); 
 
     const handleLogout = () => {
         localStorage.removeItem('loggedInUser');
@@ -37,32 +35,32 @@ const Header = () => {
             <Link to='main' className='h-10 bagel-fat-one-regular text-3xl'>
                 UpDay
             </Link>
-            <nav>
-                <ul className='flex space-x-20'>
+            
+           <div className='md:hidden flex flex-col cursor-pointer'>
+            <div className='w-6 h-1 bg-black mb-1'></div>
+            <div className='w-6 h-1 bg-black mb-1'></div>
+            <div className='w-6 h-1 bg-black'></div>
+           </div>
+            <nav
+            className={`${
+                isMenuOpen ? 'block' : 'hidden'}
+                absolute top-full w-full bg-blue-100 md:static md:block md:w-auto`}> 
+                <ul className='flex space-x-20 md:flex-row md:space-x-20'>
                     <li>
-                        {/* <a href='/mypage' className='hover:underline cursor-pointer'>
-                            챌린지 둘러보기
-                        </a> */}
-                        <Link to='/challengelist' className='hover:underline'>
+                        <Link to='/challengelist' className='hover:underline block py-2 md:py-0'>
                             챌린지 둘러보기
                         </Link>
                     </li>
                     <li>
-                        {/* <a href='/about' className='hover:underline'>
-                            마이페이지
-                        </a> */}
-                        <Link to='/mypage' className='hover:underline'>
+                        <Link to='/mypage' className='hover:underline block py-2 md:py-0'>
                             마이페이지
                         </Link>
                     </li>
                     <li>
-                        {/* <a href='/contact' className='hover:underline'>
-                            로그인
-                        </a> */}
                         {loggedInUser ? (
-                            <button onClick={handleLogout}>로그아웃</button>
+                            <button onClick={handleLogout} className='block py-2 md:py-0'>로그아웃</button>
                         ) : (
-                            <Link to='/login' className='hover:underline'>
+                            <Link to='/login' className='hover:underline block py-2 md:py-0'>
                                 로그인
                             </Link>
                         )}

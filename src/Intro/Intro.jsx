@@ -122,12 +122,18 @@ const Intro = () => {
                     </p>
                 </div>
             </div>
-            <div className='mb-4 flex item-start'>
-                <img src={Chat} alt='Chat' />
-                <div className='relative bg-gray-100 rounded-xl p-4 text-sm text-gray-600 min-h-[50px]'>
-                    👥 같은 목표를 가진 사람들과 응원하며 성장
-                    <div className='absolute left-4 bottom-[-8px] border-[8px]'></div>
-                </div>
+            <div className='flex items-center fles-col shrink-0 text-center w-[48%] min-w-[30rem] h-[46rem] rounded-3xl z-10 relative'>
+                    <div className='relative inline-block mt-[3.5rem]'>
+                        <img
+                        src={Chat}
+                        alt='말풍선'
+                        className='w-full h-auto'
+                        />
+                    <div className='absolute top-1/2 left-1/2 text-2xl transform -translate-y-1/2 whitespace-nowrap font-medium text-neutral-100'>
+                        {'👥 같은 목표를 가진 사람들과 응원하며 성장'}
+                    </div>
+                    </div>
+
             </div>
 
             <p>🎯 매일 작은 실천으로 꾸준한 습관 형성</p>
