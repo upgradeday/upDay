@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
-import { differenceInDays } from 'date-fns';
+// import { differenceInDays } from 'date-fns';
 
 // 비밀번호 유효성 검사 함수
 const validatePassword = (password) => {
@@ -32,6 +32,8 @@ export default function PersonalInfo() {
     };
 
     const loggedInUserEmail = localStorage.getItem('loggedInUser');
+    const userInfoChang = localStorage.getItem('clglist'); // 값 가져옴
+
     const [users, setUsers] = useState(() => {
         try {
             return JSON.parse(localStorage.getItem('users')) || [];
@@ -66,7 +68,7 @@ export default function PersonalInfo() {
     };
     // 새로운 상태 변수
     const [passwordError, setPasswordError] = useState('');
-    const [daysSinceSignup, setDaysSinceSignup] = useState(0);
+    // const [daysSinceSignup, setDaysSinceSignup] = useState(0);
     const [nicknameError, setNicknameError] = useState('');
     const [editMode, setEditMode] = useState(false);
 
@@ -89,12 +91,12 @@ export default function PersonalInfo() {
                 return updatedInfo;
             });
 
-            if (loggedInUser.signupDate) {
-                const signupDate = new Date(loggedInUser.signupDate);
-                const today = new Date();
-                const days = differenceInDays(today, signupDate);
-                setDaysSinceSignup(days);
-            }
+            // if (loggedInUser.signupDate) {
+            //     const signupDate = new Date(loggedInUser.signupDate);
+            //     const today = new Date();
+            //     const days = differenceInDays(today, signupDate);
+            //     setDaysSinceSignup(days);
+            // }
         }
     }, [loggedInUser]);
 
@@ -169,6 +171,10 @@ export default function PersonalInfo() {
             return;
         }
 
+
+        const currentUserId = loggedInUserEmail;
+        const newNickname = userInfo.nickname;
+
         const updatedUser = {
             email: userInfo.email,
             password: userInfo.password || loggedInUser.password, // 기존 비밀번호 유지
@@ -182,6 +188,34 @@ export default function PersonalInfo() {
         );
         localStorage.setItem('users', JSON.stringify(updatedUsers));
         setUsers(updatedUsers);
+        
+        let clglist = localStorage.getItem('clglist');
+
+if (clglist) {
+    try {
+        clglist = JSON.parse(clglist);
+
+        if (Array.isArray(clglist)) {
+            clglist = clglist.map(item => {
+                if (item.authorId === currentUserId) {
+                    return {
+                        ...item,
+                        nickname: newNickname
+                    }
+                }
+                return item;
+            })
+            localStorage.setItem('clglist', JSON.stringify(clglist));
+      console.log("닉네임이 성공적으로 변경되었습니다.");
+    } else {
+      console.error("clglist는 배열 형식이어야 합니다.");
+    }
+  } catch (error) {
+    console.error("clglist를 파싱하는 중 오류가 발생했습니다:", error);
+  }
+} else {
+  console.log("clglist 데이터가 존재하지 않습니다.");
+}
 
         handleRefresh();
         setEditMode(false); // 수정 완료 후 수정 모드 비활성화
@@ -233,7 +267,7 @@ export default function PersonalInfo() {
                                 <label
                                     htmlFor='upload-photo'
                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition 
-                                        ${editMode ? 'bg-blue-400 hover:bg-blue-500 cursor-pointer' : 'bg-neutral-600 cursor-not-allowed'} text-white`}
+                                        ${editMode ? 'bg-blue-400 hover:bg-blue-500 cursor-pointer' : ''} text-white`}
                                 >
                                     사진 올리기
                                 </label>
@@ -247,7 +281,7 @@ export default function PersonalInfo() {
                                 <label
                                     htmlFor='delete-photo'
                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition
-                                        ${editMode ? 'bg-neutral-600 hover:bg-red-400 cursor-pointer' : 'bg-neutral-600 cursor-not-allowed'} text-white`}
+                                        ${editMode ? 'bg-neutral-600 hover:bg-red-400 cursor-pointer' : ''} text-white`}
                                 >
                                     삭제하기
                                 </label>
@@ -321,7 +355,8 @@ export default function PersonalInfo() {
                                 />
                             </div>
                         </div>
-                        <div className='sm:col-span-3'>
+                        {editMode && (
+                            <div className='sm:col-span-3'>
                             <label
                                 htmlFor='password'
                                 className='block text-sm/6 font-medium'
@@ -336,7 +371,7 @@ export default function PersonalInfo() {
                                     value={userInfo.password}
                                     onChange={handleChange}
                                     className='input-field block w-full rounded-xl bg-neutral-100 px-3 py-1.5 text-base border border-neutral-300 focus:outline-blue-500'
-                                    disabled={!editMode} // 수정 모드에 따라 활성화/비활성화
+                                    disabled={!editMode}
                                 />
                                 {passwordError && (
                                     <p className='text-red-500 text-sm'>
@@ -345,12 +380,13 @@ export default function PersonalInfo() {
                                 )}
                             </div>
                         </div>
-                        <div className='sm:col-span-3'>
-                            <label
+                        )}
+                        {editMode && (
+                            <div className='sm:col-span-3'>
+                                <label
                                 htmlFor='confirmPassword'
-                                className='block text-sm/6 font-medium'
-                            >
-                                변경할 비밀번호 확인
+                                className='block texy-sm/6 font-medium'>
+                                    변경할 비밀번호 확인
                             </label>
                             <div className='mt-2'>
                                 <input
@@ -364,6 +400,7 @@ export default function PersonalInfo() {
                                 />
                             </div>
                         </div>
+                        )}
                     </div>
                 </div>
 

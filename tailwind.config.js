@@ -67,7 +67,6 @@ module.exports = {
                     800: '#363636',
                     900: '#121212',
                 },
-                spechbubble: '#f0f0f0',
             },
             keyframes: {
                 fadeInUp: {
