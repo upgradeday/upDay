@@ -1,6 +1,6 @@
 import useSignup from '../hooks/UseSignup';
 
-const ProfileForm = () => {
+const SignupForm = () => {
     const {
         email,
         password,
@@ -28,7 +28,8 @@ const ProfileForm = () => {
                             placeholder='ㅇㅇㅇ@example.com'
                             value={email}
                             onChange={(e) => setEmailState(e.target.value)}
-                            className='border border-gray-300 mb-4 pl-6 w-80 h-12 rounded-xl'
+                            className='input-field rounded-xl w-[18rem] h-[2.8rem] mb-3 pl-3
+                            md:w-80 md:h-12 md:mb-4 '
                         />
                         {emailError && (
                             <div className='text-red-400'>{emailError}</div>
@@ -45,7 +46,8 @@ const ProfileForm = () => {
                             placeholder='8자 이상 특수문자 포함'
                             value={password}
                             onChange={(e) => setPasswordState(e.target.value)}
-                            className='border border-gray-300 mb-4 pl-6 w-80 h-12 rounded-xl'
+                            className='input-field rounded-xl w-[18rem] h-[2.8rem] mb-3 pl-3
+                            md:w-80 md:h-12 md:mb-4 '
                         />
                         {pwError && (
                             <div className='text-red-400'>{pwError}</div>
@@ -53,7 +55,7 @@ const ProfileForm = () => {
                     </div>
 
                     <div className='flex flex-col items-start gap-2 mb-4'>
-                        <label htmlFor='passwordConfirm' className='text-left'>
+                        <label htmlFor='passwordConfirm' className=' text-left'>
                             비밀번호 확인
                         </label>
                         <input
@@ -63,7 +65,8 @@ const ProfileForm = () => {
                             onChange={(e) =>
                                 setPasswordConfirmState(e.target.value)
                             }
-                            className='border border-gray-300 mb-4 pl-6 w-80 h-12 rounded-xl'
+                            className='input-field rounded-xl w-[18rem] h-[2.8rem] mb-3 pl-3
+                            md:w-80 md:h-12 md:mb-4 '
                         />
                         {pwConfirmError && (
                             <div className='text-red-400'>{pwConfirmError}</div>
@@ -72,7 +75,8 @@ const ProfileForm = () => {
 
                     <button
                         type='submit'
-                        className='w-[20rem] py-3 mt-[2.5rem] mb-[2.1258rem] rounded-xl  bg-neutral-800 text-neutral-100'
+                        className='btn-black w-[18rem] h-[2.8rem] rounded-lg mt-[2.5rem]
+                        md:w-[20rem] md:mt-[2.5rem] md:mb-[2.1258rem] md:rounded-xl'
                     >
                         회원가입
                     </button>
@@ -82,4 +86,4 @@ const ProfileForm = () => {
     );
 };
 
-export default ProfileForm;
+export default SignupForm;

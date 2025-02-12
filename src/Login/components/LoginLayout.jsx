@@ -1,7 +1,7 @@
 import pic2 from '../img/Group 72.svg';
 import pic3 from '../img/Group 111.svg';
 import pic4 from '../img/Group 112.svg';
-import pic5 from '../img/Frame 647.svg';
+import pic5 from '../img/Group 1.svg';
 
 const LoginLayout = ({ children, title }) => {
     return (
@@ -13,10 +13,10 @@ const LoginLayout = ({ children, title }) => {
             />
 
             <div
-                className='flex items-center flex-col shrink-0 text-center w-[48%] min-w-[30rem]  h-[46rem] rounded-3xl z-10 relative bg-transparent 
-                md:bg-neutral-100 '
+                className='flex items-center flex-col shrink-0 text-center rounded-3xl z-10 relative bg-transparent 
+                md:bg-neutral-100 md:w-[48%] md:min-w-[30rem] md:h-[46rem] '
             >
-                <div className='relative inline-block mt-[3.5rem]'>
+                <div className='relative inline-block md:mt-[3.5rem]'>
                     <img
                         src={pic2}
                         alt='타이틀 배경'

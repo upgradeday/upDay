@@ -1,5 +1,6 @@
 import useProfileSetup from '../hooks/UseProfileSetup';
 import pic1 from '../img/Group 193.svg';
+import pic2 from '../img/Group 144.svg';
 
 const ProfileForm = () => {
     const {
@@ -21,13 +22,15 @@ const ProfileForm = () => {
             >
                 <label
                     htmlFor='file-upload'
-                    className='block w-[20rem] h-[20rem] mt-[3rem] bg-neutral-300 rounded-lg flex items-center justify-center cursor-pointer'
+                    className='flex items-center justify-center cursor-pointer rounded-lg block bg-neutral-300 w-[18rem] h-[18rem] mt-[2.5rem] 
+                    md:w-[20rem] md:h-[20rem] md:mt-[3rem]'
                 >
                     {profileImage ? (
                         <img
                             src={profileImage}
                             alt='프로필 미리보기'
-                            className='w-[20rem] h-[20rem] object-cover rounded-lg'
+                            className='w-[18rem] h-[18rem] object-cover rounded-lg
+                            md:w-[20rem] md:h-[20rem]'
                         />
                     ) : (
                         <span className='text-neutral-500'>이미지 업로드</span>
@@ -45,37 +48,49 @@ const ProfileForm = () => {
                     placeholder='닉네임'
                     value={nickname}
                     onChange={(e) => setNicknameState(e.target.value)}
-                    className='border border-gray-300 mb-4 pl-6 w-80 h-12 mt-[2rem] rounded-xl'
+                    className='input-field rounded-xl w-[18rem] h-[2.8rem] mb-3 mt-[1rem]
+                    md:w-80 md:h-12 md:mb-4 md:mb-3 md:pl-3 md:mt-[2rem]'
                 />
                 {error && <div className='text-red-400'>{error}</div>}
                 <button
                     type='submit'
-                    className='w-[20rem] py-3 mt-[2rem] mb-[2.1258rem] rounded-xl  bg-neutral-800 text-neutral-100'
+                    className='btn-black w-[18rem] h-[2.8rem] rounded-lg mt-[2rem]
+                    md:w-[20rem] md:py-3 md:mt-[2.5rem] md:mb-[2.1258rem] md:rounded-xl'
                 >
                     설정 완료
                 </button>
             </form>
             {isModalOpen && (
                 <div className='fixed inset-0 flex items-center justify-center bg-neutral-900 bg-opacity-50 backdrop-blur-sm'>
-                 
-                    <div className='relative w-[615px] h-[640px] flex items-center justify-center'>
+                    <div
+                        className='relative  flex items-center justify-center w-[360px] h-[411px]
+                        md:w-[615px] md:h-[640px]'
+                    >
                         <img
                             src={pic1}
                             alt='회원가입 완료'
-                            className='absolute inset-0 w-full h-full object-cover'
+                            className='absolute inset-0 w-full h-full object-cover hidden md:block'
+                        />
+                        <img
+                            src={pic2}
+                            alt='회원가입 완료'
+                            className='absolute inset-0 object-cover block md:hidden'
                         />
 
                         <div className='absolute top-[12%] left-1/2 transform -translate-x-1/2 text-center text-black'>
-                            <div className='text-3xl font-bold mb-4 whitespace-nowrap '>
+                            <div
+                                className='font-bold whitespace-nowrap text-2xl
+                                md:mb-4 md:text-4xl '
+                            >
                                 회원 가입이 완료되었습니다 !
                             </div>
-                            <div className='text-lg leading-relaxed mt-[3rem] leading-[2.2]'>
+                            <div className='leading-relaxed mt-[2rem]  leading-[2.2] md:text-xl md:mt-[3rem] '>
                                 이제 업데이와 함께 챌린지 도전해보세요! <br />
                                 원하던 목표를 이룰 수 있게 도와드려요 ❤ <br />
                             </div>
                             <button
                                 onClick={closeModal}
-                                className='mt-[4rem] bg-blue-300 text-white px-6 py-2 rounded-xl '
+                                className='text-basic bg-blue-300 text-white rounded-lg mt-[3rem] px-4 py-1 md:mt-[4rem] md:px-6 md:py-2 md:rounded-xl md:text-xl '
                             >
                                 로그인 하러가기
                             </button>
