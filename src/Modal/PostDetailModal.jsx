@@ -93,7 +93,8 @@ const PostDetailModal = () => {
 				postDate: new Date().toISOString().slice(0, 19),
 				clgJoin: true,  // 추가: 처음에는 참여한 상태
     			clgDoing: true, // 추가: 처음에는 진행한 상태
-    			clgDone: false   // 추가: 처음에는 완료하지 않은 상태
+    			clgDone: false,   // 추가: 처음에는 완료하지 않은 상태,
+				joinDate: new Date().toISOString().split('T')[0] // 작성자는 자동으로 참여
             };
             // 필수 입력 체크
             if (
@@ -195,6 +196,7 @@ const PostDetailModal = () => {
                     isMyPost={isMyPost}
                     onSubmit={handleSubmit}
 					onClose={handleClose}
+					challengeId={selectedChallenge?.id}
                 />
             </div>
         </div>
