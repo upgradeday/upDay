@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useModal from '../../common/hooks/useModal';
 import { Helmet } from 'react-helmet';
-import MypageNonLogin from './MypageNonLogin';
+import MyPageNonLogin from './MyPageNonLogin';
 import UserProfile from './UserProfileSection';
 import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
@@ -53,7 +53,7 @@ const MyPageLayout = () => {
                 <title>마이페이지 | UpDay, 나의 일상을 업그레이드</title>
             </Helmet>
             {!loggedInUser ? (
-                <MypageNonLogin />
+                <MyPageNonLogin />
             ) : (
                 <>
                     <section className='flex flex-col w-[48%] gap-6'>
