@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import useModal from '../../common/hooks/useModal';
 import { Helmet } from 'react-helmet';
-import MyPageNonLogin from './MypageNonLogin';
+import MyPageNonLogin from './MyPageNonLogin';
 import UserProfile from './UserProfileSection';
 import UserReport from './UserReportSection';
 import TabSwitcher from './TabSwitcher';
