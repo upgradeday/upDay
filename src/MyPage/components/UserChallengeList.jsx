@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleClgState } from '../../store/features/userChallengeSlice';
+import {
+    setMyPosts,
+    toggleClgState,
+} from '../../store/features/userChallengeSlice';
 import { BsDot } from 'react-icons/bs';
 import { HiFire, HiDocumentCheck } from 'react-icons/hi2';
 
@@ -9,6 +12,10 @@ export default function UserChallengeList({ filteredChallenges }) {
     const myPosts = useSelector((state) => state.myClgList.myPosts);
     const joinedChallenges =
         useSelector((state) => state.myClgList.joinedChallenges) || [];
+
+    useEffect(() => {
+        dispatch(setMyPosts());
+    }, [dispatch]);
 
     // 노출할 목록 선택
     const challengesToDisplay =
@@ -57,8 +64,12 @@ export default function UserChallengeList({ filteredChallenges }) {
     };
 
     return (
-        <ul className='w-full h-[490px] md:h-[570px] text-xs md:text-sm overflow-scroll list-none'>
-            {sortedChallenges.length > 0 ? (
+        <ul className='w-full h-[486px] md:h-[566px] text-xs md:text-sm overflow-scroll list-none'>
+            {filteredChallenges && filteredChallenges.length === 0 ? (
+                <li className='text-center text-gray-500 py-4'>
+                    검색 결과가 없습니다.
+                </li>
+            ) : sortedChallenges.length > 0 ? (
                 sortedChallenges.map(
                     (
                         { id, authorId, category, title, clgDoing, clgDone },
