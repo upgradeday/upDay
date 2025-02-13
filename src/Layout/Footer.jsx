@@ -1,8 +1,14 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+    const location = useLocation();
+    const hideFooterRoutes = ['/login', '/signup', '/profile'];
+    const isFooterHidden = hideFooterRoutes.includes(location.pathname);
+
     return (
-        <footer>
+
+        <footer className={`${isFooterHidden ? 'hidden md:block' : ''}`}>
             <div className='flex justify-between items-center w-[80%] max-w-[1344px] h-20 mx-auto mt-10'>
                 <p className='text-3xl font-bold bagel-fat-one-regular'>
                     UpDay
