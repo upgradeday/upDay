@@ -26,7 +26,8 @@ export default function UserChallengeSection() {
         if (joinedChallenges.length > 0) {
             setFilteredChallenges([...joinedChallenges]);
         }
-    }, [joinedChallenges]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // localStorage 값 가져올 때 예외 처리
     useEffect(() => {
@@ -46,7 +47,8 @@ export default function UserChallengeSection() {
     // 테스트 계정 여부 확인
     useEffect(() => {
         setIsTestAccount(users.length === 0 || loggedInUser === users[0].email);
-    }, [users, loggedInUser]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // 검색에 따른 목록 노출
     useEffect(() => {
@@ -83,6 +85,7 @@ export default function UserChallengeSection() {
 
         // 결과가 없으면 빈 배열을 설정하여 "검색 결과 없음"을 표시
         setFilteredChallenges(filtered.length > 0 ? filtered : []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         categoryFilter,
         searchTerm,

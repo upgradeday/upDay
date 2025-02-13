@@ -112,23 +112,23 @@ export default function UserChallengeSearch({
                     onClick={handleIsMyPost}
                 >
                     <BsDot
-                        className={`text-blue-500 text-sm ${isMyPost ? 'text-blue-100' : ''}`}
+                        className={`text-base ${isMyPost ? 'text-blue-100' : 'text-blue-500'}`}
                     />
                     <button
-                        className={`text-[10px] md:text-xs ${isMyPost ? 'text-neutral-100 font-bold' : ''}`}
+                        className={`text-[10px] md:text-xs ${isMyPost ? 'text-neutral-100 font-semibold' : ''}`}
                     >
                         내가 만든
                     </button>
                 </div>
                 <div
-                    className={`flex gap-1 p-1 pr-1.5 rounded-lg items-center text-sm ${isDoingClg ? 'bg-orange-400' : ''}`}
+                    className={`box-border border-[2px] flex gap-1 p-1 pr-1.5 rounded-lg items-center text-sm ${isDoingClg ? 'border-orange-200' : 'border-neutral-100'}`}
                     onClick={handleIsDoingClg}
                 >
                     <HiFire
-                        className={`text-orange-400 text-sm ${isDoingClg ? 'text-orange-100' : ''}`}
+                        className={`text-sm ${isDoingClg ? 'text-orange-400' : 'text-orange-400 '}`}
                     />
                     <button
-                        className={`text-[10px] md:text-xs ${isDoingClg ? 'text-neutral-100 font-bold' : ''}`}
+                        className={`text-[10px] md:text-xs ${isDoingClg ? 'text-neutral-900 font-semibold' : ''}`}
                     >
                         진행 중
                     </button>
@@ -138,10 +138,10 @@ export default function UserChallengeSearch({
                     onClick={handleIsDoneClg}
                 >
                     <HiDocumentCheck
-                        className={`text-green-400 text-sm ${isDoneClg ? 'text-green-100' : ''}`}
+                        className={`text-sm ${isDoneClg ? 'text-green-100' : 'text-green-400 '}`}
                     />
                     <button
-                        className={`text-[10px] md:text-xs ${isDoneClg ? 'text-neutral-100 font-bold' : ''}`}
+                        className={`text-[10px] md:text-xs ${isDoneClg ? 'text-neutral-100 font-semibold' : ''}`}
                     >
                         완료
                     </button>

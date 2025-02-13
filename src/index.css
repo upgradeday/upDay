@@ -37,7 +37,7 @@
     }
 
     .budge-meal {
-        @apply px-1 py-0.5 md:px-2 md:py-1 rounded-xl font-medium bg-green-200 text-center text-[10px] w-9 h-5 md:text-xs md:w-10 md:h-6;
+        @apply px-1 py-0.5 md:px-2 md:py-1 rounded-xl font-medium bg-mint-200 text-center text-[10px] w-9 h-5 md:text-xs md:w-10 md:h-6;
     }
     .budge-study {
         @apply px-1 py-0.5 md:px-2 md:py-1 rounded-xl font-medium bg-yellow-200 text-center text-[10px] w-9 h-5 md:text-xs md:w-10 md:h-6;
