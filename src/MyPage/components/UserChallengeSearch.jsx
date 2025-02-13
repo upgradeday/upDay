@@ -106,27 +106,23 @@ export default function UserChallengeSearch({
                     </button>
                 </div>
             </div>
-            <div className='flex gap-2 justify-end py-3 md:py-4 border-b border-neutral-300'>
+            <div className='flex gap-2 justify-end py-2 md:py-4 border-b border-neutral-300'>
                 <div
-                    className={`flex gap-0.5 px-1 pl-0.5 pr-1.5 rounded-lg items-center text-sm ${isMyPost ? 'bg-blue-500' : ''}`}
+                    className={`h-7 flex gap-0.5 px-1 pl-0.5 pr-2 rounded-[10px] items-center text-sm ${isMyPost ? 'bg-blue-200' : ''}`}
                     onClick={handleIsMyPost}
                 >
-                    <BsDot
-                        className={`text-base ${isMyPost ? 'text-blue-100' : 'text-blue-500'}`}
-                    />
+                    <BsDot className='text-base text-blue-500' />
                     <button
-                        className={`text-[10px] md:text-xs ${isMyPost ? 'text-neutral-100 font-semibold' : ''}`}
+                        className={`text-[10px] md:text-xs ${isMyPost ? 'font-semibold' : ''}`}
                     >
                         내가 만든
                     </button>
                 </div>
                 <div
-                    className={`box-border border-[2px] flex gap-1 p-1 pr-1.5 rounded-lg items-center text-sm ${isDoingClg ? 'border-orange-200' : 'border-neutral-100'}`}
+                    className={`h-7 flex gap-1 p-1 pr-1.5 rounded-[10px] items-center text-sm ${isDoingClg ? 'bg-orange-100' : ''}`}
                     onClick={handleIsDoingClg}
                 >
-                    <HiFire
-                        className={`text-sm ${isDoingClg ? 'text-orange-400' : 'text-orange-400 '}`}
-                    />
+                    <HiFire className='text-sm text-orange-400' />
                     <button
                         className={`text-[10px] md:text-xs ${isDoingClg ? 'text-neutral-900 font-semibold' : ''}`}
                     >
@@ -134,14 +130,12 @@ export default function UserChallengeSearch({
                     </button>
                 </div>
                 <div
-                    className={`flex gap-1 p-1 pr-1.5 rounded-lg items-center text-sm ${isDoneClg ? 'bg-green-400' : ''}`}
+                    className={`h-7 flex gap-1 p-1 pr-1.5 rounded-[10px] items-center text-sm ${isDoneClg ? 'bg-green-100' : ''}`}
                     onClick={handleIsDoneClg}
                 >
-                    <HiDocumentCheck
-                        className={`text-sm ${isDoneClg ? 'text-green-100' : 'text-green-400 '}`}
-                    />
+                    <HiDocumentCheck className='text-sm text-green-400' />
                     <button
-                        className={`text-[10px] md:text-xs ${isDoneClg ? 'text-neutral-100 font-semibold' : ''}`}
+                        className={`text-[10px] md:text-xs ${isDoneClg ? 'font-semibold' : ''}`}
                     >
                         완료
                     </button>

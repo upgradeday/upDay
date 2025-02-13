@@ -97,7 +97,7 @@ export default function UserChallengeSection() {
 
     if (!isTestAccount) {
         return (
-            <div className='w-full h-[612px] md:h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 px-[24px] py-[32px] md:p-[36px]'>
+            <div className='w-full h-[637px] md:h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 px-[24px] py-[32px] md:p-[36px]'>
                 <UserChallengeSearch />
                 <p className='text-xs md:text-sm text-center text-gray-500 mt-4'>
                     테스트 계정이 아닌 경우, 해당 기능은 제한됩니다.
@@ -107,7 +107,7 @@ export default function UserChallengeSection() {
     }
 
     return (
-        <div className='w-full h-[612px] md:h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 px-[24px] py-[32px] md:p-[36px]'>
+        <div className='w-full h-[637px] md:h-[756px] rounded-r-3xl rounded-bl-3xl bg-neutral-100 px-[24px] py-[32px] md:p-[36px]'>
             <UserChallengeSearch
                 categoryFilter={categoryFilter}
                 setCategoryFilter={setCategoryFilter}
