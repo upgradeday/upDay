@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
-// import { differenceInDays } from 'date-fns';
+import {getChallenges} from '../../utils/localStorage';
+
 
 // 비밀번호 유효성 검사 함수
 const validatePassword = (password) => {
@@ -189,14 +190,14 @@ export default function PersonalInfo() {
         localStorage.setItem('users', JSON.stringify(updatedUsers));
         setUsers(updatedUsers);
         
-        let clglist = localStorage.getItem('clglist');
+        const currentChallenges = getChallenges();
 
-if (clglist) {
+if (currentChallenges) {
     try {
-        clglist = JSON.parse(clglist);
+        currentChallenges = JSON.parse(currentChallenges);
 
-        if (Array.isArray(clglist)) {
-            clglist = clglist.map(item => {
+        if (Array.isArray(currentChallenges)) {
+            currentChallenges = currentChallenges.map(item => {
                 if (item.authorId === currentUserId) {
                     return {
                         ...item,
@@ -205,7 +206,7 @@ if (clglist) {
                 }
                 return item;
             })
-            localStorage.setItem('clglist', JSON.stringify(clglist));
+            localStorage.setItem('clglist', JSON.stringify(currentChallenges));
       console.log("닉네임이 성공적으로 변경되었습니다.");
     } else {
       console.error("clglist는 배열 형식이어야 합니다.");
@@ -245,15 +246,17 @@ if (clglist) {
                             </label>
                             <div className='mt-2 flex items-center gap-x-3'>
                                 {userInfo.profileImage ? (
+                                    <div className='w-[10%] sm:2-[15%] md:w-[20%] lg:w-[24%] aspect-square h-20 aspect-square overflow-hidden rounded-full'>
                                     <img
                                         src={userInfo.profileImage}
                                         alt='프로필'
-                                        className='w-[24%] rounded-full object-cover'
+                                        className='w-full h-full object-cover'
                                     />
+                                    </div>
                                 ) : (
                                     <BsPersonCircle
                                         aria-hidden='true'
-                                        className='size-[24%] max-size-10 text-gray-300'
+                                        className='w-[10%] sm:w-[15%] md:w-[20%] lg:w-[24%] aspect-square text-gray-300'
                                     />
                                 )}
                                 <input
@@ -266,7 +269,7 @@ if (clglist) {
                                 />
                                 <label
                                     htmlFor='upload-photo'
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition 
+                                    className={`btn btn-primary 
                                         ${editMode ? 'bg-blue-400 hover:bg-blue-500 cursor-pointer' : ''} text-white`}
                                 >
                                     사진 올리기
@@ -280,7 +283,7 @@ if (clglist) {
                                 />
                                 <label
                                     htmlFor='delete-photo'
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition
+                                    className={`btn btn-secondary
                                         ${editMode ? 'bg-neutral-600 hover:bg-red-400 cursor-pointer' : ''} text-white`}
                                 >
                                     삭제하기

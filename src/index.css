@@ -107,3 +107,8 @@ button {
 .animate-fadeInUp {
     animation: fadeInUp 0.8s ease-out forwards;
 }
+
+.fade-in-active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
