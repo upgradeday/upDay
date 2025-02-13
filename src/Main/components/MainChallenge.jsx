@@ -124,7 +124,7 @@ const MainChallenge = ({ userChallengeData, isLoggedIn }) => {
                                         {challenge.title}
                                     </span>
                                     <span className='text-sm text-gray-500 mr-4'>
-                                        도전한지{' '}
+                                        도전한 지{' '}
                                         {calculateDaysPassed(
                                             challenge.joinDate
                                         )}
