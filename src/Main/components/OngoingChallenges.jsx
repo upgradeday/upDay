@@ -1,10 +1,12 @@
+// OngoingChallenges.jsx
+
 import React from 'react';
 import MainChallenge from './MainChallenge';
 
-const OngoingChallenges = ({ challenges, isLoggedIn }) => {
+const OngoingChallenges = ({ userChallengeData, isLoggedIn }) => {
     return (
         <div>
-            <MainChallenge challenges={challenges} isLoggedIn={isLoggedIn} />
+            <MainChallenge userChallengeData={userChallengeData} isLoggedIn={isLoggedIn} />
         </div>
     );
 };
