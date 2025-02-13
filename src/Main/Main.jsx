@@ -1,5 +1,3 @@
-// Main.jsx
-
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../Main/components/MainLayout';
 import PopularChallenges from '../Main/components/PopularChallenges';
@@ -20,7 +18,6 @@ const Main = () => {
     const [challengeDays, setChallengeDays] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [filteredChallenges, setFilteredChallenges] = useState([]); // 초기값 빈 배열
-
 
     // 로그인 상태 확인 및 사용자 정보 설정
     useEffect(() => {
@@ -60,10 +57,11 @@ const Main = () => {
             );
             setFilteredChallenges(doingChallenges);
         } else {
-            console.error('userChallengeList가 배열이 아니거나 정의되지 않았습니다.');
+            console.error(
+                'userChallengeList가 배열이 아니거나 정의되지 않았습니다.'
+            );
         }
     }, []);
-    
 
     // 인기 챌린지 정렬
     const sortedChallenges = Array.isArray(userChallengeList)
@@ -102,21 +100,22 @@ const Main = () => {
 
     return (
         <MainLayout>
-            <div className='flex gap-[90px]'>
+            <div className='flex flex-col md:flex-row gap-6 md:gap-[110px]'>
                 {/* 왼쪽 콘텐츠 */}
-                <div className='w-full md:w-[600px] flex flex-col items-center relative'>
-                    <div className='absolute top-[-22px] z-10 w-full text-center'>
+                <div className='w-full sm:w-full md:w-[600px] flex flex-col items-center relative'>
+                    <div className='absolute top-[-20px] z-10 w-full text-center'>
                         <img
                             src={MainFlower}
                             alt='메인 로고'
-                            className='absolute top-[210px] right-[-5px] w-[600px] h-auto'
+                            className='hidden md:block absolute top-[265px] right-[-5px] w-[300px] md:w-[600px] h-auto'
                         />
                         <UserInfo
                             userName={userName}
                             challengeDays={challengeDays}
+                            className='md:text-left text-right pr-4'
                         />
                     </div>
-                    <div className='w-full mt-11'>
+                    <div className='w-full mt-[100px]'>
                         {/* 진행 중인 챌린지 컴포넌트 */}
                         <OngoingChallenges
                             userChallengeData={filteredChallenges}
@@ -126,21 +125,20 @@ const Main = () => {
                 </div>
 
                 {/* 오른쪽 콘텐츠 */}
-                <div className='w-full md:w-[650px] mt-10'>
+                <div className='w-full sm:w-full md:w-[650px] mt-20'>
                     {/* 인기 챌린지 컴포넌트 */}
                     <PopularChallenges challenges={sortedChallenges} />
 
-                    {/* 챌린지 카테고리 */}
                     <div className='mt-10 relative'>
                         <img
                             src={ChallengeIcon}
                             alt='챌린지 아이콘'
-                            className='absolute z-0 top-[-7px] left-[-14px] w-[180px] mt-5'
+                            className='absolute z-0 top-[-7px] left-[-14px] w-[100px] md:w-[180px] mt-5 hidden md:block'
                         />
-                        <h2 className='ml-1 text-white text-xl font-medium mb-1 flex items-center gap-2 relative z-100 top-[20px] left-[6px]'>
+                        <h2 className='ml-1 text-lg font-bold md:text-white md:text-xl md:font-medium mb-1 flex items-center gap-2 relative z-100 top-[20px] md:left-[6px]'>
                             챌린지 카테고리
                         </h2>
-                        <div className='grid grid-cols-2 gap-4 mt-10'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-5 mt-[50px] md:grid-cols-2'>
                             {categories.map((category, index) => (
                                 <Link
                                     key={index}
