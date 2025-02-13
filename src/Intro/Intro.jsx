@@ -160,17 +160,20 @@ const Intro = () => {
             },
             { threshold: 0.3 }
         );
-
-        sectionsRef.current.forEach((el) => {
+    
+        const currentSections = sectionsRef.current; // 현재 ref 값을 복사
+    
+        currentSections.forEach((el) => {
             if (el) observer.observe(el);
         });
-
+    
         return () => {
-            sectionsRef.current.forEach((el) => {
+            currentSections.forEach((el) => {
                 if (el) observer.unobserve(el);
             });
         };
     }, []);
+    
 
 
     return (

@@ -92,12 +92,6 @@ export default function PersonalInfo() {
                 return updatedInfo;
             });
 
-            // if (loggedInUser.signupDate) {
-            //     const signupDate = new Date(loggedInUser.signupDate);
-            //     const today = new Date();
-            //     const days = differenceInDays(today, signupDate);
-            //     setDaysSinceSignup(days);
-            // }
         }
     }, [loggedInUser]);
 
@@ -190,7 +184,7 @@ export default function PersonalInfo() {
         localStorage.setItem('users', JSON.stringify(updatedUsers));
         setUsers(updatedUsers);
         
-        const currentChallenges = getChallenges();
+        let currentChallenges = getChallenges();
 
 if (currentChallenges) {
     try {

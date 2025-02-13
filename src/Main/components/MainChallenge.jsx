@@ -54,7 +54,10 @@ const MainChallenge = ({ userChallengeData, isLoggedIn }) => {
     const challengesPerPage = 4;
 
     const filteredChallenges = userChallengeData
-        .filter(challenge => challenge.clgJoin === true && challenge.clgDoing === true)
+        .filter(
+            (challenge) =>
+                challenge.clgJoin === true && challenge.clgDoing === true
+        )
         .sort((a, b) => {
             const daysA = calculateDaysPassed(a.joinDate);
             const daysB = calculateDaysPassed(b.joinDate);
@@ -98,18 +101,52 @@ const MainChallenge = ({ userChallengeData, isLoggedIn }) => {
     }
 
     return (
-        <div className='relative bg-neutral-800 rounded-xl w-full md:w-[600px] bottom-[-440px]'>
+        <div className='relative md:bg-neutral-800 rounded-xl top-[250px] md:top-[440px] w-full md:w-[600px] bottom-[-440px]'>
             <div className='flex justify-between items-center mb-4'>
-                <h2 className='text-xl font-medium text-white relative left-4 top-2'>
+                <h2 className='text-lg font-bold md:text-xl md:text-white relative md:left-4 top-2'>
                     도전 중인 챌린지
                 </h2>
-                <div className='flex gap-2 relative top-2 right-4'>
+                <div className='relative flex gap-2 top-2 right-4 z-[999]'>
                     <ArrowButton direction='left' onClick={handleLeftClick} />
                     <ArrowButton direction='right' onClick={handleRightClick} />
                 </div>
             </div>
 
-            <ul>
+            {/* 모바일에서는 카드 형식으로 변경 */}
+
+            <div className='flex flex-wrap gap-3 py-2 mt-5 md:hidden w-full justify-start'>
+                {[...Array(3)].map((_, index) => {
+                    const challenge = filteredChallenges[startIndex + index];
+                    return (
+                        <div
+                            key={index}
+                            className='w-[calc(33.333%-0.5rem)] h-[100px] bg-white rounded-xl p-4 flex flex-col justify-between'
+                        >
+                            {challenge ? (
+                                <>
+                                    <span className='text-medium font-semibold text-gray-700 truncate'>
+                                        {challenge.title}
+                                    </span>
+                                    <span className='text-sm text-gray-500'>
+                                        도전한 지{' '}
+                                        {calculateDaysPassed(
+                                            challenge.joinDate
+                                        )}
+                                        일째
+                                    </span>
+                                </>
+                            ) : (
+                                <span className='text-lg font-semibold text-gray-300'>
+                                    챌린지를 더 늘려보세요!
+                                </span>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* 데스크탑에서는 기존 ul 형식 유지 */}
+            <ul className='hidden md:block'>
                 {[...Array(challengesPerPage)].map((_, index) => {
                     const challenge = filteredChallenges[startIndex + index];
                     return (
