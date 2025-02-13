@@ -1,3 +1,5 @@
+// Main.jsx
+
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../Main/components/MainLayout';
 import PopularChallenges from '../Main/components/PopularChallenges';
@@ -60,15 +62,15 @@ const Main = () => {
     // 진행 중인 챌린지 필터링
     useEffect(() => {
         if (Array.isArray(userChallengeList)) {
-            // userChallengeList가 배열인지 확인
             const doingChallenges = userChallengeList.filter(
                 (challenge) => challenge.clgDoing
             );
             setFilteredChallenges(doingChallenges);
         } else {
-            console.error('userChallengeList is not an array or is undefined.');
+            console.error('userChallengeList가 배열이 아니거나 정의되지 않았습니다.');
         }
     }, []);
+    
 
     // 인기 챌린지 정렬
     const sortedChallenges = Array.isArray(userChallengeList)
@@ -124,7 +126,7 @@ const Main = () => {
                     <div className='w-full mt-11'>
                         {/* 진행 중인 챌린지 컴포넌트 */}
                         <OngoingChallenges
-                            challenges={filteredChallenges}
+                            userChallengeData={filteredChallenges}
                             isLoggedIn={isLoggedIn}
                         />
                     </div>

@@ -1,4 +1,6 @@
-import React from 'react';
+// MainChallenge.jsx
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ArrowButton = ({ direction, onClick }) => {
@@ -38,11 +40,40 @@ const ArrowButton = ({ direction, onClick }) => {
     );
 };
 
-const MainChallenge = ({ challenges, isLoggedIn }) => {
-    const navigate = useNavigate();
+const calculateDaysPassed = (joinDate) => {
+    const start = new Date(joinDate);
+    const today = new Date();
+    const diffTime = Math.abs(today - start);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+};
 
-    // challenges 배열에서 앞의 4개 항목만 사용
-    const limitedChallenges = challenges.slice(0, 4);
+const MainChallenge = ({ userChallengeData, isLoggedIn }) => {
+    const navigate = useNavigate();
+    const [startIndex, setStartIndex] = useState(0);
+    const challengesPerPage = 4;
+
+    const filteredChallenges = userChallengeData
+        .filter(challenge => challenge.clgJoin === true && challenge.clgDoing === true)
+        .sort((a, b) => {
+            const daysA = calculateDaysPassed(a.joinDate);
+            const daysB = calculateDaysPassed(b.joinDate);
+            return daysA - daysB; // 숫자가 작은 순서대로 정렬
+        });
+
+    const handleLeftClick = () => {
+        setStartIndex((prev) =>
+            prev - challengesPerPage < 0 ? 0 : prev - challengesPerPage
+        );
+    };
+
+    const handleRightClick = () => {
+        setStartIndex((prev) =>
+            prev + challengesPerPage >= filteredChallenges.length
+                ? prev
+                : prev + challengesPerPage
+        );
+    };
 
     if (!isLoggedIn) {
         return (
@@ -73,32 +104,41 @@ const MainChallenge = ({ challenges, isLoggedIn }) => {
                     도전 중인 챌린지
                 </h2>
                 <div className='flex gap-2 relative top-2 right-4'>
-                    <ArrowButton
-                        direction='left'
-                        onClick={() => console.log('왼쪽 버튼 클릭!')}
-                    />
-                    <ArrowButton
-                        direction='right'
-                        onClick={() => console.log('오른쪽 버튼 클릭!')}
-                    />
+                    <ArrowButton direction='left' onClick={handleLeftClick} />
+                    <ArrowButton direction='right' onClick={handleRightClick} />
                 </div>
             </div>
 
             <ul>
-                {limitedChallenges.map((challenge, index) => (
-                    <li
-                        key={index}
-                        className={`py-4 bg-white border flex justify-between items-center ${index === limitedChallenges.length - 1 ? 'rounded-b-xl' : ''} mb-0`}
-                        style={{ height: '60px' }}
-                    >
-                        <span className='text-lg font-semibold text-gray-700 truncate w-2/3 ml-4'>
-                            {challenge.name}
-                        </span>
-                        <span className='text-sm text-gray-500 mr-4'>
-                            {challenge.timeRemaining}
-                        </span>
-                    </li>
-                ))}
+                {[...Array(challengesPerPage)].map((_, index) => {
+                    const challenge = filteredChallenges[startIndex + index];
+                    return (
+                        <li
+                            key={index}
+                            className={`py-4 bg-white border flex justify-between items-center ${index === challengesPerPage - 1 ? 'rounded-b-xl' : ''} mb-0`}
+                            style={{ height: '60px' }}
+                        >
+                            {challenge ? (
+                                <>
+                                    <span className='text-lg font-semibold text-gray-700 truncate w-2/3 ml-4'>
+                                        {challenge.title}
+                                    </span>
+                                    <span className='text-sm text-gray-500 mr-4'>
+                                        도전한지{' '}
+                                        {calculateDaysPassed(
+                                            challenge.joinDate
+                                        )}
+                                        일째
+                                    </span>
+                                </>
+                            ) : (
+                                <span className='text-lg font-semibold text-gray-300 ml-4'>
+                                    챌린지를 더 늘려보세요!
+                                </span>
+                            )}
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
