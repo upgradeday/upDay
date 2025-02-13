@@ -6,7 +6,6 @@ import { getMyJoinedChallenge } from '../../store/features/userChallengeSlice';
 
 export default function UserReport() {
     const dispatch = useDispatch();
-    const [challenges, setChallenges] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [isTestAccount, setIsTestAccount] = useState(true);
@@ -37,12 +36,10 @@ export default function UserReport() {
         setIsTestAccount(users.length === 0 || loggedInUser === users[0].email);
     }, [users, loggedInUser]);
 
-    // 내가 참여한 챌린지 목록
-    const myChallenges = joinedChallenges.filter(({ clgJoin }) => clgJoin);
-
-    const numClgDoing = myChallenges.filter((clg) => clg.clgDoing).length;
-    const numClgDone = myChallenges.filter((clg) => clg.clgDone).length;
-    const numClgOver = myChallenges.filter(
+    // 내가 참여한 챌린지 상태 값
+    const numClgDoing = joinedChallenges.filter((clg) => clg.clgDoing).length;
+    const numClgDone = joinedChallenges.filter((clg) => clg.clgDone).length;
+    const numClgOver = joinedChallenges.filter(
         (clg) => !clg.clgDoing && !clg.clgDone
     ).length;
 
