@@ -21,13 +21,6 @@ const Main = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [filteredChallenges, setFilteredChallenges] = useState([]); // 초기값 빈 배열
 
-    // 로그아웃 함수
-    const logout = () => {
-        localStorage.removeItem('loggedInUser');
-        setUserName('');
-        setChallengeDays(0);
-        setIsLoggedIn(false);
-    };
 
     // 로그인 상태 확인 및 사용자 정보 설정
     useEffect(() => {

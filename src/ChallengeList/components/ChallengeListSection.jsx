@@ -50,10 +50,12 @@ const ChallengeListSection = ({ selectedCategory, searchResults }) => {
     }, [selectedCategory, challenges, searchResults]);
 
     return (
-        <section className='flex gap-4 flex-wrap'>
+        <section className='grid grid-cols-3 gap-6'>
             {filteredChallenges.length > 0 ? (
                 filteredChallenges.map((card) => (
-                    <ChallengeCard key={card.id} cardData={card} />
+
+					<ChallengeCard key={card.id} cardData={card} />
+
                 ))
             ) : (
                 <p>등록된 챌린지가 없습니다.</p>

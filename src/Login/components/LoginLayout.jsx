@@ -2,19 +2,20 @@ import pic2 from '../img/Group 72.svg';
 import pic3 from '../img/Group 111.svg';
 import pic4 from '../img/Group 112.svg';
 import pic5 from '../img/Group 1.svg';
+import pic6 from '../img/Group 239.svg';
 
 const LoginLayout = ({ children, title }) => {
     return (
-        <div className='w-[80%] max-w-[1344px] mx-auto flex justify-center items-center relative h-screen'>
+        <div className='w-[80%] max-w-[1344px] mx-auto flex justify-center relative h-screen'>
             <img
                 src={pic3}
                 alt='왼쪽 배경'
-                className='absolute top-0 left-0 w-auto h-auto hidden md:block'
+                className='absolute top-0 left-0 w-auto h-auto hidden md:block '
             />
 
             <div
                 className='flex items-center flex-col shrink-0 text-center rounded-3xl z-10 relative bg-transparent 
-                md:bg-neutral-100 md:w-[48%] md:min-w-[30rem] md:h-[46rem] '
+                md:bg-neutral-100 md:w-[48%] md:min-w-[28rem] md:h-[46rem] '
             >
                 <div className='relative inline-block md:mt-[3.5rem]'>
                     <img
@@ -35,12 +36,17 @@ const LoginLayout = ({ children, title }) => {
                     </div>
                 </div>
                 {children}
+                <img
+                    src={pic6}
+                    alt='모바일 배경'
+                    className='shrink-0 mt-[2rem] block md:hidden'
+                />
             </div>
 
             <img
                 src={pic4}
                 alt='오른쪽 배경'
-                className='absolute top-0 right-0 w-auto h-auto hidden md:block'
+                className='absolute top-0 right-0 w-auto h-auto hidden md:block '
             />
         </div>
     );

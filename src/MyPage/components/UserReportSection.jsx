@@ -34,7 +34,8 @@ export default function UserReport() {
     // 테스트 계정 여부 확인
     useEffect(() => {
         setIsTestAccount(users.length === 0 || loggedInUser === users[0].email);
-    }, [users, loggedInUser]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // 내가 참여한 챌린지 상태 값
     const numClgDoing = joinedChallenges.filter((clg) => clg.clgDoing).length;

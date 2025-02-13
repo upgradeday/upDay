@@ -10,21 +10,23 @@ export default function TabSwitcher() {
     const [isTestAccount, setIsTestAccount] = useState(true);
     const [activeTab, setActiveTab] = useState(1); // 기본값으로 1번 탭을 활성화
 
-    // 테스트 계정 체크
+    // 테스트 계정 여부 체크
     useEffect(() => {
         if (users && users.length > 0 && users[0].email !== loggedInUser) {
             setIsTestAccount(false);
         } else {
             setIsTestAccount(true);
         }
-    }, [loggedInUser, users]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    // isTestAccount가 변경되면 activeTab 설정
+    // 테스트 계정이 아니면 activeTab(2)로 설정
     useEffect(() => {
         if (!isTestAccount) {
             setActiveTab(2); // 테스트 계정이 아니면 개인정보 관리 탭을 활성화
         }
-    }, [isTestAccount]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <section className='w-full md:w-[48%]'>
