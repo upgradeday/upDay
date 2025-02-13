@@ -15,6 +15,7 @@ export default function MyPageNonLogin() {
                         <div className='flex flex-row items-center'>
                             <div className='inline-block w-[42%] max-w-[180px] md:w-[50%] md:max-w-[200px] aspect-square mr-[10%]'>
                                 <img
+                                    alt='profile-photo'
                                     src='/static/media/3.75e52db1a6055881b5b2fc985970b0ef.svg'
                                     className='w-full h-full object-cover rounded-full ring-2 ring-neutral-300 overflow-hidden'
                                 />
