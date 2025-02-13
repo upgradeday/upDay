@@ -70,22 +70,29 @@ const ChallengeCard = ({ cardData }) => {
 
     return (
         <div
-            className='w-[30%] mb-6 p-4 rounded-2xl bg-white'
+            className='p-4 rounded-2xl bg-white'
             onClick={handleCardClick}
         >
             {/* 카테고리 & 기간 */}
             <div className='mb-4'>
-                <span className='px-6 py-[6px] rounded-xl bg-[#fbdcc3]'>
+                <span className='px-6 py-[6px] rounded-xl' style={{
+					backgroundColor: 
+					category === '식단' ? '#E3E3F4' :
+					category === '학습' ? '#FEF2C8' :
+					category === '운동' ? '#C5EBE6' :
+					category === '습관' ? '#FBDCC3' :
+					'#FBDCC3'
+				}}>
                     {category}
                 </span>
                 <span className='ml-4'>{duration}</span>
             </div>
 
             {/* 기본 제공 이미지 */}
-            <div className='mb-4 rounded-2xl overflow-hidden'>
+            <div className='h-72 mb-4 rounded-2xl overflow-hidden'>
                 <img
                     src={getCategoryImage(cardData.category)}
-                    className='w-full'
+                    className='h-full mx-auto'
                     alt={`${cardData.category} 챌린지`}
                 />
             </div>

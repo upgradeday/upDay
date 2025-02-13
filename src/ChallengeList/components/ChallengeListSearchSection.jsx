@@ -7,7 +7,7 @@ const btnList = [
     { title: '식단', color: '#E3E3F4' },
     { title: '학습', color: '#FEF2C8' },
     { title: '운동', color: '#C5EBE6' },
-    { title: '습관', color: '#FFDEE7' },
+    { title: '습관', color: '#FBDCC3' },
 ];
 
 const ChallengeListSearchSection = ({
@@ -64,12 +64,13 @@ const ChallengeListSearchSection = ({
                     <li className='pr-4' key={idx}>
                         <button
                             onClick={() => handleCategoryClick(ele.title)}
-                            style={{
+							style={{
                                 border: `1px solid ${ele.color}`,
                                 backgroundColor:
                                     activeCategory === ele.title
                                         ? ele.color
                                         : 'white',
+								color: activeCategory === ele.title ? 'white' : 'black',
                             }}
                             className='px-8 py-[10px] rounded-xl'
                         >

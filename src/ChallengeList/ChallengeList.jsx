@@ -1,6 +1,7 @@
 import React from 'react';
 import ChallengeListLayout from './components/ChallengeListLayout';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const ChallengeList = () => {
 
@@ -14,6 +15,9 @@ const ChallengeList = () => {
 
     return (
         <>
+			<Helmet>
+				<title>챌린지 둘러보기 - upDay</title>
+			</Helmet>
             <ChallengeListLayout />
 			<Outlet />
 			<button className='w-[6.125rem] h-[6.125rem] rounded-[50%] bg-blue-500' onClick={handleCreateClick}>
