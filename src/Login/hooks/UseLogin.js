@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom'; // ✅ useLocation 추가
-import { setUser } from '../../store/features/UserSlice';
+import { setUser } from '../../store/features/userSlice';
 import { userData } from '../../data/userData';
 
 const useLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
 
     const defaultEmail = 'test01@naver.com';
     const defaultPassword = 'test123^';
